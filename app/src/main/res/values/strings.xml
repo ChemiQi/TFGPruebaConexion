@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TFG2</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="o">o</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="imagenprincipal">ImagenPrincipal</string>
+    <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
+    <string name="registro">Registro</string>
+    <string name="repetir_contrase_a">Repetir Contraseña</string>
+    <string name="email">Email</string>
+</resources>

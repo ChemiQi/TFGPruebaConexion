@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/txt_registro_crearcuenta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:gravity="center|center_horizontal"
+        android:text="@string/registro"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_name_crearcuenta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="@string/usuario"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_registro_crearcuenta"
+        android:autofillHints=""
+        android:drawableLeft="@drawable/ic_account"
+        android:drawablePadding="8sp"
+        />
+
+
+    <EditText
+        android:id="@+id/edt_pass_crearcuenta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/contrase_a"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edt_email_crearcuenta"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_email_crearcuenta"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_crearcuenta"
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawablePadding="8sp"
+        />
+
+
+    <EditText
+        android:id="@+id/edt_passrepeat_crearcuenta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/repetir_contrase_a"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edt_pass_crearcuenta"
+        app:layout_constraintStart_toStartOf="@+id/edt_pass_crearcuenta"
+        app:layout_constraintTop_toBottomOf="@+id/edt_pass_crearcuenta"
+        android:autofillHints=""
+        android:drawableLeft="@drawable/ic_lock_open"
+        android:drawablePadding="8sp"
+        />
+
+    <EditText
+        android:id="@+id/edt_email_crearcuenta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/edt_name_crearcuenta"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_name_crearcuenta"
+        app:layout_constraintTop_toBottomOf="@+id/edt_name_crearcuenta"
+        android:autofillHints=""
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="8sp"
+        />
+
+
+    <Button
+        android:id="@+id/bt_crearcuenta_crearcuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/crear_cuenta"
+        android:onClick="registerUserDB"
+        app:layout_constraintEnd_toEndOf="@+id/edt_passrepeat_crearcuenta"
+        app:layout_constraintStart_toStartOf="@+id/edt_passrepeat_crearcuenta"
+        app:layout_constraintTop_toBottomOf="@+id/edt_passrepeat_crearcuenta" />
+</androidx.constraintlayout.widget.ConstraintLayout>
