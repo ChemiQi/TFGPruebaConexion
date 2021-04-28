@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.tfg2.modelos.BaseDB;
-import com.example.tfg2.modelos.UserDB;
+import com.example.tfg2.user.modelos.UserDB;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_USERNAME_STRING ="" ;
     EditText edt_username_login;
     EditText edt_pass_login;
     @Override
