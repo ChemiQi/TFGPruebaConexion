@@ -2,10 +2,12 @@ package com.example.tfg2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.tfg2.user.clases.CurrentUser;
 import com.example.tfg2.user.modelos.UserDB;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goRegisterActivity(View view) {
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
     }
 
     public void irContrasenaOlvidada(View view) {
@@ -30,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniciarSesion(View view) {
         if(UserDB.loginUser(edt_username_login.getText().toString(),edt_pass_login.getText().toString())){
-            System.out.println("LOGIN BUENA");
+            Intent intent = new Intent(this,MenuActivity.class);
+            startActivity(intent);
         }else {
             System.out.println("Error clogin");
         }

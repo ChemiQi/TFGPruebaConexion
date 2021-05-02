@@ -42,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(nameUser,email,password);
 
         if(UserController.newUser(user)){
-
             finish();
         }else{
             Toast.makeText(this, "Error al crear usuario", Toast.LENGTH_SHORT).show();

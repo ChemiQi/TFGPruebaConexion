@@ -1,6 +1,7 @@
 package com.example.tfg2.user.modelos;
 
 import com.example.tfg2.database.modelos.BaseDB;
+import com.example.tfg2.user.clases.CurrentUser;
 import com.example.tfg2.user.clases.User;
 
 import java.sql.Connection;
@@ -25,7 +26,12 @@ public class UserDB {
             ResultSet resultado = pst.executeQuery();
             while(resultado.next())
             {
+                int idUser = resultado.getInt("iduser");
+                String userName = resultado.getString("usuario");
+                String email = resultado.getString("email");
+                String pass = resultado.getString("password");
 
+                CurrentUser.setUser(new User(idUser,userName,email,pass));
                 loginOk =  true;
             }
             resultado.close();

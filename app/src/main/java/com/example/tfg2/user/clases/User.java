@@ -68,4 +68,14 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(id, nameUser, email);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nameUser='" + nameUser + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
