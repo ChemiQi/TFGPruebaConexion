@@ -14,6 +14,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nombre_tabla">Nombre tabla</string>
     <string name="anadir">+</string>
+    <string name="ejercicio">TODO</string>
+    <string name="nombre_ejercicio">nombre ejercicio</string>
+    <string name="nombre_musculo">nombre musculo</string>
 
     <string-array name="diasGimnasio">
         <item>1</item>

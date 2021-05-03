@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnadirEjercicio">
+
+    <TextView
+        android:id="@+id/txt_titulo_anadirEjercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Elegir Ejercicio"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_parteDelCuerpo_anadirEjercicio"
+        android:layout_width="75dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="Parte del cuerpo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_anadirEjercicio" />
+
+    <TextView
+        android:id="@+id/txt_musculo_anadirMusculo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Musculo"
+        app:layout_constraintEnd_toEndOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
+        app:layout_constraintStart_toStartOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/txt_parteDelCuerpo_anadirEjercicio" />
+
+    <Spinner
+        android:id="@+id/sp_grupoMuscular_anadirEjercicio"
+        android:layout_width="255dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toEndOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_anadirEjercicio" />
+
+    <Spinner
+        android:id="@+id/sp_musculos_anadirEjercicio"
+        android:layout_width="255dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/txt_musculo_anadirMusculo"
+        app:layout_constraintTop_toBottomOf="@+id/sp_grupoMuscular_anadirEjercicio" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ejercicios_anadirEjercicio"
+        android:layout_width="353dp"
+        android:layout_height="427dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_musculos_anadirEjercicio" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:text="Añadir"
+        app:layout_constraintEnd_toEndOf="@+id/rv_ejercicios_anadirEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/rv_ejercicios_anadirEjercicio" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
+        android:text="cancelar"
+        app:layout_constraintStart_toStartOf="@+id/rv_ejercicios_anadirEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/rv_ejercicios_anadirEjercicio" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,10 +29,7 @@ public class CrearTablaActivity extends AppCompatActivity {
         ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_crearTabla);
         sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_crearTabla);
 
-       // putColumnsNumber(2,ly_contenedorFilas_crearTabla);
-
-        listaDeFilas.forEach(a -> System.out.println("veces"));
-
+//------------- Seleccion de dias //-----------------------------------------------
         sp_diasEntreno_crearTabla.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -43,24 +40,29 @@ public class CrearTablaActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
+//------------------------------------------------------------------------//
     }
 
     private void putColumnsNumber(int numeroFilas){
         ly_contenedorFilas_crearTabla.removeAllViewsInLayout();
         for(int i = 0; i<numeroFilas; i++){
-            HorizontalScrollView sch = new HorizontalScrollView(getApplicationContext());
-                LinearLayout ly = new LinearLayout(getApplicationContext());
+            HorizontalScrollView hsv = new HorizontalScrollView(getApplicationContext()); // cada linea
+                LinearLayout ly = new LinearLayout(getApplicationContext()); // recipiente por linea
                 ly.setOrientation(LinearLayout.HORIZONTAL);
                 listaDeFilas.add(ly);
                 Button btn = new Button(getApplicationContext());
-                btn.setHeight(500);
+                btn.setHeight(400);
+                btn.setWidth(200);
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        System.out.println("JEEJ");
+                    }
+                });
+
                 ly.addView(btn);
-                sch.addView(ly);
-
-            System.out.println(sch.getRight());
-
-            this.ly_contenedorFilas_crearTabla.addView(sch);
+            hsv.addView(ly);
+            this.ly_contenedorFilas_crearTabla.addView(hsv);
         }
     }
 }
