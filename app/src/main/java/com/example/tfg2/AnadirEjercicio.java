@@ -35,6 +35,7 @@ public class AnadirEjercicio extends AppCompatActivity {
     List<Musculo> listaMusculos = MusculoController.obtenerMusculos();
     ArrayList<Ejercicio> listaEjercicios;
     ArrayList<FotoEjercicio> fotoEjercicios;
+    List<Musculo> musculosPorParteDelCuerpo;
 
     PartesDelCuerpo parteDelCuerpo ;
 
@@ -88,9 +89,13 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void datosSpinnerMusculos(int idParteDelCuerpo){
-        ArrayAdapter<CharSequence> adapterMusculos = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                listaMusculos.stream().filter(a-> a.getIdMusculo() == idParteDelCuerpo).collect(Collectors.toList())
-        );
+
+        musculosPorParteDelCuerpo = listaMusculos.stream().filter(a-> a.getIdZonaCuerpo() == idParteDelCuerpo).collect(Collectors.toList());
+
+
+        List<String> nombreMusculos = new ArrayList<>();
+        musculosPorParteDelCuerpo.forEach(musculo -> nombreMusculos.add(musculo.getNombreMusculo()));
+        ArrayAdapter<CharSequence> adapterMusculos = new ArrayAdapter(this, android.R.layout.simple_spinner_item, nombreMusculos);
         sp_musculos_anadirEjercicio.setAdapter(adapterMusculos);
 
     }
