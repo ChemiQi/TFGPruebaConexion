@@ -12,7 +12,6 @@ public class BaseDB {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Connection conexion = DriverManager.getConnection(ConfigurationDB.URLMYSQL, ConfigurationDB.USUARIODB,ConfigurationDB.CLAVEDB);
-            System.out.println("CONECTADO");
             return conexion;
         } catch (SQLException e) {
             System.out.println("no se pudo establecer la conexion con la base de datos");

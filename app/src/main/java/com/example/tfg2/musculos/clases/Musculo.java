@@ -19,6 +19,11 @@ public class Musculo {
     public Musculo() {
     }
 
+    public Musculo(int idMusculo , String nombreMusculo) {
+        this.nombreMusculo = nombreMusculo;
+        this.idMusculo = idMusculo;
+    }
+
     public int getIdMusculo() {
         return idMusculo;
     }

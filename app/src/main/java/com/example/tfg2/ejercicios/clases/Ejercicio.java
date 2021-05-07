@@ -24,6 +24,13 @@ public class Ejercicio {
     public Ejercicio() {
     }
 
+    public Ejercicio(int idJercicio, String nombre, String descripcion) {
+        this.idEjercicio = idJercicio;
+        this.nombreEjercicio = nombre;
+        this.descripcionEjercicio = descripcion;
+    }
+
+
     public int getIdEjercicio() {
         return idEjercicio;
     }

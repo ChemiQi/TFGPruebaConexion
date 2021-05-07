@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
+import com.example.tfg2.ejercicios.modelos.EjercicioDB;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
@@ -54,12 +55,25 @@ public class AnadirEjercicio extends AppCompatActivity {
 
         sp_grupoMuscular_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {  // <--- Para dependiendo que musculo haya seleccionado, salgan los musculos.
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //spiner de partes del cuerpo
                 if(position != 0){
                     System.out.println("JEEJ");
                     if(partes != null) {
                         parteDelCuerpo = partes.get(position - 1);
+                        listaEjercicios = EjercicioDB.obtenerEjerciciosPorParteDelCuerpo(parteDelCuerpo);
+                        añadirEjerciciosTabla();
                         datosSpinnerMusculos(parteDelCuerpo.getId());
+                        sp_musculos_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
                     }
                 }
             }
@@ -71,9 +85,7 @@ public class AnadirEjercicio extends AppCompatActivity {
         });
 
 
-        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios,fotoEjercicios);
-        rv_ejercicios_anadirEjercicio.setAdapter(eAdapter);
-        rv_ejercicios_anadirEjercicio.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 
@@ -89,7 +101,6 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void datosSpinnerMusculos(int idParteDelCuerpo){
-
         musculosPorParteDelCuerpo = listaMusculos.stream().filter(a-> a.getIdZonaCuerpo() == idParteDelCuerpo).collect(Collectors.toList());
 
 
@@ -98,5 +109,11 @@ public class AnadirEjercicio extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterMusculos = new ArrayAdapter(this, android.R.layout.simple_spinner_item, nombreMusculos);
         sp_musculos_anadirEjercicio.setAdapter(adapterMusculos);
 
+    }
+
+    private void añadirEjerciciosTabla(){
+        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios,fotoEjercicios);
+        rv_ejercicios_anadirEjercicio.setAdapter(eAdapter);
+        rv_ejercicios_anadirEjercicio.setLayoutManager(new LinearLayoutManager(this));
     }
 }
