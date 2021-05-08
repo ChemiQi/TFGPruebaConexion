@@ -70,7 +70,13 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
     @Override
     public void onBindViewHolder(@NonNull EjercicioViewHolder holder, int position) {
         Ejercicio ejercicioActual = listaEjercicios.get(position);
-        holder.txt_nombre_itemEjercicio.setText(String.valueOf(ejercicioActual.getNombreEjercicio()));
+        if (ejercicioActual.getNombreEjercicio().length() > 23){
+            holder.txt_nombre_itemEjercicio.setTextSize(18);
+            holder.txt_nombre_itemEjercicio.setText(String.valueOf(ejercicioActual.getNombreEjercicio()));
+        }else{
+            holder.txt_nombre_itemEjercicio.setText(String.valueOf(ejercicioActual.getNombreEjercicio()));
+        }
+
         holder.txt_musculo_itemEjercicio.setText(String.valueOf(ejercicioActual.getMusculo().getNombreMusculo()));
         if(listaFotosEjercicio != null){
             for(FotoEjercicio fotoEjercicio : listaFotosEjercicio){

@@ -57,7 +57,6 @@ public class AnadirEjercicio extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //spiner de partes del cuerpo
                 if(position != 0){
-                    System.out.println("JEEJ");
                     if(partes != null) {
                         parteDelCuerpo = partes.get(position - 1);
                         listaEjercicios = EjercicioDB.obtenerEjerciciosPorParteDelCuerpo(parteDelCuerpo);
