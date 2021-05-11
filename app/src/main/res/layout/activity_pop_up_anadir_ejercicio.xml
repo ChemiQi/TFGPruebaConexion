@@ -1,49 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".PopUpAnadirEjercicio">
 
     <TextView
-        android:id="@+id/txt_nombreEjercicio_popUpAñadirEjercicio"
-        android:layout_width="0dp"
+        android:id="@+id/txt_nombreEjercicio_popUpAnadirEjercicio"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/nombre_ejercicio"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poup_imagenEjercicio_popupAñadirEjercicio" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/poup_imagenEjercicio_popupAñadirEjercicio"
+        android:id="@+id/poip_imagenEjercicio_popipAnadirEjercicio"
         android:layout_width="311dp"
         android:layout_height="199dp"
-        android:layout_marginTop="24dp"
+        android:layout_margin="10dp"
         android:contentDescription="@string/imagen_ejercicio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="236dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nombreEjercicio_popUpAñadirEjercicio">
+        android:layout_width="318dp"
+        android:layout_height="152dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,81 +40,84 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/descripcion_ejercico" />
+
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_anadirEjercicio_popupAnadirEjercicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/a_adir"
-        app:layout_constraintEnd_toEndOf="@+id/number_numeroDeRepeticiones_popupAnadirEjercicio"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="@+id/number_numeroDeRepeticiones_popupAnadirEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/txt_serie_popAnadirEjercicio2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/number_numeroSeries_popUpAnadirEjercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/_00"
+            android:inputType="number"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/number_numeroRepeticiones_popUpAnadirEjercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/_00"
+            android:inputType="number"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/series" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/repeticiciones" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_cancelarEjercicio_popupAnadirEjercicio"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_anadirEjercicio_popUpAnadirEjercicio"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@android:string/cancel"
-        app:layout_constraintEnd_toEndOf="@+id/number_numeroDeSeries_popupAnadirEjercicio"
-        app:layout_constraintStart_toStartOf="@+id/number_numeroDeSeries_popupAnadirEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/txt_serie_popAnadirEjercicio" />
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/a_adir" />
 
-    <EditText
-        android:id="@+id/number_numeroDeSeries_popupAnadirEjercicio"
-        android:layout_width="54dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginTop="24dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/_00"
-        android:inputType="number"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
-
-    <TextView
-        android:id="@+id/txt_serie_popAnadirEjercicio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/series"
-        app:layout_constraintEnd_toEndOf="@+id/number_numeroDeSeries_popupAnadirEjercicio"
-        app:layout_constraintStart_toStartOf="@+id/number_numeroDeSeries_popupAnadirEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/number_numeroDeSeries_popupAnadirEjercicio" />
-
-    <EditText
-        android:id="@+id/number_numeroDeRepeticiones_popupAnadirEjercicio"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/_00"
-        android:inputType="number"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
-
-    <TextView
-        android:id="@+id/txt_serie_popAnadirEjercicio2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/rep"
-        app:layout_constraintEnd_toEndOf="@+id/number_numeroDeRepeticiones_popupAnadirEjercicio"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/number_numeroDeRepeticiones_popupAnadirEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/number_numeroDeRepeticiones_popupAnadirEjercicio" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

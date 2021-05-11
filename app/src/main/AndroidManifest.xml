@@ -11,15 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG2">
-        <activity android:name=".PopUpAnadirEjercicio"></activity>
-        <activity android:name=".AnadirEjercicio">
+        <activity android:name=".PopUpAnadirEjercicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CrearTablaActivity"></activity>
+        <activity android:name=".AnadirEjercicio">
+
+        </activity>
+        <activity android:name=".CrearTablaActivity">
+
+        </activity>
         <activity android:name=".TablasMenu" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".RegisterActivity" />

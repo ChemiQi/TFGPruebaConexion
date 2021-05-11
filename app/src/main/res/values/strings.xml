@@ -23,6 +23,7 @@
     <string name="rep">Rep</string>
     <string name="series">Series</string>
     <string name="_00">00</string>
+    <string name="repeticiciones">Repeticiciones</string>
 
     <string-array name="diasGimnasio">
         <item>1</item>
