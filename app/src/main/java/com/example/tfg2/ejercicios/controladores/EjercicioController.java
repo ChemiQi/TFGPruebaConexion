@@ -3,11 +3,11 @@ package com.example.tfg2.ejercicios.controladores;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.tareas.TaskNewEjercicio;
 import com.example.tfg2.musculos.clases.Musculo;
-import com.example.tfg2.musculos.tareas.TaskGetEjercicioPorParteDelCuerpo;
+import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorMusculo;
+import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorParteDelCuerpo;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,11 +41,11 @@ public class EjercicioController {
         }
     }
 
-    public static List<Ejercicio> ejerciciosPorParteDelCuerpo(PartesDelCuerpo partesDelCuerpo){
+    public static ArrayList<Ejercicio> ejerciciosPorParteDelCuerpo(PartesDelCuerpo partesDelCuerpo){
         FutureTask t = new FutureTask(new TaskGetEjercicioPorParteDelCuerpo(partesDelCuerpo));
         ExecutorService es = Executors.newSingleThreadExecutor();
         es.submit(t);
-        List<Ejercicio> listaDeVueltaEjerciciosPorParteDelCuerpo = null;
+        ArrayList<Ejercicio> listaDeVueltaEjerciciosPorParteDelCuerpo = null;
         try {
             listaDeVueltaEjerciciosPorParteDelCuerpo = (ArrayList<Ejercicio>) t.get();
             es.shutdown();
@@ -66,5 +66,31 @@ public class EjercicioController {
             return listaDeVueltaEjerciciosPorParteDelCuerpo;
         }
 
+    }
+
+    public static ArrayList<Ejercicio> obtenerEjerciciosPorMusculo(Musculo musculoSeleccionado) {
+        FutureTask t = new FutureTask(new TaskGetEjercicioPorMusculo(musculoSeleccionado));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        ArrayList<Ejercicio> listaDeVueltaEjerciciosPorParteDelCuerpo = null;
+        try {
+            listaDeVueltaEjerciciosPorParteDelCuerpo = (ArrayList<Ejercicio>) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return listaDeVueltaEjerciciosPorParteDelCuerpo;
+        }
     }
 }

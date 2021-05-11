@@ -17,6 +17,12 @@
     <string name="ejercicio">TODO</string>
     <string name="nombre_ejercicio">nombre ejercicio</string>
     <string name="nombre_musculo">nombre musculo</string>
+    <string name="imagen_ejercicio">Imagen Ejercicio</string>
+    <string name="descripcion_ejercico">descripcion ejercico</string>
+    <string name="a_adir">Añadir</string>
+    <string name="rep">Rep</string>
+    <string name="series">Series</string>
+    <string name="_00">00</string>
 
     <string-array name="diasGimnasio">
         <item>1</item>

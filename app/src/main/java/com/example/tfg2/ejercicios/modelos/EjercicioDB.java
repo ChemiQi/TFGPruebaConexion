@@ -80,4 +80,34 @@ public class EjercicioDB {
         }
     }
 
+    public static ArrayList<Ejercicio> obtenerEjerciciosPorMusculo(Musculo musculoSeleccionado) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if(conexion == null)
+        {
+            return null;
+        }
+        //---------------------------------
+        ArrayList<Ejercicio> listaEjercicios = new ArrayList<>();
+        try {
+            String ordensql = "select *  from ejercicio WHERE idmusculos like ? ;";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(1,musculoSeleccionado.getIdMusculo());
+            ResultSet resultadosql = pst.executeQuery();
+            //------------------------------------------------
+            while(resultadosql.next())
+            {
+                int idJercicio = resultadosql.getInt("idejercicio");
+                String nombre = resultadosql.getString("nombre");
+                String descripcion = resultadosql.getString("descripcion");
+
+                listaEjercicios.add(new Ejercicio(idJercicio,musculoSeleccionado,nombre,descripcion));
+            }
+            resultadosql.close();
+            pst.close();
+            conexion.close();
+            return listaEjercicios;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

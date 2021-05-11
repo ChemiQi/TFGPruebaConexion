@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
+import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.ejercicios.modelos.EjercicioDB;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
@@ -39,6 +40,7 @@ public class AnadirEjercicio extends AppCompatActivity {
     List<Musculo> musculosPorParteDelCuerpo;
 
     PartesDelCuerpo parteDelCuerpo ;
+    Musculo musculoSeleccionado;
 
     ListaEjerciciosAdapter eAdapter;
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -59,13 +61,15 @@ public class AnadirEjercicio extends AppCompatActivity {
                 if(position != 0){
                     if(partes != null) {
                         parteDelCuerpo = partes.get(position - 1);
-                        listaEjercicios = EjercicioDB.obtenerEjerciciosPorParteDelCuerpo(parteDelCuerpo);
+                        listaEjercicios = EjercicioController.ejerciciosPorParteDelCuerpo(parteDelCuerpo);
                         añadirEjerciciosTabla();
                         datosSpinnerMusculos(parteDelCuerpo.getId());
                         sp_musculos_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                                musculoSeleccionado = musculosPorParteDelCuerpo.get(position);
+                                listaEjercicios = EjercicioController.obtenerEjerciciosPorMusculo(musculoSeleccionado);
+                                añadirEjerciciosTabla();
                             }
 
                             @Override

@@ -1,4 +1,4 @@
-package com.example.tfg2.musculos.tareas;
+package com.example.tfg2.ejercicios.tareas;
 
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.modelos.EjercicioDB;
