@@ -2,6 +2,7 @@ package com.example.tfg2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.Button;
@@ -18,8 +19,15 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_anadir_ejercicio);
+        txt_nombreEjercicio_popUpAnadirEjercicio= (TextView) findViewById(R.id.txt_nombreEjercicio_popUpAnadirEjercicio);
+        poip_imagenEjercicio_popipAnadirEjercicio= (ImageView) findViewById(R.id.poip_imagenEjercicio_popipAnadirEjercicio);
+        txt_descripcionEjercicio_popUpAnadirEjercicio= (TextView) findViewById(R.id.txt_descripcionEjercicio_popUpAnadirEjercicio);
+        number_numeroSeries_popUpAnadirEjercicio= (EditText) findViewById(R.id.number_numeroSeries_popUpAnadirEjercicio);
+        number_numeroRepeticiones_popUpAnadirEjercicio= (EditText) findViewById(R.id.number_numeroRepeticiones_popUpAnadirEjercicio);
+
 
         txt_nombreEjercicio_popUpAnadirEjercicio = (TextView)findViewById(R.id.txt_nombreEjercicio_popUpAnadirEjercicio);
         poip_imagenEjercicio_popipAnadirEjercicio = (ImageView) findViewById(R.id.poip_imagenEjercicio_popipAnadirEjercicio);

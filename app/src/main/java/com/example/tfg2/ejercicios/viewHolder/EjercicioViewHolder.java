@@ -15,6 +15,7 @@ import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
 
 public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static final String EXTRA_OBJETO_EJERCICIO = "";
     public TextView txt_nombre_itemEjercicio;
     public TextView txt_musculo_itemEjercicio;
     public ImageView img_ejercicio_rv_Ejercicio;
@@ -38,6 +39,7 @@ public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View
         //System.out.println(fEjercicio.getIdLiga());
 
         Intent intent = new Intent(eAdapter.getC(), PopUpAnadirEjercicio.class);
+        intent.putExtra(EXTRA_OBJETO_EJERCICIO,ejercicio);
         eAdapter.getC().startActivity(intent);
 
     }

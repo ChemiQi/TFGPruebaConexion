@@ -2,7 +2,9 @@ package com.example.tfg2.ejercicios.clases;
 
 import com.example.tfg2.musculos.clases.Musculo;
 
-public class Ejercicio {
+import java.io.Serializable;
+
+public class Ejercicio implements Serializable {
     private int idEjercicio;
     private Musculo musculo;
     private String nombreEjercicio;

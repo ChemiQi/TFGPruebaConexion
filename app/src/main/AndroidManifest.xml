@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG2">
-        <activity android:name=".PopUpAnadirEjercicio">
+        <activity android:name=".PopUpAnadirEjercicio" >
 
         </activity>
         <activity android:name=".AnadirEjercicio">

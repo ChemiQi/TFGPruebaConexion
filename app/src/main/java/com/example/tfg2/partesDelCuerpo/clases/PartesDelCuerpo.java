@@ -1,6 +1,8 @@
 package com.example.tfg2.partesDelCuerpo.clases;
 
-public class PartesDelCuerpo {
+import java.io.Serializable;
+
+public class PartesDelCuerpo implements Serializable {
     int id;
     String nombre;
 

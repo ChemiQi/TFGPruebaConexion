@@ -1,6 +1,8 @@
 package com.example.tfg2.musculos.clases;
 
-public class Musculo {
+import java.io.Serializable;
+
+public class Musculo implements Serializable {
     private int idMusculo;
     private String nombreMusculo;
     private int idZonaCuerpo;

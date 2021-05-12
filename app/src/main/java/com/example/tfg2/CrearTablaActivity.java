@@ -66,12 +66,3 @@ public class CrearTablaActivity extends AppCompatActivity {
         }
     }
 }
-
-/*
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
- */
