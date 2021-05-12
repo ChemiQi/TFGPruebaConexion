@@ -115,7 +115,11 @@ public class AnadirEjercicio extends AppCompatActivity {
     }
 
     private void añadirEjerciciosTabla(){
-        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios,fotoEjercicios);
+        //PRUEBA PARA PODER USARLO OFFLINE
+        ArrayList<Ejercicio> listaEjercicioOffline = new ArrayList<>();
+        Musculo m = new Musculo("prueba",2);
+        listaEjercicioOffline.add(new Ejercicio(1,m,"biceps","hacer biceps"));
+        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicioOffline,fotoEjercicios);
         rv_ejercicios_anadirEjercicio.setAdapter(eAdapter);
         rv_ejercicios_anadirEjercicio.setLayoutManager(new LinearLayoutManager(this));
     }
