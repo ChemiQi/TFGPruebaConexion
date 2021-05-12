@@ -34,7 +34,7 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     List<String> listaPartesCuerpo;
     List<PartesDelCuerpo> partes = new ArrayList<>();
-    List<Musculo> listaMusculos ;//= MusculoController.obtenerMusculos();
+    List<Musculo> listaMusculos = MusculoController.obtenerMusculos();
     ArrayList<Ejercicio> listaEjercicios;
     ArrayList<FotoEjercicio> fotoEjercicios;
     List<Musculo> musculosPorParteDelCuerpo;
@@ -53,9 +53,7 @@ public class AnadirEjercicio extends AppCompatActivity {
         sp_grupoMuscular_anadirEjercicio = (Spinner) findViewById(R.id.sp_grupoMuscular_anadirEjercicio);
         rv_ejercicios_anadirEjercicio = (RecyclerView) findViewById(R.id.rv_ejercicios_anadirEjercicio);
 
-        añadirEjerciciosTabla();
-
-       /*obtenerPartesDelCuerpo();
+        obtenerPartesDelCuerpo();
 
         sp_grupoMuscular_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {  // <--- Para dependiendo que musculo haya seleccionado, salgan los musculos.
             @Override
@@ -91,7 +89,7 @@ public class AnadirEjercicio extends AppCompatActivity {
 
 
 
-*/
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -117,11 +115,7 @@ public class AnadirEjercicio extends AppCompatActivity {
     }
 
     private void añadirEjerciciosTabla(){
-        //PRUEBA PARA PODER USARLO OFFLINE
-        ArrayList<Ejercicio> listaEjercicioOffline = new ArrayList<>();
-        Musculo m = new Musculo("prueba",2);
-        listaEjercicioOffline.add(new Ejercicio(1,m,"biceps","hacer biceps"));
-        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicioOffline,fotoEjercicios);
+        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios,fotoEjercicios);
         rv_ejercicios_anadirEjercicio.setAdapter(eAdapter);
         rv_ejercicios_anadirEjercicio.setLayoutManager(new LinearLayoutManager(this));
     }

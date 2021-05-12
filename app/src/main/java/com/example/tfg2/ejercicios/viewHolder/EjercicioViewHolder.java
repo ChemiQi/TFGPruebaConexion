@@ -26,6 +26,7 @@ public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View
         txt_musculo_itemEjercicio = (TextView) mItemView.findViewById(R.id.txt_musculo_itemEjercicio);
         this.eAdapter = listaEjerciciosAdapter;
         //img_ejercicio_rv_Ejercicio = (ImageView) mItemView.findViewById(R.id.img_ejercicio_rv_Ejercicio);
+        itemView.setOnClickListener(this);
     }
 
     @Override
@@ -33,8 +34,8 @@ public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View
         int mPosition = getLayoutPosition();
         Ejercicio ejercicio =eAdapter.getListaEjercicios().get(mPosition);
         System.out.println(ejercicio.getIdEjercicio() + " " + ejercicio.getNombreEjercicio());
-        FotoEjercicio fEjercicio = eAdapter.getListaFotosEjercicio().get(mPosition);
-        System.out.println(fEjercicio.getIdLiga());
+       // FotoEjercicio fEjercicio = eAdapter.getListaFotosEjercicio().get(mPosition);
+        //System.out.println(fEjercicio.getIdLiga());
 
         Intent intent = new Intent(eAdapter.getC(), PopUpAnadirEjercicio.class);
         eAdapter.getC().startActivity(intent);
