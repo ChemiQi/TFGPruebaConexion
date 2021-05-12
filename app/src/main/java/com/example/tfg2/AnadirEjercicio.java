@@ -34,7 +34,7 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     List<String> listaPartesCuerpo;
     List<PartesDelCuerpo> partes = new ArrayList<>();
-    List<Musculo> listaMusculos = MusculoController.obtenerMusculos();
+    List<Musculo> listaMusculos ;//= MusculoController.obtenerMusculos();
     ArrayList<Ejercicio> listaEjercicios;
     ArrayList<FotoEjercicio> fotoEjercicios;
     List<Musculo> musculosPorParteDelCuerpo;
@@ -53,7 +53,9 @@ public class AnadirEjercicio extends AppCompatActivity {
         sp_grupoMuscular_anadirEjercicio = (Spinner) findViewById(R.id.sp_grupoMuscular_anadirEjercicio);
         rv_ejercicios_anadirEjercicio = (RecyclerView) findViewById(R.id.rv_ejercicios_anadirEjercicio);
 
-        obtenerPartesDelCuerpo();
+        añadirEjerciciosTabla();
+
+       /*obtenerPartesDelCuerpo();
 
         sp_grupoMuscular_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {  // <--- Para dependiendo que musculo haya seleccionado, salgan los musculos.
             @Override
@@ -89,7 +91,7 @@ public class AnadirEjercicio extends AppCompatActivity {
 
 
 
-
+*/
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
