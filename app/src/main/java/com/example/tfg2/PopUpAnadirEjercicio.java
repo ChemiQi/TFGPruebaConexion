@@ -5,18 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 
 public class PopUpAnadirEjercicio extends AppCompatActivity {
     TextView txt_nombreEjercicio_popUpAnadirEjercicio;
     ImageView poip_imagenEjercicio_popipAnadirEjercicio;
     TextView txt_descripcionEjercicio_popUpAnadirEjercicio;
-    TextView number_numeroSeries_popUpAnadirEjercicio;
-    TextView number_numeroRepeticiones_popUpAnadirEjercicio;
-    Button btn_anadirEjercicio_popUpAnadirEjercicio;
-
+    EditText number_numeroSeries_popUpAnadirEjercicio;
+    EditText number_numeroRepeticiones_popUpAnadirEjercicio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         
@@ -29,25 +30,23 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         number_numeroRepeticiones_popUpAnadirEjercicio= (EditText) findViewById(R.id.number_numeroRepeticiones_popUpAnadirEjercicio);
 
 
-        txt_nombreEjercicio_popUpAnadirEjercicio = (TextView)findViewById(R.id.txt_nombreEjercicio_popUpAnadirEjercicio);
-        poip_imagenEjercicio_popipAnadirEjercicio = (ImageView) findViewById(R.id.poip_imagenEjercicio_popipAnadirEjercicio);
-        txt_descripcionEjercicio_popUpAnadirEjercicio = (TextView)findViewById(R.id.txt_descripcionEjercicio_popUpAnadirEjercicio);
-        number_numeroSeries_popUpAnadirEjercicio = (TextView)findViewById(R.id.number_numeroSeries_popUpAnadirEjercicio);
-        number_numeroRepeticiones_popUpAnadirEjercicio = (TextView)findViewById(R.id.number_numeroRepeticiones_popUpAnadirEjercicio);
-        btn_anadirEjercicio_popUpAnadirEjercicio = (Button) findViewById(R.id.btn_anadirEjercicio_popUpAnadirEjercicio);
-
-        String textoPrueba = "HOOLA ME adasdasdsad asdasdasdsadasdasdsadasdsadasd";
-        for(int i = 0 ;  i < 5; i++){
-            textoPrueba += textoPrueba;
-        }
-
-        txt_descripcionEjercicio_popUpAnadirEjercicio.setText(textoPrueba);
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
         int ancho = medidasVentana.widthPixels;
         int alto = medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.80),(int)(alto * 0.75));
+        getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.75));
+
+        Intent intent = getIntent();
+        Ejercicio ejercicio = (Ejercicio)intent.getSerializableExtra(EjercicioViewHolder.EXTRA_OBJETO_EJERCICIO);
+
+        //------------------------------------------PONEMOS DATOS------------------------------------------------
+        if (ejercicio.getNombreEjercicio().length() > 23)
+            txt_nombreEjercicio_popUpAnadirEjercicio.setTextSize(18);
+
+        txt_nombreEjercicio_popUpAnadirEjercicio.setText(ejercicio.getNombreEjercicio());
+        txt_descripcionEjercicio_popUpAnadirEjercicio.setText(ejercicio.getDescripcionEjercicio());
+
     }
 }
