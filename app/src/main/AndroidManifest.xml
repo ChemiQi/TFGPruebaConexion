@@ -27,7 +27,9 @@
         <activity android:name=".TablasMenu" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

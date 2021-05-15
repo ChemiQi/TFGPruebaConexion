@@ -2,7 +2,9 @@ package com.example.tfg2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.tfg2.user.clases.CurrentUser;
@@ -26,5 +28,10 @@ public class MenuActivity extends AppCompatActivity {
         System.out.println(CurrentUser.getUser().toString());
 
 
+    }
+
+    public void irVerTablas(View view) {
+        Intent intent = new Intent(this,TablasMenu.class);
+        startActivity(intent);
     }
 }

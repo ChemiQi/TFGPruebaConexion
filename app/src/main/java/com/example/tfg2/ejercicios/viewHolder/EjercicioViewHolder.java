@@ -41,6 +41,5 @@ public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View
         Intent intent = new Intent(eAdapter.getC(), PopUpAnadirEjercicio.class);
         intent.putExtra(EXTRA_OBJETO_EJERCICIO,ejercicio);
         eAdapter.getC().startActivity(intent);
-
     }
 }

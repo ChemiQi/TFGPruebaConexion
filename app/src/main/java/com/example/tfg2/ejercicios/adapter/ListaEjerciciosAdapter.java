@@ -83,6 +83,7 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
                 if(ejercicioActual.getIdEjercicio() == fotoEjercicio.getIdLiga() && fotoEjercicio.getFoto() != null){
                     holder.img_ejercicio_rv_Ejercicio.setImageBitmap(fotoEjercicio.getFoto());
                     break;
+
                 }
             }
         }

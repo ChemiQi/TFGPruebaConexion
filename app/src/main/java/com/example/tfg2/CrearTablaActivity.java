@@ -19,6 +19,7 @@ public class CrearTablaActivity extends AppCompatActivity {
     LinearLayout ly_contenedorFilas_crearTabla;
     Spinner sp_diasEntreno_crearTabla;
     List<LinearLayout> listaDeFilas = new ArrayList<LinearLayout>();
+    // AL ENTRAR CREO UNA TABLA , CON UN OBJETO --- InfoTablaEjercicio, crear al dar al boton de guardar
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -34,7 +35,7 @@ public class CrearTablaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int numero = position+1;
-              putColumnsNumber((numero));
+              putColumnsNumber(numero);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -64,5 +65,9 @@ public class CrearTablaActivity extends AppCompatActivity {
             hsv.addView(ly);
             this.ly_contenedorFilas_crearTabla.addView(hsv);
         }
+    }
+
+    private void crearFila(){
+
     }
 }
