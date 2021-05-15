@@ -2,7 +2,11 @@ package com.example.tfg2;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +39,8 @@ public class CrearTablaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int numero = position+1;
-              putColumnsNumber(numero);
+              //putColumnsNumber(numero);
+                putsLinearLayouts(numero);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -64,6 +69,22 @@ public class CrearTablaActivity extends AppCompatActivity {
                 ly.addView(btn);
             hsv.addView(ly);
             this.ly_contenedorFilas_crearTabla.addView(hsv);
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    private void putsLinearLayouts(int numeroFilas){
+        ly_contenedorFilas_crearTabla.removeAllViewsInLayout();
+        for(int i = 0; i<numeroFilas; i++) {
+            RecyclerView rv = new RecyclerView(getApplicationContext());
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            rv.setLayoutManager(linearLayoutManager);
+            Button btn = new Button(getApplicationContext());
+            btn.setHeight(400);
+            btn.setWidth(200);
         }
     }
 

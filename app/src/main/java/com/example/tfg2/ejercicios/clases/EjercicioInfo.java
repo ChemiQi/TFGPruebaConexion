@@ -9,6 +9,7 @@ public class EjercicioInfo {
         this.ejercicio = ejercicio;
         this.series = series;
         this.repeticiones = repeticiones;
+        //IMAGEN EJERCIICO
     }
 
     public EjercicioInfo() {
