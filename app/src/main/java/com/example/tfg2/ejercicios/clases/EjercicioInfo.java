@@ -40,4 +40,13 @@ public class EjercicioInfo  implements Serializable {
     public void setRepeticiones(int repeticiones) {
         this.repeticiones = repeticiones;
     }
+
+    @Override
+    public String toString() {
+        return "EjercicioInfo{" +
+                "ejercicio=" + ejercicio +
+                ", series=" + series +
+                ", repeticiones=" + repeticiones +
+                '}';
+    }
 }

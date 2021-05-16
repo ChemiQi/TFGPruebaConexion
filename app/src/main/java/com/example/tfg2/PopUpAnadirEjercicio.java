@@ -55,8 +55,7 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
     }
 
     public void anadirEjercicioAListaEjercicio(View view) {
-        AnadirEjercicio ae = new AnadirEjercicio();
-        ae.addEjercicioLista(new EjercicioInfo(ejercicio,Integer.valueOf(number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString()),Integer.valueOf(number_numeroSeries_popUpAnadirEjercicio.getText().toString())));
+        AnadirEjercicio.addEjercicioLista(new EjercicioInfo(ejercicio,Integer.valueOf(number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString()),Integer.valueOf(number_numeroSeries_popUpAnadirEjercicio.getText().toString())));
         finish();
     }
 }

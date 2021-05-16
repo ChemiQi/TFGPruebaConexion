@@ -3,13 +3,11 @@ package com.example.tfg2;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -19,22 +17,23 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
-import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
+import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrearTablaActivity extends AppCompatActivity {
     private static final int PETICION2 = 2;
-    public static final String EXTRA_ARRAYLISTEJERCICIOS = "";
+    public static final String EXTRA_POSITIONDIA = "";
     LinearLayout ly_contenedorFilas_crearTabla;
     Spinner sp_diasEntreno_crearTabla;
     List<LinearLayout> listaDeFilas = new ArrayList<LinearLayout>();
     ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
     int diasSeleccionados = 0;
+
+    int position;
 
     // AL ENTRAR CREO UNA TABLA , CON UN OBJETO --- InfoTablaEjercicio, crear al dar al boton de guardar
 
@@ -54,7 +53,7 @@ public class CrearTablaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                  diasSeleccionados = position+1;
-              //putColumnsNumber(numero);
+
                 putsLinearLayouts(diasSeleccionados);
             }
             @Override
@@ -64,7 +63,7 @@ public class CrearTablaActivity extends AppCompatActivity {
 //------------------------------------------------------------------------//
     }
 
-    private void putColumnsNumber(int numeroFilas){
+    /*private void putColumnsNumber(int numeroFilas){
         ly_contenedorFilas_crearTabla.removeAllViewsInLayout();
         for(int i = 0; i<numeroFilas; i++){
             HorizontalScrollView hsv = new HorizontalScrollView(getApplicationContext()); // cada linea
@@ -75,7 +74,9 @@ public class CrearTablaActivity extends AppCompatActivity {
 
                 //---------------------------------------------------------------------------------------------------
             ArrayList<EjercicioInfo> diaEjercicios = listaDiasEjercicio.get(i);
+
             ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,diaEjercicios);
+
 
 
                 Button btn = new Button(getApplicationContext());
@@ -92,18 +93,21 @@ public class CrearTablaActivity extends AppCompatActivity {
             hsv.addView(ly);
             this.ly_contenedorFilas_crearTabla.addView(hsv);
         }
-    }
+    }*/
 
     @SuppressLint("WrongConstant")
     private void putsLinearLayouts(int numeroFilas){
         ly_contenedorFilas_crearTabla.removeAllViewsInLayout();
         for(int i = 0; i<numeroFilas; i++) {
+
             HorizontalScrollView hsv = new HorizontalScrollView(getApplicationContext());
 
             LinearLayout ly = new LinearLayout(getApplicationContext()); // recipiente por linea
             ly.setOrientation(LinearLayout.HORIZONTAL);
 
             ArrayList<EjercicioInfo> diaEjercicios = listaDiasEjercicio.get(i);
+            position = i;
+
             ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,diaEjercicios);
 
             RecyclerView rv = new RecyclerView(getApplicationContext());
@@ -118,8 +122,10 @@ public class CrearTablaActivity extends AppCompatActivity {
             btn.setWidth(200);
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    int posicion = position;
+                    System.out.println("POSICION: " + position);
                     Intent intent = new Intent(getApplicationContext(),AnadirEjercicio.class);
-                    intent.putExtra(EXTRA_ARRAYLISTEJERCICIOS,diaEjercicios);
+                    intent.putExtra(EXTRA_POSITIONDIA,posicion);
                     startActivityForResult(intent,PETICION2);
                 }
             });
@@ -145,7 +151,10 @@ public class CrearTablaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PETICION2){
             if (resultCode == RESULT_OK){
+                EjercicioYPosicion ejercicioYPosicion = (EjercicioYPosicion) data.getSerializableExtra(AnadirEjercicio.EJERCICIO_CREADO);
+                listaDiasEjercicio.get(ejercicioYPosicion.getPosicion()).add(ejercicioYPosicion.getEjercicioInfo());
                 putsLinearLayouts(diasSeleccionados);
+                System.out.println("reusltado ok");
             }else if(requestCode == RESULT_CANCELED){
                 System.out.println("ERROR");
             }

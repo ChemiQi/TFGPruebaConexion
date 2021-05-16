@@ -16,9 +16,9 @@ import android.widget.Spinner;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
+import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
-import com.example.tfg2.ejercicios.modelos.EjercicioDB;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
@@ -30,12 +30,15 @@ import java.util.stream.Collectors;
 
 public class AnadirEjercicio extends AppCompatActivity {
 
+    public static final String EJERCICIO_CREADO = "";
     Spinner sp_grupoMuscular_anadirEjercicio;
     Spinner sp_musculos_anadirEjercicio;
     RecyclerView rv_ejercicios_anadirEjercicio;
 
-     ArrayList<EjercicioInfo> ejerciciosRecibidos;
+    private int posicion;
+    private static EjercicioInfo ejercicioInfoBase;
     Intent intent;
+    public static Boolean esperaActivacion = false;
 
     List<String> listaPartesCuerpo;
     List<PartesDelCuerpo> partes = new ArrayList<>();
@@ -46,6 +49,7 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     PartesDelCuerpo parteDelCuerpo ;
     Musculo musculoSeleccionado;
+    int contador = 0;
 
     ListaEjerciciosAdapter eAdapter;
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -58,9 +62,16 @@ public class AnadirEjercicio extends AppCompatActivity {
         sp_grupoMuscular_anadirEjercicio = (Spinner) findViewById(R.id.sp_grupoMuscular_anadirEjercicio);
         rv_ejercicios_anadirEjercicio = (RecyclerView) findViewById(R.id.rv_ejercicios_anadirEjercicio);
 
-         intent = getIntent();
-        ejerciciosRecibidos = (ArrayList) intent.getSerializableExtra(CrearTablaActivity.EXTRA_ARRAYLISTEJERCICIOS);
+        intent = getIntent();
+        posicion = intent.getIntExtra(CrearTablaActivity.EXTRA_POSITIONDIA, -1);
 
+
+
+        try {
+            esperarRespuesta();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         obtenerPartesDelCuerpo();
 
@@ -97,9 +108,6 @@ public class AnadirEjercicio extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -131,9 +139,40 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     }
 
-    public void addEjercicioLista(EjercicioInfo ejercicioInfo){
-        ejerciciosRecibidos.add(ejercicioInfo);
-        setResult(RESULT_OK,new Intent(this,CrearTablaActivity.class));
-        finish();
+    public static void addEjercicioLista(EjercicioInfo ejercicioInfo){
+        ejercicioInfoBase = ejercicioInfo;
+        esperaActivacion = true;
     }
+
+    private void esperarRespuesta() throws InterruptedException {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(!esperaActivacion){
+                    contador++;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(contador);
+                }
+                ponerResultado();
+                esperaActivacion = false;
+                ponerResultado();
+            }
+        }).start();
+
+    }
+
+    private void ponerResultado(){
+        Intent inten2t = new Intent(this,CrearTablaActivity.class);
+        EjercicioYPosicion ejercicioYPosicion = new EjercicioYPosicion(posicion,ejercicioInfoBase);
+        inten2t.putExtra(EJERCICIO_CREADO,ejercicioYPosicion);
+        setResult(RESULT_OK,inten2t);
+        finish();
+}
+
+
 }
