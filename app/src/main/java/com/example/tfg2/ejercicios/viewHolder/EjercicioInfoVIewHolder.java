@@ -28,6 +28,8 @@ public class EjercicioInfoVIewHolder extends RecyclerView.ViewHolder implements 
         itemView.setOnClickListener(this);
     }
 
+
+
     @Override
     public void onClick(View v) {
 
