@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.ejercicios.modelos.EjercicioDB;
@@ -31,6 +33,9 @@ public class AnadirEjercicio extends AppCompatActivity {
     Spinner sp_grupoMuscular_anadirEjercicio;
     Spinner sp_musculos_anadirEjercicio;
     RecyclerView rv_ejercicios_anadirEjercicio;
+
+     ArrayList<EjercicioInfo> ejerciciosRecibidos;
+    Intent intent;
 
     List<String> listaPartesCuerpo;
     List<PartesDelCuerpo> partes = new ArrayList<>();
@@ -53,6 +58,10 @@ public class AnadirEjercicio extends AppCompatActivity {
         sp_grupoMuscular_anadirEjercicio = (Spinner) findViewById(R.id.sp_grupoMuscular_anadirEjercicio);
         rv_ejercicios_anadirEjercicio = (RecyclerView) findViewById(R.id.rv_ejercicios_anadirEjercicio);
 
+         intent = getIntent();
+        ejerciciosRecibidos = (ArrayList) intent.getSerializableExtra(CrearTablaActivity.EXTRA_ARRAYLISTEJERCICIOS);
+
+
         obtenerPartesDelCuerpo();
 
         sp_grupoMuscular_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {  // <--- Para dependiendo que musculo haya seleccionado, salgan los musculos.
@@ -70,6 +79,7 @@ public class AnadirEjercicio extends AppCompatActivity {
                                 musculoSeleccionado = musculosPorParteDelCuerpo.get(position);
                                 listaEjercicios = EjercicioController.obtenerEjerciciosPorMusculo(musculoSeleccionado);
                                 añadirEjerciciosTabla();
+
                             }
 
                             @Override
@@ -118,5 +128,12 @@ public class AnadirEjercicio extends AppCompatActivity {
         eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios,fotoEjercicios);
         rv_ejercicios_anadirEjercicio.setAdapter(eAdapter);
         rv_ejercicios_anadirEjercicio.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+    public void addEjercicioLista(EjercicioInfo ejercicioInfo){
+        ejerciciosRecibidos.add(ejercicioInfo);
+        setResult(RESULT_OK,new Intent(this,CrearTablaActivity.class));
+        finish();
     }
 }

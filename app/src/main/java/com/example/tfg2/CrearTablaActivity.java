@@ -1,5 +1,6 @@
 package com.example.tfg2;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -28,10 +29,12 @@ import java.util.List;
 
 public class CrearTablaActivity extends AppCompatActivity {
     private static final int PETICION2 = 2;
+    public static final String EXTRA_ARRAYLISTEJERCICIOS = "";
     LinearLayout ly_contenedorFilas_crearTabla;
     Spinner sp_diasEntreno_crearTabla;
     List<LinearLayout> listaDeFilas = new ArrayList<LinearLayout>();
     ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
+    int diasSeleccionados = 0;
 
     // AL ENTRAR CREO UNA TABLA , CON UN OBJETO --- InfoTablaEjercicio, crear al dar al boton de guardar
 
@@ -50,9 +53,9 @@ public class CrearTablaActivity extends AppCompatActivity {
         sp_diasEntreno_crearTabla.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int numero = position+1;
+                 diasSeleccionados = position+1;
               //putColumnsNumber(numero);
-                putsLinearLayouts(numero);
+                putsLinearLayouts(diasSeleccionados);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -116,6 +119,7 @@ public class CrearTablaActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(),AnadirEjercicio.class);
+                    intent.putExtra(EXTRA_ARRAYLISTEJERCICIOS,diaEjercicios);
                     startActivityForResult(intent,PETICION2);
                 }
             });
@@ -136,4 +140,15 @@ public class CrearTablaActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PETICION2){
+            if (resultCode == RESULT_OK){
+                putsLinearLayouts(diasSeleccionados);
+            }else if(requestCode == RESULT_CANCELED){
+                System.out.println("ERROR");
+            }
+        }
+    }
 }

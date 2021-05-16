@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 
 public class PopUpAnadirEjercicio extends AppCompatActivity {
@@ -18,6 +20,8 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
     TextView txt_descripcionEjercicio_popUpAnadirEjercicio;
     EditText number_numeroSeries_popUpAnadirEjercicio;
     EditText number_numeroRepeticiones_popUpAnadirEjercicio;
+
+    Ejercicio ejercicio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         
@@ -39,7 +43,7 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.75));
 
         Intent intent = getIntent();
-        Ejercicio ejercicio = (Ejercicio)intent.getSerializableExtra(EjercicioViewHolder.EXTRA_OBJETO_EJERCICIO);
+         ejercicio = (Ejercicio)intent.getSerializableExtra(EjercicioViewHolder.EXTRA_OBJETO_EJERCICIO);
 
         //------------------------------------------PONEMOS DATOS------------------------------------------------
         if (ejercicio.getNombreEjercicio().length() > 23)
@@ -48,5 +52,11 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         txt_nombreEjercicio_popUpAnadirEjercicio.setText(ejercicio.getNombreEjercicio());
         txt_descripcionEjercicio_popUpAnadirEjercicio.setText(ejercicio.getDescripcionEjercicio());
 
+    }
+
+    public void anadirEjercicioAListaEjercicio(View view) {
+        AnadirEjercicio ae = new AnadirEjercicio();
+        ae.addEjercicioLista(new EjercicioInfo(ejercicio,Integer.valueOf(number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString()),Integer.valueOf(number_numeroSeries_popUpAnadirEjercicio.getText().toString())));
+        finish();
     }
 }

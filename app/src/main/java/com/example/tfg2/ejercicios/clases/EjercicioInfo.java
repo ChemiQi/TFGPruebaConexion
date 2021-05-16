@@ -1,6 +1,8 @@
 package com.example.tfg2.ejercicios.clases;
 
-public class EjercicioInfo {
+import java.io.Serializable;
+
+public class EjercicioInfo  implements Serializable {
     Ejercicio ejercicio;
     int series;
     int repeticiones;
