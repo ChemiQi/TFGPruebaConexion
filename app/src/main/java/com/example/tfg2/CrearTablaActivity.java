@@ -106,7 +106,7 @@ public class CrearTablaActivity extends AppCompatActivity {
             ly.setOrientation(LinearLayout.HORIZONTAL);
 
             ArrayList<EjercicioInfo> diaEjercicios = listaDiasEjercicio.get(i);
-            position = i;
+
 
             ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,diaEjercicios);
 
@@ -120,12 +120,15 @@ public class CrearTablaActivity extends AppCompatActivity {
             Button btn = new Button(getApplicationContext());
             btn.setHeight(400);
             btn.setWidth(200);
+            btn.setText(String.valueOf(i));
+            btn.setTag(i);
+
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    int posicion = position;
-                    System.out.println("POSICION: " + position);
+
+
                     Intent intent = new Intent(getApplicationContext(),AnadirEjercicio.class);
-                    intent.putExtra(EXTRA_POSITIONDIA,posicion);
+                    intent.putExtra(EXTRA_POSITIONDIA,(Integer) btn.getTag());
                     startActivityForResult(intent,PETICION2);
                 }
             });
@@ -140,12 +143,10 @@ public class CrearTablaActivity extends AppCompatActivity {
     }
 
     private void crearListasPorDia(){  // 7 por los dias de la semana de ejercicio
-
         for(int i = 0; i<7; i++){
             listaDiasEjercicio.add(new ArrayList<EjercicioInfo>());
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -157,6 +158,8 @@ public class CrearTablaActivity extends AppCompatActivity {
                 System.out.println("reusltado ok");
             }else if(requestCode == RESULT_CANCELED){
                 System.out.println("ERROR");
+            }else {
+                AnadirEjercicio.esperaActivacion = true;
             }
         }
     }

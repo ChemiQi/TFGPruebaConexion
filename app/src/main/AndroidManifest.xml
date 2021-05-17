@@ -18,13 +18,15 @@
 
         </activity>
         <activity android:name=".CrearTablaActivity">
+
+        </activity>
+        <activity android:name=".TablasMenu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TablasMenu" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">

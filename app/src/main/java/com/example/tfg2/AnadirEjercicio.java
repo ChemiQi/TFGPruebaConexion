@@ -52,6 +52,9 @@ public class AnadirEjercicio extends AppCompatActivity {
     int contador = 0;
 
     ListaEjerciciosAdapter eAdapter;
+
+    //-------------------------------------------------------------------------------------------------------------------
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,9 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     }
 
+
+    //TODO--------------------------METODOS-------------------------------------------------------
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void obtenerPartesDelCuerpo(){
         partes = PdcController.obtenerPartes();
@@ -123,7 +129,6 @@ public class AnadirEjercicio extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void datosSpinnerMusculos(int idParteDelCuerpo){
         musculosPorParteDelCuerpo = listaMusculos.stream().filter(a-> a.getIdZonaCuerpo() == idParteDelCuerpo).collect(Collectors.toList());
-
 
         List<String> nombreMusculos = new ArrayList<>();
         musculosPorParteDelCuerpo.forEach(musculo -> nombreMusculos.add(musculo.getNombreMusculo()));
@@ -156,7 +161,7 @@ public class AnadirEjercicio extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    System.out.println(contador);
+
                 }
                 ponerResultado();
                 esperaActivacion = false;
