@@ -114,7 +114,7 @@ public class AnadirEjercicio extends AppCompatActivity {
     }
 
 
-    //TODO--------------------------METODOS-------------------------------------------------------
+    //--------------------------METODOS-------------------------------------------------------
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void obtenerPartesDelCuerpo(){

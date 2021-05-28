@@ -34,8 +34,7 @@ public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View
     public void onClick(View v) {
         int mPosition = getLayoutPosition();
         Ejercicio ejercicio =eAdapter.getListaEjercicios().get(mPosition);
-       // FotoEjercicio fEjercicio = eAdapter.getListaFotosEjercicio().get(mPosition);
-        //System.out.println(fEjercicio.getIdLiga());
+
 
         Intent intent = new Intent(eAdapter.getC(), PopUpAnadirEjercicio.class);
         intent.putExtra(EXTRA_OBJETO_EJERCICIO,ejercicio);

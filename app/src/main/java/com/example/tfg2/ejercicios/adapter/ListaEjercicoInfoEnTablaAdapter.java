@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 
 public class ListaEjercicoInfoEnTablaAdapter extends RecyclerView.Adapter<EjercicioInfoVIewHolder> {
+
     private Context c;
     private ArrayList<EjercicioInfo> listaEjercicioInfo ;
     private LayoutInflater mInflater;
@@ -62,9 +63,10 @@ public class ListaEjercicoInfoEnTablaAdapter extends RecyclerView.Adapter<Ejerci
 
     @Override
     public void onBindViewHolder(@NonNull EjercicioInfoVIewHolder holder, int position) {
+
         EjercicioInfo ejercicioInfo = listaEjercicioInfo.get(position);
-      holder.txt_repeticiones_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getRepeticiones()));
-      holder.txt_series_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getSeries()));
+        holder.txt_repeticiones_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getRepeticiones()));
+        holder.txt_series_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getSeries()));
 
     }
 

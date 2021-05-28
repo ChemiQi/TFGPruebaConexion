@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
+import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 
@@ -105,10 +106,10 @@ public class CrearTablaActivity extends AppCompatActivity {
             LinearLayout ly = new LinearLayout(getApplicationContext()); // recipiente por linea
             ly.setOrientation(LinearLayout.HORIZONTAL);
 
-            ArrayList<EjercicioInfo> diaEjercicios = listaDiasEjercicio.get(i);
 
 
-            ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,diaEjercicios);
+
+            ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,listaDiasEjercicio.get(i));
 
             RecyclerView rv = new RecyclerView(getApplicationContext());
             rv.setAdapter(adapter);
@@ -144,7 +145,8 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     private void crearListasPorDia(){  // 7 por los dias de la semana de ejercicio
         for(int i = 0; i<7; i++){
-            listaDiasEjercicio.add(new ArrayList<EjercicioInfo>());
+            ArrayList<EjercicioInfo> a = new ArrayList<EjercicioInfo>();
+            listaDiasEjercicio.add(a);
         }
     }
     @Override
