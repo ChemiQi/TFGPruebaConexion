@@ -26,7 +26,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="36dp"
         android:gravity="center"
-        android:text="Parte del cuerpo"
+        android:text="@string/parte_del_cuerpo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_titulo_anadirEjercicio" />
 
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Musculo"
+        android:text="@string/musculo"
         app:layout_constraintEnd_toEndOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
         app:layout_constraintStart_toStartOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/txt_parteDelCuerpo_anadirEjercicio" />

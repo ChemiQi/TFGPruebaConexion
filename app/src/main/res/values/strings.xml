@@ -24,6 +24,11 @@
     <string name="series">Series</string>
     <string name="_00">00</string>
     <string name="repeticiones">Repeticiones</string>
+    <string name="anadir_ejercicio">Añadir ejercicio</string>
+    <string name="seleccionar_imagen">Seleccionar imagen</string>
+    <string name="parte_del_cuerpo">Parte del cuerpo</string>
+    <string name="musculo">Musculo</string>
+
 
     <string-array name="diasGimnasio">
         <item>1</item>
@@ -34,4 +39,57 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+
+    <string-array name="partesCuerpoOffline">
+        <item>Seleccione..</item>
+        <item>Brazos</item>
+        <item>Piernas</item>
+        <item>Tronco</item>
+        <item>Cardio</item>
+    </string-array>
+
+    <string-array name="musculosOffline">
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Antebrazo</item>
+        <item>Deltoides</item>
+        <item>Cuadriceps</item>
+        <item>Gluteos</item>
+        <item>Gemelos</item>
+        <item>Isquiotibiales</item>
+        <item>Abdomen</item>
+        <item>Pectoral</item>
+        <item>Trapecio</item>
+        <item>Dorsal</item>
+        <item>Lumbar</item>
+        <item>Espalda</item>
+    </string-array>
+    
+    <string-array name="brazosOffline">
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Antebrazo</item>
+        <item>Deltoides</item>
+    </string-array>
+
+    <string-array name="piernasOffline">
+        <item>Cuadriceps</item>
+        <item>Gluteos</item>
+        <item>Gemelos</item>
+        <item>Isquiotibiales</item>
+    </string-array>
+
+    <string-array name="cuerpoOffline">
+        <item>Abdomen</item>
+        <item>Pectoral</item>
+        <item>Trapecio</item>
+        <item>Dorsal</item>
+        <item>Lumbar</item>
+        <item>Espalda</item>
+    </string-array>
+
+    <string-array name="cardioOffline">
+        <item>Cardio</item>
+    </string-array>
+
 </resources>
