@@ -3,6 +3,10 @@ package com.example.tfg2;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,8 +22,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
+import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
@@ -39,9 +46,9 @@ public class CrearEjercicio extends AppCompatActivity {
     private EditText edt_descripcionEjercicio_crearEjercicio;
 
     private String parteDelCuerpoSeleccionado;
-    private String musculoSeleccionado;
+    String musculoSeleccionado;
 
-
+    EjercicioViewModel ejercicioViewModel;
 
 
 
@@ -57,6 +64,19 @@ public class CrearEjercicio extends AppCompatActivity {
         edt_descripcionEjercicio_crearEjercicio = (EditText) findViewById(R.id.edt_descripcionEjercicio_crearEjercicio);
         edt_nombreEjercicio_crearEjercicio = (EditText)findViewById(R.id.edt_nombreEjercicio_crearEjercicio);
 
+        ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
+
+        LiveData<List<EjercicioLocal>> ejerciciosLive  = ejercicioViewModel.obtenerEjercicios();
+       if(ejerciciosLive != null){
+           ejerciciosLive.observe(this, new Observer<List<EjercicioLocal>>() {
+               @Override
+               public void onChanged(List<EjercicioLocal> ejercicioLocals) {
+                   for(EjercicioLocal e : ejercicioLocals){
+                       e.mostrar();
+                   }
+               }
+           });
+       }
 
         obtenerPartesDelCuerpo();
 
@@ -114,9 +134,18 @@ public class CrearEjercicio extends AppCompatActivity {
     }
 
     public void crearEjercicioOffline(View view) {
-        String nombre = String.valueOf(edt_nombreEjercicio_crearEjercicio.getText());
-        System.out.println(musculoSeleccionado + parteDelCuerpoSeleccionado + nombre + String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()));
+       /* this.nombreMusculo = nombreMusculo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagenEjercicio = imagenEjercicio;
+        */
+
         //TODO AÑADIR A LA BASE DE DATOS LOCAL EL EJERCICIO , AÑADIR IMAGEN
+        EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),null);
+        ejercicioLocal = new EjercicioLocal("a","a","a",null);
+        if(ejercicioViewModel.insertarEjercicio(ejercicioLocal)){
+            System.out.println("INSERTADO CORRECTAMENTE");
+        }
     }
 
 

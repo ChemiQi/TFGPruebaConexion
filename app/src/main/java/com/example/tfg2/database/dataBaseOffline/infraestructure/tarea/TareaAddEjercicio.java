@@ -1,0 +1,24 @@
+package com.example.tfg2.database.dataBaseOffline.infraestructure.tarea;
+
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.EjercicioRepository;
+
+import java.util.concurrent.Callable;
+
+public class TareaAddEjercicio implements Callable {
+    EjercicioLocal ejercicioLocal;
+    public TareaAddEjercicio(EjercicioLocal p) {
+        this.ejercicioLocal = p;
+    }
+
+    @Override
+    public Object call() throws Exception {
+        try{
+            EjercicioRepository.insertarEjercicio(ejercicioLocal);
+            return true;
+        }catch (Exception e){
+            System.out.println("ERROR AL INSERTAR EJERCICIO");
+            return false;
+        }
+    }
+}
