@@ -1,20 +1,25 @@
 package com.example.tfg2.ejercicios.clases;
 
+import android.graphics.Bitmap;
+
 import com.example.tfg2.musculos.clases.Musculo;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 public class Ejercicio implements Serializable {
     private int idEjercicio;
     private Musculo musculo;
     private String nombreEjercicio;
     private String descripcionEjercicio;
+    private Bitmap imageMusculo;
 
-    public Ejercicio(int idEjercicio, Musculo musculo, String nombreEjercicio, String descripcionEjercicio) {
+    public Ejercicio(int idEjercicio, Musculo musculo, String nombreEjercicio, String descripcionEjercicio,Bitmap imageMusculo) {
         this.idEjercicio = idEjercicio;
         this.musculo = musculo;
         this.nombreEjercicio = nombreEjercicio;
         this.descripcionEjercicio = descripcionEjercicio;
+        this.imageMusculo = imageMusculo;
     }
 
     public Ejercicio(Musculo musculo, String nombreEjercicio, String descripcionEjercicio) {
@@ -31,6 +36,7 @@ public class Ejercicio implements Serializable {
         this.nombreEjercicio = nombre;
         this.descripcionEjercicio = descripcion;
     }
+
 
 
     public int getIdEjercicio() {
@@ -63,5 +69,13 @@ public class Ejercicio implements Serializable {
 
     public void setDescripcionEjercicio(String descripcionEjercicio) {
         this.descripcionEjercicio = descripcionEjercicio;
+    }
+
+    public Bitmap getImageMusculo() {
+        return imageMusculo;
+    }
+
+    public void setImageMusculo(Bitmap imageMusculo) {
+        this.imageMusculo = imageMusculo;
     }
 }

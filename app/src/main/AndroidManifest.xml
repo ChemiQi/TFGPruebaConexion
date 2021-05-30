@@ -19,14 +19,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".PopUpAnadirEjercicio"></activity>
-        <activity android:name=".AnadirEjercicio"></activity>
+        <activity android:name=".AnadirEjercicio">
+
+        </activity>
         <activity android:name=".CrearTablaActivity">
 
         </activity>
         <activity android:name=".TablasMenu"></activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

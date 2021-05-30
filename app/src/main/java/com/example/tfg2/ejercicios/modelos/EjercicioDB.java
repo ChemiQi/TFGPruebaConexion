@@ -7,8 +7,12 @@ import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,8 +72,10 @@ public class EjercicioDB {
                 String descripcion = resultadosql.getString("descripcion");
                 String nombreMusculo = resultadosql.getString("nombremusculo");
                 int idMusculo = resultadosql.getInt("idmusculos");
+                Blob imagen = resultadosql.getBlob("imagenEjercicio");
+                Bitmap bmImage = ImagenesBlobBitmap.blob_to_bitmap(imagen,200,200);
                 System.out.println(idMusculo + nombreMusculo);
-                listaEjercicios.add(new Ejercicio(idJercicio,new Musculo(idMusculo,nombreMusculo),nombre,descripcion));
+                listaEjercicios.add(new Ejercicio(idJercicio,new Musculo(idMusculo,nombreMusculo),nombre,descripcion,bmImage));
             }
             resultadosql.close();
             pst.close();
@@ -99,8 +105,10 @@ public class EjercicioDB {
                 int idJercicio = resultadosql.getInt("idejercicio");
                 String nombre = resultadosql.getString("nombre");
                 String descripcion = resultadosql.getString("descripcion");
+                Blob imagen = resultadosql.getBlob("imagenEjercicio");
+                Bitmap bmImage = ImagenesBlobBitmap.blob_to_bitmap(imagen,200,200);
 
-                listaEjercicios.add(new Ejercicio(idJercicio,musculoSeleccionado,nombre,descripcion));
+                listaEjercicios.add(new Ejercicio(idJercicio,musculoSeleccionado,nombre,descripcion,bmImage));
             }
             resultadosql.close();
             pst.close();
@@ -108,6 +116,40 @@ public class EjercicioDB {
             return listaEjercicios;
         } catch (SQLException e) {
             return null;
+        }
+    }
+
+    public static boolean ponerFoto( Bitmap foto, int id){
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if(conexion == null)
+        {
+            return false;
+        }
+        //----------------------------
+        try {
+            String ordensql = "UPDATE ejercicio SET imagenEjercicio = ? WHERE  idejercicio = ?;";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(2,id);
+            if(foto != null){
+                ByteArrayOutputStream baos =new ByteArrayOutputStream();
+                foto.compress(Bitmap.CompressFormat.PNG,0,baos);
+                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                pst.setBinaryStream(1,bais);
+            }else{
+                pst.setBinaryStream(1,null);
+            }
+            int filasAfectadas = pst.executeUpdate();
+            pst.close();
+            conexion.close();
+            if(filasAfectadas > 0)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
         }
     }
 }

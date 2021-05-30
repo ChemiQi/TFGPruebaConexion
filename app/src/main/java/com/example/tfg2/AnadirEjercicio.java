@@ -138,7 +138,7 @@ public class AnadirEjercicio extends AppCompatActivity {
     }
 
     private void añadirEjerciciosTabla(){
-        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios,fotoEjercicios);
+        eAdapter = new ListaEjerciciosAdapter(this,listaEjercicios);
         rv_ejercicios_anadirEjercicio.setAdapter(eAdapter);
         rv_ejercicios_anadirEjercicio.setLayoutManager(new LinearLayoutManager(this));
 

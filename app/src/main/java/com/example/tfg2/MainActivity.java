@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.user.clases.CurrentUser;
 import com.example.tfg2.user.modelos.UserDB;
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         edt_username_login = (EditText) findViewById(R.id.edt_username_login);
         edt_pass_login = (EditText) findViewById(R.id.edt_pass_login);
+
+
     }
 
     public void goRegisterActivity(View view) {
@@ -33,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void iniciarSesion(View view) {
-        if(UserDB.loginUser(edt_username_login.getText().toString(),edt_pass_login.getText().toString())){
-            Intent intent = new Intent(this,MenuActivity.class);
-            startActivity(intent);
-        }else {
-            System.out.println("Error clogin");
+        try {
+            if (UserDB.loginUser(edt_username_login.getText().toString(), edt_pass_login.getText().toString())) {
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+            } else {
+                System.out.println("Error login");
+            }
+        }catch (Exception e){
+            Toast.makeText(this, "Hubo un error en la base de datos", Toast.LENGTH_SHORT).show();
         }
     }
 }

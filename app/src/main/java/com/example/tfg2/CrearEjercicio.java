@@ -26,6 +26,7 @@ import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.FotoEjercicio;
+import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
@@ -130,7 +131,13 @@ public class CrearEjercicio extends AppCompatActivity {
     }
 
     public void cancelarCrearEjercicio(View view) {
-        finish();
+    if(imagenSeleccionada != null){
+        if(EjercicioController.ponerFotoEjercicio(imagenSeleccionada,Integer.valueOf(String.valueOf(edt_nombreEjercicio_crearEjercicio.getText())))){
+            System.out.println("IMAGEN AÑADIDA CORRECTAMENTE");
+        }
+    }
+
+       // finish();
     }
 
     public void crearEjercicioOffline(View view) {

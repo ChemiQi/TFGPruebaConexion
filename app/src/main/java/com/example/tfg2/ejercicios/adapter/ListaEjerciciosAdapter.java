@@ -1,6 +1,8 @@
 package com.example.tfg2.ejercicios.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHolder> {
     private Context c;
     private ArrayList<Ejercicio> listaEjercicios;
-    private ArrayList<FotoEjercicio> listaFotosEjercicio;
+   // private ArrayList<FotoEjercicio> listaFotosEjercicio;
     private LayoutInflater mInflater;
 
     public Context getC() {
@@ -37,13 +39,13 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
         this.listaEjercicios = listaEjercicios;
     }
 
-    public ArrayList<FotoEjercicio> getListaFotosEjercicio() {
+   /* public ArrayList<FotoEjercicio> getListaFotosEjercicio() {
         return listaFotosEjercicio;
     }
 
     public void setListaFotosEjercicio(ArrayList<FotoEjercicio> listaFotosEjercicio) {
         this.listaFotosEjercicio = listaFotosEjercicio;
-    }
+    }*/
 
     public LayoutInflater getmInflater() {
         return mInflater;
@@ -53,10 +55,9 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
         this.mInflater = mInflater;
     }
 
-    public ListaEjerciciosAdapter(Context c, ArrayList<Ejercicio> listaEjercicios, ArrayList<FotoEjercicio> listaFotosEjercicio) {
+    public ListaEjerciciosAdapter(Context c, ArrayList<Ejercicio> listaEjercicios) {
         this.c = c;
         this.listaEjercicios = listaEjercicios;
-        this.listaFotosEjercicio = listaFotosEjercicio;
         mInflater = LayoutInflater.from(c);
     }
 
@@ -78,7 +79,15 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
         }
 
         holder.txt_musculo_itemEjercicio.setText(String.valueOf(ejercicioActual.getMusculo().getNombreMusculo()));
-        if(listaFotosEjercicio != null){
+
+        if(ejercicioActual.getImageMusculo() != null){
+            holder.img_ejercicio_rv_Ejercicio.setImageBitmap(ejercicioActual.getImageMusculo());
+        }
+        if(ejercicioActual.getImageMusculo() == null){
+            Bitmap noImage = BitmapFactory.decodeResource(c.getResources(),R.drawable.noimage);
+            holder.img_ejercicio_rv_Ejercicio.setImageBitmap(noImage);
+        }
+       /* if(listaFotosEjercicio != null){
             for(FotoEjercicio fotoEjercicio : listaFotosEjercicio){
                 if(ejercicioActual.getIdEjercicio() == fotoEjercicio.getIdLiga() && fotoEjercicio.getFoto() != null){
                     holder.img_ejercicio_rv_Ejercicio.setImageBitmap(fotoEjercicio.getFoto());
@@ -86,7 +95,7 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
 
                 }
             }
-        }
+        }*/
 
     }
 

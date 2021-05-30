@@ -1,6 +1,9 @@
 package com.example.tfg2.ejercicios.controladores;
 
+import android.graphics.Bitmap;
+
 import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.tareas.TareaAñadirFoto;
 import com.example.tfg2.ejercicios.tareas.TaskNewEjercicio;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorMusculo;
@@ -91,6 +94,31 @@ public class EjercicioController {
         }
         finally {
             return listaDeVueltaEjerciciosPorParteDelCuerpo;
+        }
+    }
+    public static boolean ponerFotoEjercicio( Bitmap foto, int id) {
+        FutureTask t = new FutureTask(new TareaAñadirFoto(foto, id));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insertadoOK = false;
+        try {
+            insertadoOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insertadoOK;
         }
     }
 }
