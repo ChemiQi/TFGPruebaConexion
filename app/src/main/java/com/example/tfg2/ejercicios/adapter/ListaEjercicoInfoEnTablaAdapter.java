@@ -1,6 +1,8 @@
 package com.example.tfg2.ejercicios.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +69,16 @@ public class ListaEjercicoInfoEnTablaAdapter extends RecyclerView.Adapter<Ejerci
         EjercicioInfo ejercicioInfo = listaEjercicioInfo.get(position);
         holder.txt_repeticiones_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getRepeticiones()));
         holder.txt_series_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getSeries()));
+
+        if(ejercicioInfo.getEjercicio().getImageMusculo() != null){
+            holder.img_imagenEjercicio_imteEjercicioEnTabla.setImageBitmap(ejercicioInfo.getEjercicio().getImageMusculo());
+            System.out.println("IMAGEN NO NULO");
+        }
+        if(ejercicioInfo.getEjercicio().getImageMusculo() == null){
+            Bitmap noImage = BitmapFactory.decodeResource(c.getResources(),R.drawable.noimage);
+            holder.img_imagenEjercicio_imteEjercicioEnTabla.setImageBitmap(noImage);
+            System.out.println("IMAGEN  NULO");
+        }
 
     }
 

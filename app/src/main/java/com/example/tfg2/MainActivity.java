@@ -37,15 +37,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void iniciarSesion(View view) {
-        try {
-            if (UserDB.loginUser(edt_username_login.getText().toString(), edt_pass_login.getText().toString())) {
+        if(BaseDB.conectarConBaseDeDatos() != null){
+            if(UserDB.loginUser(edt_username_login.getText().toString(), edt_pass_login.getText().toString())) {
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
-            } else {
-                System.out.println("Error login");
+            }else{
+                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e){
+        }else{
             Toast.makeText(this, "Hubo un error en la base de datos", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 }

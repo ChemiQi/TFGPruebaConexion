@@ -25,9 +25,6 @@ public class MenuActivity extends AppCompatActivity {
         btn_crearTabla_menu = (Button) findViewById(R.id.btn_crearTabla_menu);
         btn_ajustes_menu = (Button) findViewById(R.id.bnt_ajustes_menu);
 
-        System.out.println(CurrentUser.getUser().toString());
-
-
     }
 
     public void irVerTablas(View view) {

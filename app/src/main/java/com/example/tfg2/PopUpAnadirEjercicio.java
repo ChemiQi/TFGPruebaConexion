@@ -3,6 +3,7 @@ package com.example.tfg2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -30,6 +31,7 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
     private EjercicioInfo ejercicioInfoRecibido;
 
     private byte[] imagenByte;
+    private Bitmap imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +72,13 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         }
         try{
             imagenByte = intent.getByteArrayExtra(EjercicioViewHolder.EXTRA_IMAGEN_EJERCICIO);
-            poip_imagenEjercicio_popipAnadirEjercicio.setImageBitmap(ImagenesBlobBitmap.bytes_to_bitmap(imagenByte));
+            if(imagenByte != null) {
+                imagen = ImagenesBlobBitmap.bytes_to_bitmap(imagenByte);
+                System.out.println("BUTE NO NULOS");
+                poip_imagenEjercicio_popipAnadirEjercicio.setImageBitmap(imagen);
+            }
         }catch (Exception e){
+            System.out.println("ERROR");
         }
 
 
@@ -95,11 +102,15 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
 
     public void anadirEjercicioAListaEjercicio(View view) {
         if(ejercicioInfoRecibido ==null) {
+           if(imagenByte != null){
+                ejercicio.setImageMusculo(imagen);
+                if(ejercicio.getImageMusculo() != null)
+                System.out.println("IMAGENES DEL EJERCICIO NO NULO");
+           }
             AnadirEjercicio.addEjercicioLista(new EjercicioInfo(ejercicio, Integer.valueOf(number_numeroSeries_popUpAnadirEjercicio.getText().toString()), Integer.valueOf(number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString())));
             finish();
         }
         if(ejercicioInfoRecibido != null){
-
             finish();
         }
     }

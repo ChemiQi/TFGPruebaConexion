@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
+import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,37 +68,6 @@ public class CrearTablaActivity extends AppCompatActivity {
 //------------------------------------------------------------------------//
     }
 
-    /*private void putColumnsNumber(int numeroFilas){
-        ly_contenedorFilas_crearTabla.removeAllViewsInLayout();
-        for(int i = 0; i<numeroFilas; i++){
-            HorizontalScrollView hsv = new HorizontalScrollView(getApplicationContext()); // cada linea
-                LinearLayout ly = new LinearLayout(getApplicationContext()); // recipiente por linea
-                ly.setOrientation(LinearLayout.HORIZONTAL);
-                listaDeFilas.add(ly);
-
-
-                //---------------------------------------------------------------------------------------------------
-            ArrayList<EjercicioInfo> diaEjercicios = listaDiasEjercicio.get(i);
-
-            ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,diaEjercicios);
-
-
-
-                Button btn = new Button(getApplicationContext());
-                btn.setHeight(400);
-                btn.setWidth(200);
-
-                btn.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        System.out.println("JEEJ");
-                    }
-                });
-
-                ly.addView(btn);
-            hsv.addView(ly);
-            this.ly_contenedorFilas_crearTabla.addView(hsv);
-        }
-    }*/
 
     @SuppressLint("WrongConstant")
     private void putsLinearLayouts(int numeroFilas){
@@ -102,10 +75,15 @@ public class CrearTablaActivity extends AppCompatActivity {
         for(int i = 0; i<numeroFilas; i++) {
 
             HorizontalScrollView hsv = new HorizontalScrollView(getApplicationContext());
+            hsv.setPadding(0,5,0,5);
+
+            //int red = Color.parseColor("FF0000");
+
+
 
             LinearLayout ly = new LinearLayout(getApplicationContext()); // recipiente por linea
             ly.setOrientation(LinearLayout.HORIZONTAL);
-
+            ly.setBackgroundColor(ponerColoresFondo(i));
 
 
 
@@ -121,19 +99,17 @@ public class CrearTablaActivity extends AppCompatActivity {
             Button btn = new Button(getApplicationContext());
             btn.setHeight(400);
             btn.setWidth(200);
-            btn.setText(String.valueOf(i));
+            btn.setText("+");
             btn.setTag(i);
+            btn.setAlpha(0.8f);
 
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
-
                     Intent intent = new Intent(getApplicationContext(),AnadirEjercicio.class);
                     intent.putExtra(EXTRA_POSITIONDIA,(Integer) btn.getTag());
                     startActivityForResult(intent,PETICION2);
                 }
             });
-
             ly.addView(rv);
             ly.addView(btn);
             hsv.addView(ly);
@@ -154,15 +130,41 @@ public class CrearTablaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PETICION2){
             if (resultCode == RESULT_OK){
+                byte [] imagenByte = data.getByteArrayExtra(AnadirEjercicio.EXTRA_IMAGEN_EJERCICIO_ANADIREJERCIICO);
                 EjercicioYPosicion ejercicioYPosicion = (EjercicioYPosicion) data.getSerializableExtra(AnadirEjercicio.EJERCICIO_CREADO);
+
+                if(imagenByte != null) {
+                    ejercicioYPosicion.getEjercicioInfo().getEjercicio().setImageMusculo(ImagenesBlobBitmap.bytes_to_bitmap(imagenByte));
+                }
+
                 listaDiasEjercicio.get(ejercicioYPosicion.getPosicion()).add(ejercicioYPosicion.getEjercicioInfo());
                 putsLinearLayouts(diasSeleccionados);
-                System.out.println("reusltado ok");
             }else if(requestCode == RESULT_CANCELED){
                 System.out.println("ERROR");
             }else {
                 AnadirEjercicio.esperaActivacion = true;
             }
+        }
+    }
+
+    private int ponerColoresFondo(int i){
+        switch (i){
+            case 0:
+                return Color.parseColor("#CCFF0000");//ROJO
+            case 1:
+                return Color.parseColor("#CC008BFF"); //AAZUL
+            case 2:
+                return Color.parseColor("#CC3D8E3D"); //VERDE
+            case 3:
+                return Color.parseColor("#CCC5C816");//AMARILLO
+            case 4:
+                return Color.parseColor("#CCFF0000");
+            case 5:
+                return Color.parseColor("#CCFF0000");
+            case 6:
+                return Color.parseColor("#CCFF0000");
+            default:
+                return Color.parseColor("#CCFFFFFF");
         }
     }
 }

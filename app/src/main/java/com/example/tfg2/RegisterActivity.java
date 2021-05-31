@@ -29,7 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
         edt_passrepeat_crearcuenta = (EditText) findViewById(R.id.edt_passrepeat_crearcuenta);
 
         Intent intent = getIntent();
-        String nombreUsuario = String.valueOf(intent.getStringExtra(MainActivity.EXTRA_USERNAME_STRING));
+        String nombreUsuario = intent.getStringExtra(MainActivity.EXTRA_USERNAME_STRING);
+        if(nombreUsuario != null)
         edt_name_crearcuenta.setText(nombreUsuario);
 
     }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
 import com.example.tfg2.partesDelCuerpo.controladores.PdcController;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 public class AnadirEjercicio extends AppCompatActivity {
 
     public static final String EJERCICIO_CREADO = "";
+    public  static final String EXTRA_IMAGEN_EJERCICIO_ANADIREJERCIICO = "chema.martinez/imagenAEnviar";
     Spinner sp_grupoMuscular_anadirEjercicio;
     Spinner sp_musculos_anadirEjercicio;
     RecyclerView rv_ejercicios_anadirEjercicio;
@@ -49,7 +52,7 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     PartesDelCuerpo parteDelCuerpo ;
     Musculo musculoSeleccionado;
-    int contador = 0;
+
 
     ListaEjerciciosAdapter eAdapter;
 
@@ -155,7 +158,6 @@ public class AnadirEjercicio extends AppCompatActivity {
             @Override
             public void run() {
                 while(!esperaActivacion){
-                    contador++;
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -165,7 +167,6 @@ public class AnadirEjercicio extends AppCompatActivity {
                 }
                 ponerResultado();
                 esperaActivacion = false;
-                ponerResultado();
             }
         }).start();
 
@@ -173,11 +174,22 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     private void ponerResultado(){
         Intent inten2t = new Intent(this,CrearTablaActivity.class);
+
         EjercicioYPosicion ejercicioYPosicion = new EjercicioYPosicion(posicion,ejercicioInfoBase);
+        if(ejercicioInfoBase != null) {
+            if (ejercicioInfoBase.getEjercicio().getImageMusculo() != null) {
+                byte[] imagenn = transformarImagen(ejercicioInfoBase.getEjercicio().getImageMusculo());
+                ejercicioInfoBase.getEjercicio().setImageMusculo(null);
+                inten2t.putExtra(EXTRA_IMAGEN_EJERCICIO_ANADIREJERCIICO, imagenn);
+            }
+        }
         inten2t.putExtra(EJERCICIO_CREADO,ejercicioYPosicion);
         setResult(RESULT_OK,inten2t);
         finish();
 }
 
+    private byte[] transformarImagen(Bitmap bmFoto){
+        return ImagenesBlobBitmap.bitmap_to_bytes(bmFoto);
+    }
 
 }
