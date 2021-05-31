@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG2">
         <activity android:name=".CrearEjercicio">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".PopUpAnadirEjercicio"></activity>
@@ -19,11 +24,7 @@
 
         </activity>
         <activity android:name=".CrearTablaActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".TablasMenu"></activity>
         <activity android:name=".MenuActivity" />

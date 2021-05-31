@@ -67,17 +67,8 @@ public class CrearEjercicio extends AppCompatActivity {
 
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
-        LiveData<List<EjercicioLocal>> ejerciciosLive  = ejercicioViewModel.obtenerEjercicios();
-       if(ejerciciosLive != null){
-           ejerciciosLive.observe(this, new Observer<List<EjercicioLocal>>() {
-               @Override
-               public void onChanged(List<EjercicioLocal> ejercicioLocals) {
-                   for(EjercicioLocal e : ejercicioLocals){
-                       e.mostrar();
-                   }
-               }
-           });
-       }
+        //LiveData<List<EjercicioLocal>> ejerciciosLive  = ejercicioViewModel.obtenerEjercicios();
+
 
         obtenerPartesDelCuerpo();
 
@@ -131,11 +122,6 @@ public class CrearEjercicio extends AppCompatActivity {
     }
 
     public void cancelarCrearEjercicio(View view) {
-    if(imagenSeleccionada != null){
-        if(EjercicioController.ponerFotoEjercicio(imagenSeleccionada,Integer.valueOf(String.valueOf(edt_nombreEjercicio_crearEjercicio.getText())))){
-            System.out.println("IMAGEN AÑADIDA CORRECTAMENTE");
-        }
-    }
 
        // finish();
     }
@@ -149,7 +135,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
         //TODO AÑADIR A LA BASE DE DATOS LOCAL EL EJERCICIO , AÑADIR IMAGEN
         EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),null);
-        ejercicioLocal = new EjercicioLocal("a","a","a",null);
+       // ejercicioLocal = new EjercicioLocal("a","a","a",null);
         if(ejercicioViewModel.insertarEjercicio(ejercicioLocal)){
             System.out.println("INSERTADO CORRECTAMENTE");
         }

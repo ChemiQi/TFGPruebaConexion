@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
@@ -45,7 +46,8 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     List<String> listaPartesCuerpo;
     List<PartesDelCuerpo> partes = new ArrayList<>();
-    List<Musculo> listaMusculos = MusculoController.obtenerMusculos();
+    List<Musculo> listaMusculos;
+
     ArrayList<Ejercicio> listaEjercicios;
     ArrayList<FotoEjercicio> fotoEjercicios;
     List<Musculo> musculosPorParteDelCuerpo;
@@ -71,7 +73,9 @@ public class AnadirEjercicio extends AppCompatActivity {
         intent = getIntent();
         posicion = intent.getIntExtra(CrearTablaActivity.EXTRA_POSITIONDIA, -1);
 
-
+        if(BaseDB.conectarConBaseDeDatos() != null){
+            listaMusculos = MusculoController.obtenerMusculos();
+        }
 
         try {
             esperarRespuesta();
@@ -121,12 +125,14 @@ public class AnadirEjercicio extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void obtenerPartesDelCuerpo(){
-        partes = PdcController.obtenerPartes();
-        this.listaPartesCuerpo = new ArrayList<String>();
-        listaPartesCuerpo.add("Seleccione..");
+        if(BaseDB.conectarConBaseDeDatos() != null) {
+            partes = PdcController.obtenerPartes();
+            this.listaPartesCuerpo = new ArrayList<String>();
+            listaPartesCuerpo.add("Seleccione..");
             partes.forEach(a -> listaPartesCuerpo.add(a.getNombre()));
-        ArrayAdapter<CharSequence> adapterPartes = new ArrayAdapter(this, android.R.layout.simple_spinner_item,listaPartesCuerpo);
-        sp_grupoMuscular_anadirEjercicio.setAdapter(adapterPartes);
+            ArrayAdapter<CharSequence> adapterPartes = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaPartesCuerpo);
+            sp_grupoMuscular_anadirEjercicio.setAdapter(adapterPartes);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -192,4 +198,7 @@ public class AnadirEjercicio extends AppCompatActivity {
         return ImagenesBlobBitmap.bitmap_to_bytes(bmFoto);
     }
 
+    public void cancelarElegirEjerccio(View view) {
+        finish();
+    }
 }

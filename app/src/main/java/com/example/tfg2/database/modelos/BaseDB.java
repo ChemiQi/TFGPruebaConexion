@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class BaseDB {
     public static Connection conectarConBaseDeDatos() {
         try {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
+            //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+           // StrictMode.setThreadPolicy(policy);
             Connection conexion = DriverManager.getConnection(ConfigurationDB.URLMYSQL, ConfigurationDB.USUARIODB,ConfigurationDB.CLAVEDB);
             return conexion;
         } catch (SQLException e) {

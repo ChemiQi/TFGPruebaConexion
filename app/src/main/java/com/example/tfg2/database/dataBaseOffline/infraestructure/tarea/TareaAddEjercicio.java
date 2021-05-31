@@ -14,7 +14,7 @@ public class TareaAddEjercicio implements Callable {
     @Override
     public Object call() throws Exception {
         try{
-            EjercicioRepository.insertarEjercicio(ejercicioLocal);
+            EjercicioRepository.mEjercicioDao.insert(ejercicioLocal);
             return true;
         }catch (Exception e){
             System.out.println("ERROR AL INSERTAR EJERCICIO");
