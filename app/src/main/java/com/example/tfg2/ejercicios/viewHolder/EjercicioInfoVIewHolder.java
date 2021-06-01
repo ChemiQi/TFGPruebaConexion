@@ -1,6 +1,7 @@
 package com.example.tfg2.ejercicios.viewHolder;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,11 +13,13 @@ import com.example.tfg2.PopUpAnadirEjercicio;
 import com.example.tfg2.R;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 import java.util.ArrayList;
 
 public class EjercicioInfoVIewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    public static final String EXTRA_OBJETO_EJERCICIOINFO = "";
+    public static final String EXTRA_OBJETO_EJERCICIOINFO = "chema.martinez/objetoEjercicioInfo";
+    public static final String EXTRA_IMAGEN_EJERCICIO_EJERCICIOINFOHOWLDER = "chema.martinez/imagenEjercicioInfoHolder";
 
     public TextView txt_repeticiones_itemEjercicioEnTabla;
     public TextView txt_series_itemEjercicioEnTabla;
@@ -41,10 +44,19 @@ public class EjercicioInfoVIewHolder extends RecyclerView.ViewHolder implements 
         int mPosition = getLayoutPosition();
 
         EjercicioInfo ejercicioInfo = listaEjercicoInfoEnTablaAdapter.getListaEjercicioInfo().get(mPosition);
-
         Intent intent = new Intent(listaEjercicoInfoEnTablaAdapter.getC(), PopUpAnadirEjercicio.class);
+        if(ejercicioInfo.getEjercicio().getImageMusculo() != null) {
+            Bitmap imagenGuardada =ejercicioInfo.getEjercicio().getImageMusculo();
+            byte [] imagen = transformarImagen(imagenGuardada);
+            ejercicioInfo.getEjercicio().setImageMusculo(null);
+            intent.putExtra(EXTRA_IMAGEN_EJERCICIO_EJERCICIOINFOHOWLDER,imagen);
+        }
+
         intent.putExtra(EXTRA_OBJETO_EJERCICIOINFO,ejercicioInfo);
         listaEjercicoInfoEnTablaAdapter.getC().startActivity(intent);
+    }
 
+    private byte[] transformarImagen(Bitmap bmFoto){
+        return ImagenesBlobBitmap.bitmap_to_bytes(bmFoto);
     }
 }

@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         edt_username_login = (EditText) findViewById(R.id.edt_username_login);
         edt_pass_login = (EditText) findViewById(R.id.edt_pass_login);
+        if(BaseDB.conectarConBaseDeDatos() != null){
+            System.out.println("CONECTADO CORRECTAMENTE");
+        }else {
+            System.out.println("ERROR");
+        }
 
 
     }

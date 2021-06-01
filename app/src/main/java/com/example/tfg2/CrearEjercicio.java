@@ -127,15 +127,9 @@ public class CrearEjercicio extends AppCompatActivity {
     }
 
     public void crearEjercicioOffline(View view) {
-       /* this.nombreMusculo = nombreMusculo;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.imagenEjercicio = imagenEjercicio;
-        */
 
-        //TODO AÑADIR A LA BASE DE DATOS LOCAL EL EJERCICIO , AÑADIR IMAGEN
         EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),null);
-       // ejercicioLocal = new EjercicioLocal("a","a","a",null);
+
         if(ejercicioViewModel.insertarEjercicio(ejercicioLocal)){
             System.out.println("INSERTADO CORRECTAMENTE");
         }

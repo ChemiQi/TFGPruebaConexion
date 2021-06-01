@@ -54,7 +54,7 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         int ancho = medidasVentana.widthPixels;
         int alto = medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.75));
+        getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.85));
 
         // RECIBIR DATOS -----------------------------------------------------
 
@@ -70,15 +70,22 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         }catch (Exception e){
 
         }
+
         try{
             imagenByte = intent.getByteArrayExtra(EjercicioViewHolder.EXTRA_IMAGEN_EJERCICIO);
             if(imagenByte != null) {
                 imagen = ImagenesBlobBitmap.bytes_to_bitmap(imagenByte);
-                System.out.println("BUTE NO NULOS");
                 poip_imagenEjercicio_popipAnadirEjercicio.setImageBitmap(imagen);
             }
         }catch (Exception e){
-            System.out.println("ERROR");
+        }
+        try{
+            byte[] imagenByte2 = intent.getByteArrayExtra(EjercicioInfoVIewHolder.EXTRA_IMAGEN_EJERCICIO_EJERCICIOINFOHOWLDER);
+            if(imagenByte2 != null) {
+                imagen = ImagenesBlobBitmap.bytes_to_bitmap(imagenByte2);
+                poip_imagenEjercicio_popipAnadirEjercicio.setImageBitmap(imagen);
+            }
+        }catch (Exception e){
         }
 
 
@@ -89,11 +96,13 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
              number_numeroRepeticiones_popUpAnadirEjercicio.setText(String.valueOf(ejercicioInfoRecibido.getRepeticiones()));
              number_numeroRepeticiones_popUpAnadirEjercicio.setEnabled(false);
              number_numeroSeries_popUpAnadirEjercicio.setEnabled(false);
+             System.out.println("ENTRA");
          }
 
         //------------------------------------------PONEMOS DATOS------------------------------------------------
-        if (ejercicio.getNombreEjercicio().length() > 23)
+        if (ejercicio.getNombreEjercicio().length() > 23) {
             txt_nombreEjercicio_popUpAnadirEjercicio.setTextSize(18);
+        }
 
         txt_nombreEjercicio_popUpAnadirEjercicio.setText(ejercicio.getNombreEjercicio());
         txt_descripcionEjercicio_popUpAnadirEjercicio.setText(ejercicio.getDescripcionEjercicio());

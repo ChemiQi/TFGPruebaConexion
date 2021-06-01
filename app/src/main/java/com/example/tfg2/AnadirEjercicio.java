@@ -177,10 +177,8 @@ public class AnadirEjercicio extends AppCompatActivity {
         }).start();
 
     }
-
     private void ponerResultado(){
         Intent inten2t = new Intent(this,CrearTablaActivity.class);
-
         EjercicioYPosicion ejercicioYPosicion = new EjercicioYPosicion(posicion,ejercicioInfoBase);
         if(ejercicioInfoBase != null) {
             if (ejercicioInfoBase.getEjercicio().getImageMusculo() != null) {
