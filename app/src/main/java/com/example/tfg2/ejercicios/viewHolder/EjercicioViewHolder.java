@@ -13,7 +13,6 @@ import com.example.tfg2.PopUpAnadirEjercicio;
 import com.example.tfg2.R;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
-import com.example.tfg2.ejercicios.clases.FotoEjercicio;
 import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

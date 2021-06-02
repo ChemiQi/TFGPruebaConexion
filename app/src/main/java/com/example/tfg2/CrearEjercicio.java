@@ -1,18 +1,14 @@
 package com.example.tfg2;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -24,19 +20,10 @@ import android.widget.Spinner;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
-import com.example.tfg2.ejercicios.clases.Ejercicio;
-import com.example.tfg2.ejercicios.clases.FotoEjercicio;
-import com.example.tfg2.ejercicios.controladores.EjercicioController;
-import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
-import com.example.tfg2.musculos.clases.Musculo;
-import com.example.tfg2.musculos.controladores.MusculoController;
-import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
-import com.example.tfg2.partesDelCuerpo.controladores.PdcController;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CrearEjercicio extends AppCompatActivity {
     private ImageView img_imagenEjercicio_crearEjercicio;
@@ -67,7 +54,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
-        //LiveData<List<EjercicioLocal>> ejerciciosLive  = ejercicioViewModel.obtenerEjercicios();
+        LiveData<List<EjercicioLocal>> ejerciciosLive  = ejercicioViewModel.obtenerEjercicios();
 
 
         obtenerPartesDelCuerpo();
@@ -128,7 +115,9 @@ public class CrearEjercicio extends AppCompatActivity {
 
     public void crearEjercicioOffline(View view) {
 
-        EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),null);
+        EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
+                true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
+        //idEjercicio, @NonNull String nombreMusculo, @NonNull String nombre, @NonNull String descripcion, Boolean created, byte[] imagenEjercicio
 
         if(ejercicioViewModel.insertarEjercicio(ejercicioLocal)){
             System.out.println("INSERTADO CORRECTAMENTE");

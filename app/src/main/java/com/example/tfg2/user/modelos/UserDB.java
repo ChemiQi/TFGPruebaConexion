@@ -10,13 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDB {
-    public static boolean loginUser(String usuario, String password){
-        boolean loginOk = false;
+    public static User loginUser(String usuario, String password){
+        User userOk = null;
         Connection conexion = BaseDB.conectarConBaseDeDatos();
         if(conexion == null)
         {
             System.out.println("Error de conexion");
-            return false;
+            return null;
         }
         try{
             String ordenSQL = "Select * from user where usuario like ? and password like ?";
@@ -31,16 +31,16 @@ public class UserDB {
                 String email = resultado.getString("email");
                 String pass = resultado.getString("password");
 
-                CurrentUser.setUser(new User(idUser,userName,email,pass));
-                loginOk =  true;
+                User user = new User(idUser,userName,email,pass);
+                userOk =  user;
             }
             resultado.close();
             pst.close();
             conexion.close();
-            return loginOk;
+            return userOk;
         }catch (Exception e){
             System.out.println("Login false");
-            return false;
+            return null;
         }
     }
 

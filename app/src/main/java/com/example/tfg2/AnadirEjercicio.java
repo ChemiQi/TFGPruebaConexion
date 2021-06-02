@@ -19,12 +19,12 @@ import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
-import com.example.tfg2.ejercicios.clases.FotoEjercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.controladores.MusculoController;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
 import com.example.tfg2.partesDelCuerpo.controladores.PdcController;
+import com.example.tfg2.user.clases.CurrentUser;
 import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 import java.util.ArrayList;
@@ -49,7 +49,6 @@ public class AnadirEjercicio extends AppCompatActivity {
     List<Musculo> listaMusculos;
 
     ArrayList<Ejercicio> listaEjercicios;
-    ArrayList<FotoEjercicio> fotoEjercicios;
     List<Musculo> musculosPorParteDelCuerpo;
 
     PartesDelCuerpo parteDelCuerpo ;
@@ -85,6 +84,15 @@ public class AnadirEjercicio extends AppCompatActivity {
 
         obtenerPartesDelCuerpo();
 
+
+        if(CurrentUser.getUser() != null) {
+            System.out.println(CurrentUser.getUser().getNameUser());
+            listaEjercicios = EjercicioController.obtenerEjerciciosUsuario(CurrentUser.getUser().getId());
+
+        }else {
+            listaEjercicios  = new ArrayList<>();
+        }
+
         sp_grupoMuscular_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {  // <--- Para dependiendo que musculo haya seleccionado, salgan los musculos.
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //spiner de partes del cuerpo
@@ -92,6 +100,8 @@ public class AnadirEjercicio extends AppCompatActivity {
                     if(partes != null) {
                         parteDelCuerpo = partes.get(position - 1);
                         listaEjercicios = EjercicioController.ejerciciosPorParteDelCuerpo(parteDelCuerpo);
+                                //TODO AÑADIR LOS EJERCICIOS RECIBIDOS a la array
+                        //EjercicioController.ejerciciosPorParteDelCuerpo(parteDelCuerpo);
                         añadirEjerciciosTabla();
                         datosSpinnerMusculos(parteDelCuerpo.getId());
                         sp_musculos_anadirEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -6,6 +6,10 @@ public class PartesDelCuerpo implements Serializable {
     int id;
     String nombre;
 
+    public PartesDelCuerpo(int id) {
+        this.id = id;
+        this.nombre = setNombre(id);
+    }
     public PartesDelCuerpo(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
@@ -28,5 +32,20 @@ public class PartesDelCuerpo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    private String setNombre(int id){
+        switch (id){
+            case 1:
+                return "Brazos";
+            case 2:
+                return "Piernas";
+            case 3:
+                return "Tronco";
+            case 4:
+                return "Cardio";
+            default:
+                return "";
+        }
     }
 }

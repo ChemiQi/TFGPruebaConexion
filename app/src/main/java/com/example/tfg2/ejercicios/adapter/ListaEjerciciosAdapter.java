@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg2.R;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
-import com.example.tfg2.ejercicios.clases.FotoEjercicio;
 import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package com.example.tfg2.database.dataBaseOffline.domain;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -22,24 +24,25 @@ public class EjercicioLocal {
     @NonNull
     String descripcion;
 
-   // Blob imagenEjercicio;
+    Boolean created;
 
+    byte [] imagenEjercicio;
 
-    public EjercicioLocal(int idEjercicio,  String nombreMusculo, @NonNull String nombre, @NonNull String descripcion, @NonNull Blob imagenEjercicio) {
+    public EjercicioLocal(int idEjercicio, @NonNull String nombreMusculo, @NonNull String nombre, @NonNull String descripcion, Boolean created, byte[] imagenEjercicio) {
         this.idEjercicio = idEjercicio;
-       // this.idUser = idUser;
         this.nombreMusculo = nombreMusculo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        //this.imagenEjercicio = imagenEjercicio;
+        this.created = created;
+        this.imagenEjercicio = imagenEjercicio;
     }
-    public EjercicioLocal( String nombreMusculo, @NonNull String nombre, @NonNull String descripcion,  Blob imagenEjercicio) {
+    public EjercicioLocal( @NonNull String nombreMusculo, @NonNull String nombre, @NonNull String descripcion, Boolean created, byte[] imagenEjercicio) {
         this.nombreMusculo = nombreMusculo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-       // this.imagenEjercicio = imagenEjercicio;
+        this.created = created;
+        this.imagenEjercicio = imagenEjercicio;
     }
-
 
     public EjercicioLocal() {
     }
@@ -80,16 +83,23 @@ public class EjercicioLocal {
         this.descripcion = descripcion;
     }
 
-
-   /* public Blob getImagenEjercicio() {
-        return imagenEjercicio;
+    public Boolean getCreated() {
+        return created;
     }
 
-    public void setImagenEjercicio(@NonNull Blob imagenEjercicio) {
-        this.imagenEjercicio = imagenEjercicio;
+    public void setCreated(Boolean created) {
+        this.created = created;
     }
 
-    */
+     public byte [] getImagenEjercicio() {
+            return imagenEjercicio;
+        }
+
+        public void setImagenEjercicio(@NonNull byte [] imagenEjercicio) {
+            this.imagenEjercicio = imagenEjercicio;
+        }
+
+
     public void mostrar(){
         System.out.println(this.idEjercicio + " " + this.nombre + ": " + this.descripcion + " ---" +this.nombreMusculo );
     }

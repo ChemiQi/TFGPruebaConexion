@@ -3,6 +3,7 @@ package com.example.tfg2.ejercicios.clases;
 import android.graphics.Bitmap;
 
 import com.example.tfg2.musculos.clases.Musculo;
+import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -10,16 +11,25 @@ import java.sql.Blob;
 public class Ejercicio implements Serializable {
     private int idEjercicio;
     private Musculo musculo;
+    private PartesDelCuerpo partesDelCuerpo;
     private String nombreEjercicio;
     private String descripcionEjercicio;
     private Bitmap imageMusculo;
 
-    public Ejercicio(int idEjercicio, Musculo musculo, String nombreEjercicio, String descripcionEjercicio,Bitmap imageMusculo) {
+    public Ejercicio(int idEjercicio, Musculo musculo,PartesDelCuerpo partesDelCuerpo ,String nombreEjercicio, String descripcionEjercicio,Bitmap imageMusculo) {
         this.idEjercicio = idEjercicio;
         this.musculo = musculo;
         this.nombreEjercicio = nombreEjercicio;
         this.descripcionEjercicio = descripcionEjercicio;
         this.imageMusculo = imageMusculo;
+        this.partesDelCuerpo = partesDelCuerpo;
+    }
+    public Ejercicio(Musculo musculo, PartesDelCuerpo partesDelCuerpo,String nombreEjercicio, String descripcionEjercicio,Bitmap imageMusculo) {
+        this.musculo = musculo;
+        this.nombreEjercicio = nombreEjercicio;
+        this.descripcionEjercicio = descripcionEjercicio;
+        this.imageMusculo = imageMusculo;
+        this.partesDelCuerpo = partesDelCuerpo;
     }
 
     public Ejercicio(Musculo musculo, String nombreEjercicio, String descripcionEjercicio) {
@@ -37,6 +47,13 @@ public class Ejercicio implements Serializable {
         this.descripcionEjercicio = descripcion;
     }
 
+    public Ejercicio(int idJercicio, Musculo musculoSeleccionado, String nombre, String descripcion, Bitmap bmImage) {
+        this.idEjercicio = idJercicio;
+        this.musculo = musculoSeleccionado;
+        this.nombreEjercicio = nombre;
+        this.descripcionEjercicio = descripcion;
+        this.imageMusculo = bmImage;
+    }
 
 
     public int getIdEjercicio() {

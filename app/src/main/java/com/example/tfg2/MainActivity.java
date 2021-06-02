@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.user.clases.CurrentUser;
+import com.example.tfg2.user.clases.User;
 import com.example.tfg2.user.modelos.UserDB;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniciarSesion(View view) {
         if(BaseDB.conectarConBaseDeDatos() != null){
-            if(UserDB.loginUser(edt_username_login.getText().toString(), edt_pass_login.getText().toString())) {
+           User user=  UserDB.loginUser(edt_username_login.getText().toString(), edt_pass_login.getText().toString());
+            if(user != null) {
+                CurrentUser.setUser(user);
+                System.out.println(user.getNameUser() + " " + user.getEmail());
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
             }else{

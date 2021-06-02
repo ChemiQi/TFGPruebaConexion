@@ -60,6 +60,7 @@
             android:id="@+id/bnt_ajustes_menu"
             android:layout_width="150dp"
             android:layout_height="match_parent"
+            android:onClick="irEjercicios"
             android:text="ajustes" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

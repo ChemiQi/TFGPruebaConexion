@@ -47,9 +47,13 @@ public class ImagenesBlobBitmap {
     }
 
     public static byte[] bitmap_to_bytes(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        return b;
+        if(bm != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+            return b;
+        }else {
+            return null;
+        }
     }
 }

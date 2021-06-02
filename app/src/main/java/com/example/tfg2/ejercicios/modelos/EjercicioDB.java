@@ -7,6 +7,7 @@ import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
+import com.example.tfg2.user.clases.User;
 import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 
@@ -60,7 +61,7 @@ public class EjercicioDB {
         //---------------------------------
         ArrayList<Ejercicio> listaEjercicios = new ArrayList<>();
         try {
-            String ordensql = "select e.* , m.idmusculos, m.nombre as nombremusculo from ejercicio as e INNER JOIN  musculos as m ON  e.idmusculos  = m.idmusculos WHERE m.zonas_cuerpo_id like ?;";
+            String ordensql = "select e.* , m.idmusculos, m.nombre as nombremusculo,zc.id as idPC from ejercicio as e INNER JOIN  musculos as m ON  e.idmusculos  = m.idmusculos INNER JOIN zonas_cuerpo as zc ON m.zonas_cuerpo_id = zc.id WHERE m.zonas_cuerpo_id like ?;";
             PreparedStatement pst = conexion.prepareStatement(ordensql);
             pst.setInt(1,partesDelCuerpo.getId());
             ResultSet resultadosql = pst.executeQuery();
@@ -73,9 +74,10 @@ public class EjercicioDB {
                 String nombreMusculo = resultadosql.getString("nombremusculo");
                 int idMusculo = resultadosql.getInt("idmusculos");
                 Blob imagen = resultadosql.getBlob("imagenEjercicio");
+                int idParteDelCuerpo = resultadosql.getInt("idPC");
                 Bitmap bmImage = ImagenesBlobBitmap.blob_to_bitmap(imagen,200,200);
                 System.out.println(idMusculo + nombreMusculo);
-                listaEjercicios.add(new Ejercicio(idJercicio,new Musculo(idMusculo,nombreMusculo),nombre,descripcion,bmImage));
+                listaEjercicios.add(new Ejercicio(idJercicio,new Musculo(idMusculo,nombreMusculo),new PartesDelCuerpo(idParteDelCuerpo),nombre,descripcion,bmImage));
             }
             resultadosql.close();
             pst.close();
@@ -150,6 +152,44 @@ public class EjercicioDB {
             }
         } catch (SQLException e) {
             return false;
+        }
+    }
+
+    public static ArrayList<Ejercicio> obtenerEjerciciosUsuario(int user) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if(conexion == null)
+        {
+            return null;
+        }
+        //---------------------------------
+        ArrayList<Ejercicio> listaEjercicios = new ArrayList<>();
+        try {
+            String ordensql = "SELECT eu.*, m.nombre, id as nombremusculo, zc.id as idpc FROM ejercicio_user as eu INNER JOIN  musculos as m ON  eu.idmusculos  = m.idmusculos INNER JOIN zonas_cuerpo as zc ON m.zonas_cuerpo_id = zc.id WHERE eu.idejercicio_user like ?;";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(1,user);
+            ResultSet resultadosql = pst.executeQuery();
+            //------------------------------------------------
+            while(resultadosql.next())
+            {
+                //int idJercicio = resultadosql.getInt("idejercicio_user");
+                String nombre = resultadosql.getString("nombre");
+                String descripcion = resultadosql.getString("descripcion");
+                String nombreMusculo = resultadosql.getString("nombremusculo");
+                int idMusculo = resultadosql.getInt("idmusculos");
+                Blob imagen = resultadosql.getBlob("imagenEjercicio");
+                Bitmap bmImage = ImagenesBlobBitmap.blob_to_bitmap(imagen,200,200);
+                int idParteDelCuerpo = resultadosql.getInt("idpc");
+
+                listaEjercicios.add(new Ejercicio(new Musculo(idMusculo,nombreMusculo),new PartesDelCuerpo(idParteDelCuerpo),nombre,descripcion,bmImage));
+            }
+            resultadosql.close();
+            pst.close();
+            conexion.close();
+            return listaEjercicios;
+        } catch (SQLException e) {
+            System.out.println("ERRORrrrrr");
+            return null;
+
         }
     }
 }
