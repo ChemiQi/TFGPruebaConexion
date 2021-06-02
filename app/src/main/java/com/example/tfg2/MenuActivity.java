@@ -33,7 +33,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void irEjercicios(View view) {
-        Intent intent = new Intent(this,TablasMenu.class);
+        Intent intent = new Intent(this,TablasEjercicios.class);
         startActivity(intent);
     }
 }

@@ -28,6 +28,8 @@
     <string name="seleccionar_imagen">Seleccionar imagen</string>
     <string name="parte_del_cuerpo">Parte del cuerpo</string>
     <string name="musculo">Musculo</string>
+    <string name="mis_ejercicios">Mis Ejercicios</string>
+    <string name="ejercicios_descargados">Ejercicios descargados</string>
 
 
     <string-array name="diasGimnasio">
@@ -64,7 +66,7 @@
         <item>Lumbar</item>
         <item>Espalda</item>
     </string-array>
-    
+
     <string-array name="brazosOffline">
         <item>Biceps</item>
         <item>Triceps</item>

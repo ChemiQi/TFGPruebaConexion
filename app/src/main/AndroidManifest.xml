@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,28 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG2">
+        <activity android:name=".TablasEjercicios"></activity>
         <activity android:name=".CrearEjercicio">
+
+        </activity>
+        <activity android:name=".PopUpAnadirEjercicio" />
+        <activity android:name=".AnadirEjercicio"></activity>
+        <activity android:name=".CrearTablaActivity"></activity>
+        <activity android:name=".TablasMenu"></activity>
+        <activity android:name=".MenuActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PopUpAnadirEjercicio"></activity>
-        <activity android:name=".AnadirEjercicio">
-
-        </activity>
-        <activity android:name=".CrearTablaActivity">
-
-        </activity>
-        <activity android:name=".TablasMenu">
-
-        </activity>
-        <activity android:name=".MenuActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

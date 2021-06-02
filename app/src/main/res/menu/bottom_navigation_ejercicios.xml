@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ejercicios_locales"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/mis_ejercicios"/>
+    <item
+        android:id="@+id/ejercicios_descargados"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/ejercicios_descargados"/>
+
+</menu>
