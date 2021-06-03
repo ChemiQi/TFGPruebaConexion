@@ -25,10 +25,10 @@ public class EjercicioViewHolder extends RecyclerView.ViewHolder implements View
 
     public EjercicioViewHolder(@NonNull View mItemView, ListaEjerciciosAdapter listaEjerciciosAdapter) {
         super(mItemView);
-        txt_nombre_itemEjercicio = (TextView) mItemView.findViewById(R.id.txt_nombre_itemEjercicio);
-        txt_musculo_itemEjercicio = (TextView) mItemView.findViewById(R.id.txt_musculo_itemEjercicio);
+        txt_nombre_itemEjercicio = (TextView) mItemView.findViewById(R.id.txt_nombre_itemEjercicioLocal);
+        txt_musculo_itemEjercicio = (TextView) mItemView.findViewById(R.id.txt_musculo_itemEjercicioLocal);
         this.eAdapter = listaEjerciciosAdapter;
-        img_ejercicio_rv_Ejercicio = (ImageView) mItemView.findViewById(R.id.img_ejercicio_rv_Ejercicio);
+        img_ejercicio_rv_Ejercicio = (ImageView) mItemView.findViewById(R.id.img_ejercicio_rv_EjercicioLocal);
         itemView.setOnClickListener(this);
     }
 

@@ -54,8 +54,6 @@ public class CrearEjercicio extends AppCompatActivity {
 
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
-        LiveData<List<EjercicioLocal>> ejerciciosLive  = ejercicioViewModel.obtenerEjercicios();
-
 
         obtenerPartesDelCuerpo();
 
@@ -117,11 +115,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
         EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
                 true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
-        //idEjercicio, @NonNull String nombreMusculo, @NonNull String nombre, @NonNull String descripcion, Boolean created, byte[] imagenEjercicio
-
-        if(ejercicioViewModel.insertarEjercicio(ejercicioLocal)){
-            System.out.println("INSERTADO CORRECTAMENTE");
-        }
+        finish();
     }
 
 
