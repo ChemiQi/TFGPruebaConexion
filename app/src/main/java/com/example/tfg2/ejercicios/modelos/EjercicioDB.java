@@ -3,10 +3,13 @@ package com.example.tfg2.ejercicios.modelos;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.musculos.clases.Musculo;
+import com.example.tfg2.musculos.controladores.MusculoController;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
+import com.example.tfg2.user.clases.CurrentUser;
 import com.example.tfg2.user.clases.User;
 import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
@@ -187,9 +190,47 @@ public class EjercicioDB {
             conexion.close();
             return listaEjercicios;
         } catch (SQLException e) {
-            System.out.println("ERRORrrrrr");
             return null;
 
         }
     }
+    public static boolean addEjercicioUsuario(EjercicioLocal j) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if(conexion == null)
+        {
+            return false;
+        }
+        //----------------------------
+        try {
+            String ordensql = "INSERT INTO ejercicio_user ( iduser ,idmusculos, nombre,descripcion,imagenEjercicio) VALUES (?,?,?,?,?);";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(1, CurrentUser.getUser().getId());
+            pst.setInt(2, MusculoController.obtenerMusculosPorNombre(j.getNombreMusculo()).getIdMusculo());
+            pst.setString(3,j.getNombre());
+            pst.setString(4,j.getDescripcion());
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                Bitmap foto = ImagenesBlobBitmap.bytes_to_bitmap(j.getImagenEjercicio());
+                foto.compress(Bitmap.CompressFormat.PNG, 0, baos);
+                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                pst.setBinaryStream(5, bais);
+
+
+            int filasAfectadas = pst.executeUpdate();
+            pst.close();
+            conexion.close();
+            if(filasAfectadas > 0)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException e2) {
+            System.out.println("ERROR AÑADIR");
+            System.out.println(e2);
+            return false;
+        }
+    }
+
 }

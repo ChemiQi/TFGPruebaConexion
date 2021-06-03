@@ -8,5 +8,9 @@
         android:id="@+id/ejercicios_descargados"
         android:icon="@android:drawable/ic_input_add"
         android:title="@string/ejercicios_descargados"/>
+    <item
+        android:id="@+id/ejercicios_subidos"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/ejercicios_subidos"/>
 
 </menu>

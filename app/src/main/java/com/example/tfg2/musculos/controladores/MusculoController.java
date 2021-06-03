@@ -3,6 +3,7 @@ package com.example.tfg2.musculos.controladores;
 
 import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.musculos.tareas.TaskGetMusulos;
+import com.example.tfg2.musculos.tareas.TaskGetMusulosPorNombre;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +42,34 @@ public class MusculoController {
             return musculosDeVuelta;
         }
     }
+
+    public static Musculo obtenerMusculosPorNombre(String nombre) {
+        Musculo musculosDeVuelta = null;
+        FutureTask t = new FutureTask(new TaskGetMusulosPorNombre(nombre));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+
+        try {
+
+            musculosDeVuelta = (Musculo) t.get();
+            System.out.println("Despues del get");
+            es.shutdown();
+            try{
+                if(!es.awaitTermination(2000, TimeUnit.MILLISECONDS)){
+                    es.shutdown();
+                }
+            }catch(InterruptedException e){
+
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return musculosDeVuelta;
+        }
+    }
+
 
 }

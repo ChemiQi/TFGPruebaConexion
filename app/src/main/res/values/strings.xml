@@ -30,6 +30,7 @@
     <string name="musculo">Musculo</string>
     <string name="mis_ejercicios">Mis Ejercicios</string>
     <string name="ejercicios_descargados">Ejercicios descargados</string>
+    <string name="ejercicios_subidos">Ejercicios subidos</string>
 
 
     <string-array name="diasGimnasio">

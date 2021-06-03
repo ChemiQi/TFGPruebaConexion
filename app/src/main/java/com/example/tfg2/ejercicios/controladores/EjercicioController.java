@@ -2,8 +2,10 @@ package com.example.tfg2.ejercicios.controladores;
 
 import android.graphics.Bitmap;
 
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.tareas.TareaAñadirFoto;
+import com.example.tfg2.ejercicios.tareas.TaskAddEjercicioUser;
 import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioUser;
 import com.example.tfg2.ejercicios.tareas.TaskNewEjercicio;
 import com.example.tfg2.musculos.clases.Musculo;
@@ -151,5 +153,31 @@ public class EjercicioController {
                 return listaDeVueltaEjerciciosPorParteDelCuerpo;
             }
 
+    }
+
+    public static boolean addEjercicioUser(EjercicioLocal ejercicioLocal){
+        FutureTask t = new FutureTask(new TaskAddEjercicioUser(ejercicioLocal));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insertadoOK = false;
+        try {
+            insertadoOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insertadoOK;
+        }
     }
 }

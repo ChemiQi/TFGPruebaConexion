@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class TablasEjercicios extends AppCompatActivity {
     EjerciciosDescargadosFr ejerciciosDescargadosFr = new EjerciciosDescargadosFr();
     EjerciciosLocalesFr ejerciciosLocalesFr = new EjerciciosLocalesFr();
+    EjerciciosSubudosFR ejerciciosSubudosFR = new EjerciciosSubudosFR();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class TablasEjercicios extends AppCompatActivity {
                     return true;
                 case R.id.ejercicios_locales:
                     loadFragment(ejerciciosLocalesFr);
+                    return true;
+                case R.id.ejercicios_subidos:
+                    loadFragment(ejerciciosSubudosFR);
                     return true;
             }
             return false;

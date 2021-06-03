@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AnadirEjercicio extends AppCompatActivity {
+    private View vista;
 
     public static final String EJERCICIO_CREADO = "";
     public  static final String EXTRA_IMAGEN_EJERCICIO_ANADIREJERCIICO = "chema.martinez/imagenAEnviar";

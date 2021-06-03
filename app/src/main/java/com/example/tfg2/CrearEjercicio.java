@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -56,6 +57,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
 
         obtenerPartesDelCuerpo();
+
 
         sp_grupoMuscular_crearEjercicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -115,6 +117,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
         EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
                 true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
+        ejercicioViewModel.insertarEjercicio(ejercicioLocal);
         finish();
     }
 
@@ -123,7 +126,6 @@ public class CrearEjercicio extends AppCompatActivity {
 
     private void obtenerPartesDelCuerpo(){
         String [] partesDelCuerpo = {"Selecciona..", "Brazos","Piernas","Torso","Cardio"};
-        //ArrayAdapter<CharSequence> adapterPartes = new ArrayAdapter(this, android.R.layout.simple_spinner_item, R.array.partesCuerpoOffline);
         ArrayAdapter<CharSequence> adapterPartes = new ArrayAdapter(this, android.R.layout.simple_spinner_item, partesDelCuerpo);
         sp_grupoMuscular_crearEjercicio.setAdapter(adapterPartes);
     }
