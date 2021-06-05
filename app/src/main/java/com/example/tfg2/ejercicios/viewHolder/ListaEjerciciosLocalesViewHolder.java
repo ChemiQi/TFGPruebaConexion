@@ -1,6 +1,7 @@
 package com.example.tfg2.ejercicios.viewHolder;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tfg2.CrearEjercicio;
 import com.example.tfg2.EjerciciosLocalesFr;
 import com.example.tfg2.R;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
@@ -17,7 +19,10 @@ import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 
+import static com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder.EXTRA_OBJETO_EJERCICIO;
+
 public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public  final String EXTRA_OBJETO_EJERCICIOLOCAL = "chema.martinez_objetoEjercicioLocal";
     public TextView txt_nombre_itemEjercicioLocal;
     public TextView txt_musculo_itemEjercicioLocal;
     public ImageView img_ejercicio_rv_EjercicioLocal;
@@ -61,10 +66,12 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
 
     @Override
     public void onClick(View v) {
-        int mPosition = getLayoutPosition();
+       /* int mPosition = getLayoutPosition();
         EjercicioLocal ejercicio =eAdapter.getListaEjerciciosLocales().get(mPosition);
 
-        System.out.println(ejercicio.getNombre());
+        Intent intent = new Intent(eAdapter.getC(), CrearEjercicio.class);
+        intent.putExtra(EXTRA_OBJETO_EJERCICIOLOCAL,ejercicio);
+        eAdapter.getC().startActivity(intent);*/
 
     }
 

@@ -1,64 +1,64 @@
 package com.example.tfg2;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EjerciciosSubudosFR#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
+import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
+import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
+import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.controladores.EjercicioController;
+import com.example.tfg2.ejercicios.modelos.EjercicioDB;
+import com.example.tfg2.user.clases.CurrentUser;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class EjerciciosSubudosFR extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private View vista;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView rv_verEjerciciosSubidos_ejerciciosSubidosFr;
+   private ListaEjerciciosAdapter eAdapter;
+    private Context context;
 
+    private static final int PETICION4 = 1;
     public EjerciciosSubudosFR() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EjerciciosSubudosFR.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EjerciciosSubudosFR newInstance(String param1, String param2) {
-        EjerciciosSubudosFR fragment = new EjerciciosSubudosFR();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ejercicios_subudos_f_r, container, false);
+
+        vista = inflater.inflate(R.layout.fragment_ejercicios_subudos_f_r, container, false);
+        context = vista.getContext();
+        rv_verEjerciciosSubidos_ejerciciosSubidosFr = vista.findViewById(R.id.rv_verEjerciciosSubidos_ejerciciosSubidosFr);
+        añadirEjerciciosTabla();
+        return vista;
+    }
+
+
+    private void añadirEjerciciosTabla(){
+        ArrayList<Ejercicio> ejerciciosSubidos = EjercicioController.obtenerEjerciciosUsuario(1);
+        eAdapter = new ListaEjerciciosAdapter(context,ejerciciosSubidos);
+        rv_verEjerciciosSubidos_ejerciciosSubidosFr.setAdapter(eAdapter);
+        rv_verEjerciciosSubidos_ejerciciosSubidosFr.setLayoutManager(new LinearLayoutManager(context));
+
     }
 }

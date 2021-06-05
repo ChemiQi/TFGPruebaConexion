@@ -86,16 +86,6 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
             Bitmap noImage = BitmapFactory.decodeResource(c.getResources(),R.drawable.noimage);
             holder.img_ejercicio_rv_Ejercicio.setImageBitmap(noImage);
         }
-       /* if(listaFotosEjercicio != null){
-            for(FotoEjercicio fotoEjercicio : listaFotosEjercicio){
-                if(ejercicioActual.getIdEjercicio() == fotoEjercicio.getIdLiga() && fotoEjercicio.getFoto() != null){
-                    holder.img_ejercicio_rv_Ejercicio.setImageBitmap(fotoEjercicio.getFoto());
-                    break;
-
-                }
-            }
-        }*/
-
     }
 
     @Override

@@ -6,11 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 
 @Entity(tableName = "ejercicio_user")
-public class EjercicioLocal {
+public class EjercicioLocal  implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull

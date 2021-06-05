@@ -167,7 +167,7 @@ public class EjercicioDB {
         //---------------------------------
         ArrayList<Ejercicio> listaEjercicios = new ArrayList<>();
         try {
-            String ordensql = "SELECT eu.*, m.nombre, id as nombremusculo, zc.id as idpc FROM ejercicio_user as eu INNER JOIN  musculos as m ON  eu.idmusculos  = m.idmusculos INNER JOIN zonas_cuerpo as zc ON m.zonas_cuerpo_id = zc.id WHERE eu.idejercicio_user like ?;";
+            String ordensql = "SELECT eu.*, m.nombre, id as nombremusculo, zc.id as idpc FROM ejercicio_user as eu INNER JOIN  musculos as m ON  eu.idmusculos  = m.idmusculos INNER JOIN zonas_cuerpo as zc ON m.zonas_cuerpo_id = zc.id WHERE eu.iduser like ?;";
             PreparedStatement pst = conexion.prepareStatement(ordensql);
             pst.setInt(1,user);
             ResultSet resultadosql = pst.executeQuery();
@@ -190,6 +190,7 @@ public class EjercicioDB {
             conexion.close();
             return listaEjercicios;
         } catch (SQLException e) {
+            System.out.println("ERROR COGER EJERCICIO USER");
             return null;
 
         }
