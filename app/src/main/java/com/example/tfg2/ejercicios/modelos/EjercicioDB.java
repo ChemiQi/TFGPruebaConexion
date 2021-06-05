@@ -205,7 +205,8 @@ public class EjercicioDB {
         try {
             String ordensql = "INSERT INTO ejercicio_user ( iduser ,idmusculos, nombre,descripcion,imagenEjercicio) VALUES (?,?,?,?,?);";
             PreparedStatement pst = conexion.prepareStatement(ordensql);
-            pst.setInt(1, CurrentUser.getUser().getId());
+            //pst.setInt(1, CurrentUser.getUser().getId());
+            pst.setInt(1, 1);
             pst.setInt(2, MusculoController.obtenerMusculosPorNombre(j.getNombreMusculo()).getIdMusculo());
             pst.setString(3,j.getNombre());
             pst.setString(4,j.getDescripcion());
@@ -233,5 +234,38 @@ public class EjercicioDB {
             return false;
         }
     }
+    public static boolean comprobarEjercicioUser(EjercicioLocal j, int user){
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        boolean resultado = false;
+        if(conexion == null)
+        {
+            return resultado;
+        }
+        //---------------------------------
+        ArrayList<Ejercicio> listaEjercicios = new ArrayList<>();
+        try {
+            String ordensql = "Select * from ejercicio_user where nombre like ? and iduser like ?;";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setString(1,j.getNombre());
+            pst.setInt(2,user);
+            ResultSet resultadosql = pst.executeQuery();
+            //------------------------------------------------
+            while(resultadosql.next())
+            {
+             resultado = true;
+            }
+            resultadosql.close();
+            pst.close();
+            conexion.close();
+            return resultado;
+        } catch (SQLException e) {
+            System.out.println("ERROR COGER EJERCICIO USER");
+            return resultado;
+
+        }
+    }
+
+   // String ordensql = "Select * from ejercicio_user where nombre like ? and descripcion like ? and idmusculos like ? and iduser like ?;";
+
 
 }

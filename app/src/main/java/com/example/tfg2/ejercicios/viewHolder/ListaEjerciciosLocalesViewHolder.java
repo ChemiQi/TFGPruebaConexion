@@ -18,6 +18,7 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
+import com.example.tfg2.user.clases.CurrentUser;
 
 import static com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder.EXTRA_OBJETO_EJERCICIO;
 
@@ -50,9 +51,32 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
                 alerta.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        EjercicioController.addEjercicioUser(ejercicioLocal2);
+                        if(!EjercicioController.comprobarEjercicioUser(ejercicioLocal2, 1)) {
+                            System.out.println("NO REPETIDO, AÑADIRA EJERCICO");
+                            EjercicioController.addEjercicioUser(ejercicioLocal2);
+                        }else {
+                            System.out.println("REPETIDO, AVISO");
+                            AlertDialog.Builder alertaEjercicioRepetido = new AlertDialog.Builder(viewLocal.getContext());
+                            alertaEjercicioRepetido.setTitle("Ejercicio con el mismo nombre. ¿Quieres subirlo igualmente?");
+                            alertaEjercicioRepetido.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    EjercicioController.addEjercicioUser(ejercicioLocal2);
+                                }
+                            });
+                            alertaEjercicioRepetido.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            alertaEjercicioRepetido.show();
+                        }
                     }
+
                 });
+
+
                 alerta.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -60,6 +84,7 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
                     }
                 });
                 alerta.show();
+
             }
         });
     }
