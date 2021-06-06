@@ -34,4 +34,12 @@ public class TablaViewModel extends AndroidViewModel {
     public boolean addTablaLocal(TablaLocal tablaLocal){
         return tablaRepository.insertarTabla(tablaLocal);
     }
+
+    public LiveData<List<TablaLocal>> obtenerTablas(){
+        return tablaRepository.getAllTablas();
+    }
+
+    public TablaLocal obtenerUltimaTabla(){
+        return tablaRepository.getLastTable();
+    }
 }

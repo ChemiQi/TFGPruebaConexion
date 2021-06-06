@@ -14,19 +14,24 @@ public class TablaLocal implements Serializable {
     @NonNull
     String nombre;
 
+    int dias;
+
     Boolean created;
 
     public TablaLocal() {
     }
 
-    public TablaLocal(@NonNull String nombre, Boolean created) {
+    public TablaLocal(@NonNull String nombre, int dias, Boolean created) {
         this.nombre = nombre;
+        this.dias = dias;
         this.created = created;
+
     }
 
-    public TablaLocal(int idTabla, @NonNull String nombre, Boolean created) {
+    public TablaLocal(int idTabla, @NonNull String nombre,int dias, Boolean created) {
         this.idTabla = idTabla;
         this.nombre = nombre;
+        this.dias = dias;
         this.created = created;
     }
 
@@ -53,5 +58,13 @@ public class TablaLocal implements Serializable {
 
     public void setCreated(Boolean created) {
         this.created = created;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
     }
 }

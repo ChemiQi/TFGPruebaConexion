@@ -5,13 +5,12 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 
-import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaRoomDatabase;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.TareaAddEjercicio;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.TareaAddTablaLocal;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.TareaComprobarTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaComprobarTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetLastTabla;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -56,6 +55,32 @@ public class TablaRepository {
     }
     public LiveData<List<TablaLocal>> getAllTablas() {
         return mAllTablas;
+    }
+
+    public TablaLocal getLastTable(){
+        TablaLocal tablaLocal = null;
+        FutureTask t = new FutureTask(new TareaGetLastTabla());
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        try {
+            tablaLocal = (TablaLocal) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return tablaLocal;
+        }
     }
 
     public boolean insertarTabla(TablaLocal tablaLocal) {

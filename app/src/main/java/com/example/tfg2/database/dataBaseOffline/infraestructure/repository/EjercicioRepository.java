@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaroEjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.EjercicioRoomDatabase;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.TareaAddEjercicio;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.TareaGetId;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaAddEjercicio;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetId;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

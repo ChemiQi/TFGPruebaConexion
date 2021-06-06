@@ -110,7 +110,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
     public void cancelarCrearEjercicio(View view) {
         System.out.println(ejercicioViewModel.obtenerIdEjercicio());
-       // finish();
+        finish();
     }
 
     public void crearEjercicioOffline(View view) {

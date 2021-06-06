@@ -1,4 +1,4 @@
-package com.example.tfg2.database.dataBaseOffline.infraestructure.tarea;
+package com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas;
 
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.EjercicioRepository;

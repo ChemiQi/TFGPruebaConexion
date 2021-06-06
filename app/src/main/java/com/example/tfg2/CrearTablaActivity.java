@@ -21,8 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
+import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
+import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
@@ -220,14 +222,33 @@ public class CrearTablaActivity extends AppCompatActivity {
     }
 
     private void addTablaDatosLocal(Tabla tabla){
-        TablaLocal tablaLocal = new TablaLocal(tabla.getNombre(),true);
+        TablaLocal tablaLocal = new TablaLocal(tabla.getNombre(),diasSeleccionados,true);
         if(tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())){
-            if(tablaViewModel.addTablaLocal(tablaLocal))
-                System.out.println("AÑADIDO CORRECTAMENTE");
+            if(tablaViewModel.addTablaLocal(tablaLocal)){
+                tablaLocal = tablaViewModel.obtenerUltimaTabla();
+                List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
+                TablaEjercicioRelacionViewModel  tr= ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
+                if(tr.guardarDatosTablaEjercicio(tablaLocal,listaDiasEjercicio)){
+
+                }else{
+                    tablaViewModel.borrarTabla(tablaLocal);
+                    //MENSAJE DE ERROR
+                }
+            }
+
             else
                 System.out.println("ERROR AL AÑADIR TABLA");
         }else{
             System.out.println("NOMBRE REPETIDO");
+        }
+    }
+
+    private List<TablaEjercicioRelacion> transformarDatosAEjercicioTabla(TablaLocal tablaLocal, ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio) {
+        List<TablaEjercicioRelacion> transformado = new ArrayList<TablaEjercicioRelacion>();
+        for(int i  = 0 ; i<tablaLocal.getDias() ; i++){
+            for(int y = 0; y<listaDiasEjercicio.get(i).size(); i++){
+
+            }
         }
     }
 }

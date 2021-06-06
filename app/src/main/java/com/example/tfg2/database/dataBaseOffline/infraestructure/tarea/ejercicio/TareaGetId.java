@@ -1,21 +1,16 @@
-package com.example.tfg2.database.dataBaseOffline.infraestructure.tarea;
+package com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio;
 
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.EjercicioRepository;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.TablaRepository;
 
 import java.util.concurrent.Callable;
 
-public class TareaComprobarTablaLocal implements Callable {
-    private String nombre;
-    public TareaComprobarTablaLocal(String nombre) {
-        this.nombre = nombre;
-    }
-
+public class TareaGetId implements Callable {
     @Override
     public Object call() throws Exception {
         try{
-
-            return TablaRepository.daoTablaLocal.comprobarTablaPorNombre(nombre);
+            System.out.println(EjercicioRepository.mEjercicioDao.getIdEjercicio());
+            return EjercicioRepository.mEjercicioDao.getIdEjercicio();
         }catch (Exception e){
             System.out.println("ERROR AL INSERTAR EJERCICIO");
             return null;

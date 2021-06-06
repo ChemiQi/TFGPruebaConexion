@@ -27,4 +27,7 @@ public interface DaoTablaLocal {
 
     @Query("SELECT * FROM tabla_user WHERE nombre like :nombreTabla")
     List<TablaLocal> comprobarTablaPorNombre(String nombreTabla);
+
+    @Query("SELECT * from tabla_user order by idTabla desc limit 1")
+    TablaLocal conseguirUltimaTabla();
 }
