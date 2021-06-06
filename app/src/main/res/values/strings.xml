@@ -31,6 +31,9 @@
     <string name="mis_ejercicios">Mis Ejercicios</string>
     <string name="ejercicios_descargados">Ejercicios descargados</string>
     <string name="ejercicios_subidos">Ejercicios subidos</string>
+    <string name="nombre_de_la_tabla">Nombre de la tabla</string>
+    <string name="mi_tabla">Mi tabla</string>
+    <string name="button">Button</string>
 
 
     <string-array name="diasGimnasio">

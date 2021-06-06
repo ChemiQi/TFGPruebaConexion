@@ -30,4 +30,8 @@ public class EjercicioViewModel  extends AndroidViewModel {
     public LiveData<List<EjercicioLocal>> obtenerEjercicios(){
         return ejercicioRepository.getAllEjercicios();
     }
+
+    public int obtenerIdEjercicio(){
+        return ejercicioRepository.getId();
+    }
 }

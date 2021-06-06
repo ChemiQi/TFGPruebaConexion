@@ -25,6 +25,8 @@ public interface DaroEjercicioLocal {
     @Query("SELECT * FROM ejercicio_user")
     LiveData<List<EjercicioLocal>> getAll();
 
+    @Query("SELECT MAX(idEjercicio) FROM ejercicio_user")
+    int getIdEjercicio();
 
 
 }

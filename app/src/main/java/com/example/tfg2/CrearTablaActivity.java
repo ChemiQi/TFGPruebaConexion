@@ -3,6 +3,7 @@ package com.example.tfg2;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,11 +20,19 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
+import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
+import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
+import com.example.tfg2.tabla.clases.Tabla;
+import com.example.tfg2.tabla.controladores.TablaController;
+import com.example.tfg2.tabla.modelos.TablaDB;
+import com.example.tfg2.user.clases.CurrentUser;
+import com.example.tfg2.user.clases.User;
 import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
 import java.util.ArrayList;
@@ -32,11 +41,15 @@ import java.util.List;
 public class CrearTablaActivity extends AppCompatActivity {
     private static final int PETICION2 = 2;
     public static final String EXTRA_POSITIONDIA = "";
+    public static final int PETICION4 = 3;
     LinearLayout ly_contenedorFilas_crearTabla;
     Spinner sp_diasEntreno_crearTabla;
     List<LinearLayout> listaDeFilas = new ArrayList<LinearLayout>();
     ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
     int diasSeleccionados = 0;
+    private String nombreTabla = "";
+
+    private TablaViewModel tablaViewModel;
 
     int position;
 
@@ -47,6 +60,8 @@ public class CrearTablaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_tabla);
+
+        tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
 
         ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_crearTabla);
         sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_crearTabla);
@@ -128,7 +143,29 @@ public class CrearTablaActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PETICION2){
+        if(requestCode == PETICION4){
+            if(resultCode == RESULT_OK){
+
+                nombreTabla = data.getStringExtra(PopUpAnadirTabla.EXTRA_NOMBRETABLA_POPUPNOMBRETALBA);
+                CurrentUser.setUser(new User(1,"","",""));
+                Tabla tablaCreada = new Tabla(nombreTabla,diasSeleccionados);
+               /* Integer itTabla = 1;  ------------------------ TABLA ONLINE
+                        //TablaController.obtenerUltimoIdTablaUsuario(tablaCreada);
+                if(itTabla != null){
+                    tablaCreada.setId(itTabla);
+                    tablaCreada.setListaDiasEjercicio(listaDiasEjercicio);
+                    if(TablaController.addEjerciciosTablaUser(tablaCreada)){
+                        //finish();
+                    }else{
+                        System.out.println("ERROR CREAR TABLA");
+                    }
+                }
+*/
+                addTablaDatosLocal(tablaCreada);
+
+            }
+        }
+        else if(requestCode == PETICION2){
             if (resultCode == RESULT_OK){
                 byte [] imagenByte = data.getByteArrayExtra(AnadirEjercicio.EXTRA_IMAGEN_EJERCICIO_ANADIREJERCIICO);
                 EjercicioYPosicion ejercicioYPosicion = (EjercicioYPosicion) data.getSerializableExtra(AnadirEjercicio.EJERCICIO_CREADO);
@@ -165,6 +202,32 @@ public class CrearTablaActivity extends AppCompatActivity {
                 return Color.parseColor("#CCFF0000");
             default:
                 return Color.parseColor("#CCFFFFFF");
+        }
+    }
+
+    public void cancelarCrearTabla(View view) {
+
+    }
+
+    public void guardarTabla(View view) {
+        Intent intent  = new Intent(this,PopUpAnadirTabla.class);
+        startActivityForResult(intent,PETICION4);
+    }
+
+    private boolean guardarDatosDB(){
+
+        return false;
+    }
+
+    private void addTablaDatosLocal(Tabla tabla){
+        TablaLocal tablaLocal = new TablaLocal(tabla.getNombre(),true);
+        if(tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())){
+            if(tablaViewModel.addTablaLocal(tablaLocal))
+                System.out.println("AÑADIDO CORRECTAMENTE");
+            else
+                System.out.println("ERROR AL AÑADIR TABLA");
+        }else{
+            System.out.println("NOMBRE REPETIDO");
         }
     }
 }

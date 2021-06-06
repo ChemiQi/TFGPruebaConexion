@@ -109,7 +109,7 @@ public class CrearEjercicio extends AppCompatActivity {
     }
 
     public void cancelarCrearEjercicio(View view) {
-
+        System.out.println(ejercicioViewModel.obtenerIdEjercicio());
        // finish();
     }
 
@@ -117,6 +117,9 @@ public class CrearEjercicio extends AppCompatActivity {
 
         EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
                 true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
+        if(ejercicioViewModel.obtenerIdEjercicio() == 0){
+            ejercicioLocal.setIdEjercicio(200);
+        }
         ejercicioViewModel.insertarEjercicio(ejercicioLocal);
         finish();
     }

@@ -58,168 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        />
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
-             FILA 2
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1"
-                        android:layout_marginRight="5dp"/>
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
-             FILA 3
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1" />
-
-
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
-             FILA 4
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1" />
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
-
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="invisible">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1" />
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
-
-            <HorizontalScrollView
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1" />
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
-
-
-
-            <HorizontalScrollView
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="1" />
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
-            -->
         </LinearLayout>
     </ScrollView>
 
@@ -230,6 +68,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="70dp"
         android:layout_marginRight="70dp"
+        android:onClick="guardarTabla"
         android:text="Guardar"
         app:layout_constraintEnd_toEndOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
@@ -241,6 +80,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="28dp"
+        android:onClick="cancelarCrearTabla"
         android:text="Cancelar"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />

@@ -1,6 +1,5 @@
-package com.example.tfg2.infoTablaEjercicio.clases;
+package com.example.tfg2.tabla.clases;
 
-import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.user.clases.User;
 
