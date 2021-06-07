@@ -55,7 +55,7 @@ public class EjerciciosSubudosFR extends Fragment {
 
 
     private void añadirEjerciciosTabla(){
-        ArrayList<Ejercicio> ejerciciosSubidos = EjercicioController.obtenerEjerciciosUsuario(1);
+        ArrayList<Ejercicio> ejerciciosSubidos = EjercicioController.obtenerEjerciciosUsuario(CurrentUser.getUser().getId());
         eAdapter = new ListaEjerciciosAdapter(context,ejerciciosSubidos);
         rv_verEjerciciosSubidos_ejerciciosSubidosFr.setAdapter(eAdapter);
         rv_verEjerciciosSubidos_ejerciciosSubidosFr.setLayoutManager(new LinearLayoutManager(context));

@@ -24,6 +24,7 @@ import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
+import com.example.tfg2.tabla.adapter.ListaTablaLocalAdapter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +34,8 @@ public class TablasMisTablas extends Fragment {
     View vista;
     RecyclerView rv_verMisTablas_TablasMisTablas;
     TablaViewModel tablaViewModel;
+    ListaTablaLocalAdapter listaTablaLocalAdapter;
+    private List<TablaLocal> tablaLocales;
     private static final int PETICION1 = 1;
 
     public TablasMisTablas() {
@@ -52,21 +55,21 @@ public class TablasMisTablas extends Fragment {
         LiveData<List<TablaLocal>> tablasLive  = tablaViewModel.obtenerTablas();
 
         Context context = vista.getContext();
-        /*listaEjerciciosLocalesAdapter = new ListaEjerciciosLocalesAdapter(context);
-        rv_verEjerciciosLocales_ejerciciosLocalesFr.setAdapter(listaEjerciciosLocalesAdapter);
-        rv_verEjerciciosLocales_ejerciciosLocalesFr.setLayoutManager(new LinearLayoutManager(context));
+        listaTablaLocalAdapter = new ListaTablaLocalAdapter(context,tablasLive);
+        rv_verMisTablas_TablasMisTablas.setAdapter(listaTablaLocalAdapter);
+        rv_verMisTablas_TablasMisTablas.setLayoutManager(new LinearLayoutManager(context));
 
-        if(ejerciciosLive != null){
-            ejerciciosLive.observe(this, new Observer<List<EjercicioLocal>>() {
+        if(tablasLive != null){
+            tablasLive.observe(this, new Observer<List<TablaLocal>>() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
-                public void onChanged(List<EjercicioLocal> ejercicioLocals) {
-                    ejercicioLocales = ejercicioLocals;
-                    ejercicioLocales = ejercicioLocales.stream().filter(e-> e.getCreated()).collect(Collectors.toList());
-                    listaEjerciciosLocalesAdapter.setListaEjerciciosLocales(ejercicioLocales);
+                public void onChanged(List<TablaLocal> tablaLocals) {
+                    tablaLocales = tablaLocals;
+                    tablaLocales = tablaLocales.stream().filter(e-> e.getCreated()).collect(Collectors.toList());
+                    listaTablaLocalAdapter.setListaTablasLocales(tablaLocales);
                 }
             });
-        }*/
+        }
 
         btn_anadirTabla_MisTablas.setOnClickListener(new View.OnClickListener() {
             @Override
