@@ -338,7 +338,6 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void adda(List<TablaEjercicioRelacion> tablaRelacion){
-        descargarEjerciciosALocal(tablaRelacion);
         if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
             System.out.println("AÑADIDO CORRECTAMENTE");
             finish();

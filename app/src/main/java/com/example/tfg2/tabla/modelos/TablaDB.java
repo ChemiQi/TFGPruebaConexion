@@ -1,12 +1,16 @@
 package com.example.tfg2.tabla.modelos;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.tfg2.database.modelos.BaseDB;
+import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.user.clases.CurrentUser;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -114,5 +118,37 @@ public class TablaDB {
         }
 
         return false;
+    }
+
+    public static ArrayList<Tabla> obtenerTablasTFG() {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if(conexion == null)
+        {
+            return null;
+        }
+        //---------------------------------
+        ArrayList<Tabla> tablaTfg = new ArrayList<>();
+        try {
+            String ordensql = "select *  from tabla_ejercicios;";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            ResultSet resultadosql = pst.executeQuery();
+            //------------------------------------------------
+            while(resultadosql.next())
+            {
+                int idTabla = resultadosql.getInt("idtabla_ejercicios");
+                String nombre = resultadosql.getString("nombre");
+                String descripcion = resultadosql.getString("descripcion");
+                int dias = resultadosql.getInt("dias");
+
+
+                tablaTfg.add(new Tabla(idTabla,nombre,descripcion,dias));
+            }
+            resultadosql.close();
+            pst.close();
+            conexion.close();
+            return tablaTfg;
+        } catch (SQLException e) {
+            return null;
+        }
     }
 }

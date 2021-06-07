@@ -1,4 +1,4 @@
-package com.example.tfg2.tabla.controladores;
+package com.example.tfg2.tabla.tareas;
 
 import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.tabla.modelos.TablaDB;

@@ -1,11 +1,14 @@
 package com.example.tfg2.tabla.controladores;
 
-import android.graphics.Bitmap;
-
-import com.example.tfg2.ejercicios.tareas.TareaAñadirFoto;
+import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorParteDelCuerpo;
+import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
 import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.tabla.tareas.TareaDevolverUltimoIdTablasUser;
+import com.example.tfg2.tabla.tareas.TareaObtenerTablasTFG;
+import com.example.tfg2.tabla.tareas.TareadAddEjerciciosTablaUser;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -62,6 +65,31 @@ public class TablaController {
         }
         finally {
             return insertadoOK;
+        }
+    }
+
+    public static ArrayList<Tabla> getTablasTFG() {
+        FutureTask t = new FutureTask(new TareaObtenerTablasTFG());
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        ArrayList<Tabla> tablasDeVuelta = null;
+        try {
+            tablasDeVuelta = (ArrayList<Tabla>) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            return tablasDeVuelta;
         }
     }
 }

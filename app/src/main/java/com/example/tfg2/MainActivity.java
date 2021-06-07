@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
            User user=  UserDB.loginUser(edt_username_login.getText().toString(), edt_pass_login.getText().toString());
             if(user != null) {
                 CurrentUser.setUser(user);
-                System.out.println(user.getNameUser() + " " + user.getEmail());
+                System.out.println(CurrentUser.getUser().getId());
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
             }else{

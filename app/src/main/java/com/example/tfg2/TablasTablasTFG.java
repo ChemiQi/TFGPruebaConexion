@@ -1,64 +1,51 @@
 package com.example.tfg2;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TablasTablasTFG#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.tfg2.ejercicios.adapter.ListaEjerciciosAdapter;
+import com.example.tfg2.tabla.adapter.ListaTablaAdapter;
+import com.example.tfg2.tabla.clases.Tabla;
+import com.example.tfg2.tabla.controladores.TablaController;
+
+import java.util.List;
+
+
 public class TablasTablasTFG extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private View vista;
+    private ListaTablaAdapter listaTablaAdapter;
+    private List<Tabla> tablasTFG;
+    private RecyclerView rv_verTablasTFG_TablasTFG;
+    Context context;
     public TablasTablasTFG() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SecondFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TablasTablasTFG newInstance(String param1, String param2) {
-        TablasTablasTFG fragment = new TablasTablasTFG();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+
+        vista =  inflater.inflate(R.layout.fragment_second, container, false);
+        rv_verTablasTFG_TablasTFG = vista.findViewById(R.id.rv_verTablasTFG_TablasTFG);
+        context = vista.getContext();
+
+
+        tablasTFG = TablaController.getTablasTFG();
+        añadirTablasTFG();
+        return vista;
+    }
+
+    private void añadirTablasTFG(){
+        listaTablaAdapter = new ListaTablaAdapter(context,tablasTFG);
+        rv_verTablasTFG_TablasTFG.setAdapter(listaTablaAdapter);
+        rv_verTablasTFG_TablasTFG.setLayoutManager(new LinearLayoutManager(context));
+
     }
 }
