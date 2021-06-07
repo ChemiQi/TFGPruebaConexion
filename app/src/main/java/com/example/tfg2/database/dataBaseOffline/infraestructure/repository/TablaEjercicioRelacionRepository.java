@@ -11,10 +11,18 @@ import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaEje
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaroEjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.EjercicioRoomDatabase;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaEjercicioRelacionRoomDatabase;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddOneDataTablaEjercicioRelacion;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddTablaEjercicioRelacion;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 public class TablaEjercicioRelacionRepository {
     public static DaoTablaEjercicioRelacion mEjercicioTablaDao;
@@ -30,6 +38,59 @@ public class TablaEjercicioRelacionRepository {
         return mAllTablaEjercicio;
     }
 
-    public boolean saveDataTablaEjercicio(TablaLocal tablaLocal, ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio) {
+    public boolean saveDataTablaEjercicio(List<TablaEjercicioRelacion> tablaEjercicioRelacion) {
+        FutureTask t = new FutureTask(new AddTablaEjercicioRelacion(tablaEjercicioRelacion));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insercionOK = false;
+        try {
+            insercionOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insercionOK;
+        }
+    }
+
+    public boolean saveDataTablaEjercicio(TablaEjercicioRelacion tablaEjercicioRelacion){
+        FutureTask t = new FutureTask(new AddOneDataTablaEjercicioRelacion(tablaEjercicioRelacion));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insercionOK = false;
+        try {
+            insercionOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insercionOK;
+        }
+    }
+
+    public LiveData<List<TablaEjercicioRelacion>> getAllInfo() {
+        return mAllTablaEjercicio;
     }
 }

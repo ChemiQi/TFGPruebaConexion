@@ -10,6 +10,7 @@ import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaLoc
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaRoomDatabase;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaComprobarTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaDeleteTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetLastTabla;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class TablaRepository {
         daoTablaLocal = db.daoTablaLocal();
         mAllTablas = daoTablaLocal.getAll();
     }
+
+
+
+
+
     public static  List<TablaLocal>  comprobarTablaPorNombre(String nombre) {
         List<TablaLocal> tablaLocal = null;
         FutureTask t = new FutureTask(new TareaComprobarTablaLocal(nombre));
@@ -109,4 +115,29 @@ public class TablaRepository {
         }
     }
 
+    public boolean deleteTable(TablaLocal tablaLocal) {
+        FutureTask t = new FutureTask(new TareaDeleteTabla(tablaLocal));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insercionOK = false;
+        try {
+            insercionOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insercionOK;
+        }
+    }
 }

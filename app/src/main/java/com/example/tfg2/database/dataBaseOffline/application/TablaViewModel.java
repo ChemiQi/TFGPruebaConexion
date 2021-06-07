@@ -42,4 +42,8 @@ public class TablaViewModel extends AndroidViewModel {
     public TablaLocal obtenerUltimaTabla(){
         return tablaRepository.getLastTable();
     }
+
+    public boolean borrarTabla(TablaLocal tablaLocal) {
+        return tablaRepository.deleteTable(tablaLocal);
+    }
 }

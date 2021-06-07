@@ -2,12 +2,15 @@ package com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roo
 
 import android.content.Context;
 
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaroEjercicioLocal;
 
+@Database(entities = {TablaEjercicioRelacion.class},version = 1,exportSchema = false)
 public abstract class TablaEjercicioRelacionRoomDatabase extends RoomDatabase {
     public abstract DaoTablaEjercicioRelacion tablaEjercicioDao();
     private static TablaEjercicioRelacionRoomDatabase INSTANCE;

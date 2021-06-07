@@ -18,13 +18,22 @@ import java.util.List;
 public class TablaEjercicioRelacionViewModel extends AndroidViewModel {
     private TablaEjercicioRelacionRepository tablaEjercicioRelacionRepository;
     private LiveData<List<TablaEjercicioRelacion>> listaEjercicioTabla;
+
     public TablaEjercicioRelacionViewModel(@NonNull Application application) {
         super(application);
         this.tablaEjercicioRelacionRepository = new TablaEjercicioRelacionRepository(application);
         listaEjercicioTabla = tablaEjercicioRelacionRepository.getAllTablasEjercicios();
     }
 
-    public boolean guardarDatosTablaEjercicio(TablaLocal tablaLocal, ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio) {
-        return tablaEjercicioRelacionRepository.saveDataTablaEjercicio(tablaLocal,listaDiasEjercicio);
+    public boolean guardarDatosTablaEjercicio(List<TablaEjercicioRelacion> tablaEjercicioRelacion) {
+        return tablaEjercicioRelacionRepository.saveDataTablaEjercicio(tablaEjercicioRelacion);
+    }
+
+    public boolean guardarDatoTablaEjercicio(TablaEjercicioRelacion tablaEjercicioRelacion){
+        return tablaEjercicioRelacionRepository.saveDataTablaEjercicio(tablaEjercicioRelacion);
+    }
+
+    public LiveData<List<TablaEjercicioRelacion>> obtenerTablas(){
+        return tablaEjercicioRelacionRepository.getAllInfo();
     }
 }

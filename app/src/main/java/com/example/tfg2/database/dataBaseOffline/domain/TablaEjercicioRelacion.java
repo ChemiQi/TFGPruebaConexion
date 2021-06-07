@@ -1,8 +1,11 @@
 package com.example.tfg2.database.dataBaseOffline.domain;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.tabla.clases.Tabla;
 
@@ -10,10 +13,13 @@ import java.io.Serializable;
 
 @Entity(tableName = "tabla_has_ejercicios")
 public class TablaEjercicioRelacion implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    private int idTablaEjercico;
+
     private int idTabla;
 
     @Ignore
-    private Tabla tabla;
+    private TablaLocal tabla;
     private int idEjercicio;
 
     @Ignore
@@ -26,10 +32,10 @@ public class TablaEjercicioRelacion implements Serializable {
     public TablaEjercicioRelacion() {
     }
 
-    public TablaEjercicioRelacion( Tabla tabla, Ejercicio ejercicio, int repeticiones, int series, int dia) {
+    public TablaEjercicioRelacion(TablaLocal tabla, Ejercicio ejercicio, int repeticiones, int series, int dia) {
 
         this.tabla = tabla;
-        this.idTabla = tabla.getId();
+        this.idTabla = tabla.getIdTabla();
         this.ejercicio = ejercicio;
         this.idEjercicio = ejercicio.getIdEjercicio();
         this.repeticiones = repeticiones;
@@ -45,11 +51,11 @@ public class TablaEjercicioRelacion implements Serializable {
         this.idTabla = idTabla;
     }
 
-    public Tabla getTabla() {
+    public TablaLocal getTabla() {
         return tabla;
     }
 
-    public void setTabla(Tabla tabla) {
+    public void setTabla(TablaLocal tabla) {
         this.tabla = tabla;
     }
 
@@ -91,5 +97,17 @@ public class TablaEjercicioRelacion implements Serializable {
 
     public void setDia(int dia) {
         this.dia = dia;
+    }
+
+    public int getIdTablaEjercico() {
+        return idTablaEjercico;
+    }
+
+    public void setIdTablaEjercico(int idTablaEjercico) {
+        this.idTablaEjercico = idTablaEjercico;
+    }
+
+    public void pintar(){
+        System.out.println("IDTABLA: " + this.idTabla + " --- IDEJERCICIO " + this.idEjercicio + " --- REP: " + this.repeticiones + " --- SER: " + this.series + " --- DIA " + this.dia);
     }
 }

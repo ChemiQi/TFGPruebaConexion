@@ -3,6 +3,8 @@ package com.example.tfg2;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ import android.widget.Spinner;
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
@@ -52,6 +55,7 @@ public class CrearTablaActivity extends AppCompatActivity {
     private String nombreTabla = "";
 
     private TablaViewModel tablaViewModel;
+    private TablaEjercicioRelacionViewModel  tr;
 
     int position;
 
@@ -64,11 +68,26 @@ public class CrearTablaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crear_tabla);
 
         tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
+        tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
 
         ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_crearTabla);
         sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_crearTabla);
 
         crearListasPorDia();
+
+        LiveData<List<TablaEjercicioRelacion>> lista= tr.obtenerTablas();
+
+        if(lista != null){
+            lista.observe(this, new Observer<List<TablaEjercicioRelacion>>() {
+                @Override
+                public void onChanged(List<TablaEjercicioRelacion> ejercicioLocals) {
+                   for(TablaEjercicioRelacion tablaEjercicioRelacion : ejercicioLocals){
+                       tablaEjercicioRelacion.pintar();
+                   }
+                }
+            });
+        }
+
 
 //------------- Seleccion de dias //-----------------------------------------------
         sp_diasEntreno_crearTabla.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -142,6 +161,7 @@ public class CrearTablaActivity extends AppCompatActivity {
             listaDiasEjercicio.add(a);
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -216,26 +236,28 @@ public class CrearTablaActivity extends AppCompatActivity {
         startActivityForResult(intent,PETICION4);
     }
 
-    private boolean guardarDatosDB(){
 
-        return false;
-    }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addTablaDatosLocal(Tabla tabla){
         TablaLocal tablaLocal = new TablaLocal(tabla.getNombre(),diasSeleccionados,true);
         if(tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())){
             if(tablaViewModel.addTablaLocal(tablaLocal)){
                 tablaLocal = tablaViewModel.obtenerUltimaTabla();
                 List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
-                TablaEjercicioRelacionViewModel  tr= ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
-                if(tr.guardarDatosTablaEjercicio(tablaLocal,listaDiasEjercicio)){
 
+                if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
+                    System.out.println("AÑADIDO CORRECTAMENTE");
+                    finish();
                 }else{
-                    tablaViewModel.borrarTabla(tablaLocal);
-                    //MENSAJE DE ERROR
+                    if(tablaViewModel.borrarTabla(tablaLocal)){
+                         System.out.println("TABLA BORRADA");
+                    }else {
+                        System.out.println("ERROR AL BORRAR TABLA");
+                    }
+
                 }
             }
-
             else
                 System.out.println("ERROR AL AÑADIR TABLA");
         }else{
@@ -243,12 +265,16 @@ public class CrearTablaActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private List<TablaEjercicioRelacion> transformarDatosAEjercicioTabla(TablaLocal tablaLocal, ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio) {
         List<TablaEjercicioRelacion> transformado = new ArrayList<TablaEjercicioRelacion>();
         for(int i  = 0 ; i<tablaLocal.getDias() ; i++){
-            for(int y = 0; y<listaDiasEjercicio.get(i).size(); i++){
-
+            ArrayList<EjercicioInfo> ejercicioInfos = listaDiasEjercicio.get(i);
+            for(EjercicioInfo ejercicioInfo : ejercicioInfos){
+                transformado.add(new TablaEjercicioRelacion(tablaLocal,ejercicioInfo.getEjercicio(),ejercicioInfo.getRepeticiones(),ejercicioInfo.getSeries(),i));
             }
         }
+        transformado.forEach(ejercicio -> ejercicio.pintar() );
+        return transformado;
     }
 }

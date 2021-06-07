@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
+import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 
 import java.util.List;
 
@@ -30,4 +32,6 @@ public interface DaoTablaLocal {
 
     @Query("SELECT * from tabla_user order by idTabla desc limit 1")
     TablaLocal conseguirUltimaTabla();
+
+
 }
