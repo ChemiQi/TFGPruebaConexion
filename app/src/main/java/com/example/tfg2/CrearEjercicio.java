@@ -117,7 +117,7 @@ public class CrearEjercicio extends AppCompatActivity {
 
         EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
                 true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
-        if(ejercicioViewModel.obtenerIdEjercicio() == 0){
+        if(ejercicioViewModel.obtenerIdEjercicio()  < 200){
             ejercicioLocal.setIdEjercicio(200);
         }
         ejercicioViewModel.insertarEjercicio(ejercicioLocal);

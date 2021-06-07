@@ -30,4 +30,6 @@ public interface DaroEjercicioLocal {
 
     @Query("SELECT * FROM ejercicio_user")
     List<EjercicioLocal> getEjercicios();
+
+
 }
