@@ -5,11 +5,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.graphics.Color;
@@ -32,6 +35,7 @@ import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
+import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.tabla.controladores.TablaController;
@@ -56,6 +60,9 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     private TablaViewModel tablaViewModel;
     private TablaEjercicioRelacionViewModel  tr;
+    private EjercicioViewModel ejercicioViewModel;
+    List<EjercicioLocal> ejercicioLocals2;
+    TablaLocal tablaLocal;
 
     int position;
 
@@ -69,6 +76,7 @@ public class CrearTablaActivity extends AppCompatActivity {
 
         tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
         tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
+        ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
         ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_crearTabla);
         sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_crearTabla);
@@ -240,28 +248,79 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void addTablaDatosLocal(Tabla tabla){
-        TablaLocal tablaLocal = new TablaLocal(tabla.getNombre(),diasSeleccionados,true);
+         tablaLocal = new TablaLocal(tabla.getNombre(),diasSeleccionados,true);
         if(tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())){
             if(tablaViewModel.addTablaLocal(tablaLocal)){
                 tablaLocal = tablaViewModel.obtenerUltimaTabla();
                 List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
-
-                if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
-                    System.out.println("AÑADIDO CORRECTAMENTE");
-                    finish();
-                }else{
-                    if(tablaViewModel.borrarTabla(tablaLocal)){
-                         System.out.println("TABLA BORRADA");
-                    }else {
-                        System.out.println("ERROR AL BORRAR TABLA");
-                    }
-
+                if(comprobarEjerciciosLocales(tablaRelacion)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("Hemos encontrado ejercicios no descargados. \n¿Quíeres descargar esos ejercicios para poder usarlo sin Internet?\nPodrás usarlo en otras tablas ")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    descargarEjerciciosALocal(tablaRelacion);
+                                    adda(tablaRelacion);
+                                }
+                            })
+                            .setNegativeButton("No, usaré internet", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    adda(tablaRelacion);
+                                }
+                            });
+                    builder.show();
+                }else {
+                    adda(tablaRelacion);
                 }
             }
             else
                 System.out.println("ERROR AL AÑADIR TABLA");
         }else{
             System.out.println("NOMBRE REPETIDO");
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private boolean comprobarEjerciciosLocales(List<TablaEjercicioRelacion> tablaRelacion) {
+        boolean comprobacion = false;
+        ejercicioLocals2 = ejercicioViewModel.allEjercicios();
+        //ejercicioLocals2.forEach(ejercicioLocal -> ejercicioLocal.mostrar());
+        tablaRelacion.forEach(e -> System.out.println("EJERCICIO LISTA ->" + e.getIdEjercicio()));
+        for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
+            if(!ejercicioLocals2.stream().anyMatch(ejercicioLocal -> ejercicioLocal.getIdEjercicio() == tablaEjercicioRelacion.getIdEjercicio())) {
+                return true;
+            }
+        }
+        return comprobacion;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void descargarEjerciciosALocal(List<TablaEjercicioRelacion> tablaRelacion){
+        ejercicioLocals2 = ejercicioViewModel.allEjercicios();
+       // ejercicioLocals2.forEach(ejercicioLocal -> ejercicioLocal.mostrar());
+        if(ejercicioLocals2.isEmpty()){
+            for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
+                if (ejercicioViewModel.insertarEjercicio(new EjercicioLocal(EjercicioController.getEjercicioPorId(tablaEjercicioRelacion.getIdEjercicio())))) {
+                    System.out.println("EJERCICIO DESCARGADO DB GLOBAL CORRECTAMENTE");
+                } else {
+                    System.out.println("EJERCICIO DESCARGADO DB GLOBAL MAL");
+                }
+            }
+
+        }
+        if(!ejercicioLocals2.isEmpty()) {
+            for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
+                for (EjercicioLocal ejercicioLocal : ejercicioLocals2) {
+                    if (ejercicioLocal.getIdEjercicio() != tablaEjercicioRelacion.getIdEjercicio()) {
+                        if (ejercicioViewModel.insertarEjercicio(new EjercicioLocal(EjercicioController.getEjercicioPorId(tablaEjercicioRelacion.getIdEjercicio())))) {
+                            System.out.println("EJERCICIO DESCARGADO DB GLOBAL CORRECTAMENTE");
+                        } else {
+                            System.out.println("EJERCICIO DESCARGADO DB GLOBAL MAL");
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -274,7 +333,21 @@ public class CrearTablaActivity extends AppCompatActivity {
                 transformado.add(new TablaEjercicioRelacion(tablaLocal,ejercicioInfo.getEjercicio(),ejercicioInfo.getRepeticiones(),ejercicioInfo.getSeries(),i));
             }
         }
-        transformado.forEach(ejercicio -> ejercicio.pintar() );
         return transformado;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void adda(List<TablaEjercicioRelacion> tablaRelacion){
+        descargarEjerciciosALocal(tablaRelacion);
+        if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
+            System.out.println("AÑADIDO CORRECTAMENTE");
+            finish();
+        }else{
+            if(tablaViewModel.borrarTabla(tablaLocal)){
+                System.out.println("TABLA BORRADA");
+            }else {
+                System.out.println("ERROR AL BORRAR TABLA");
+            }
+        }
     }
 }

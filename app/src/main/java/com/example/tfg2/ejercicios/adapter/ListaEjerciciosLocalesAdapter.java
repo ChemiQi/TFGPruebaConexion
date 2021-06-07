@@ -55,7 +55,7 @@ public class ListaEjerciciosLocalesAdapter extends RecyclerView.Adapter<ListaEje
         }else{
             for(EjercicioLocal c:listaEjerciciosLocales)
             {
-                Log.i("ejercicio","ejercicio -> " + c.getNombre());
+                Log.i("ejercicio","ejercicio -> " + c.getNombre() + " " + c.getIdEjercicio());
             }
         }
         notifyDataSetChanged();

@@ -265,7 +265,42 @@ public class EjercicioDB {
         }
     }
 
-   // String ordensql = "Select * from ejercicio_user where nombre like ? and descripcion like ? and idmusculos like ? and iduser like ?;";
+    public static Ejercicio obtenerEjercicioPorId(int idEjercicio) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if (conexion == null) {
+            return null;
+        }
+
+        Ejercicio ejercicio = null;
+        try {
+            String ordensql = "Select e.*, m.nombre as nombremusculo, zc.id as idpc FROM ejercicio as e INNER JOIN musculos as m ON  e.idmusculos  = m.idmusculos INNER JOIN zonas_cuerpo as zc ON m.zonas_cuerpo_id = zc.id  where idEjercicio like ?";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(1, idEjercicio);
+            ResultSet resultadosql = pst.executeQuery();
+            //------------------------------------------------
+            while (resultadosql.next()) {
+                int idJercicio = resultadosql.getInt("idejercicio");
+                String nombre = resultadosql.getString("nombre");
+                String descripcion = resultadosql.getString("descripcion");
+                String nombreMusculo = resultadosql.getString("nombremusculo");
+                int idMusculo = resultadosql.getInt("idmusculos");
+                Blob imagen = resultadosql.getBlob("imagenEjercicio");
+                Bitmap bmImage = ImagenesBlobBitmap.blob_to_bitmap(imagen, 200, 200);
+                int idParteDelCuerpo = resultadosql.getInt("idpc");
+
+                ejercicio = new Ejercicio(idJercicio,new Musculo(idMusculo, nombreMusculo), new PartesDelCuerpo(idParteDelCuerpo), nombre, descripcion, bmImage);
+            }
+            resultadosql.close();
+            pst.close();
+            conexion.close();
+            return ejercicio;
+        } catch (SQLException e) {
+            System.out.println("ERROR COGER EJERCICIO DB GLOBAL");
+            return null;
+
+        }
+    }
+
 
 
 }

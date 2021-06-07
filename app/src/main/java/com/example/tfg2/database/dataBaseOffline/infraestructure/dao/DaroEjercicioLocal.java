@@ -28,5 +28,6 @@ public interface DaroEjercicioLocal {
     @Query("SELECT MAX(idEjercicio) FROM ejercicio_user")
     int getIdEjercicio();
 
-
+    @Query("SELECT * FROM ejercicio_user")
+    List<EjercicioLocal> getEjercicios();
 }

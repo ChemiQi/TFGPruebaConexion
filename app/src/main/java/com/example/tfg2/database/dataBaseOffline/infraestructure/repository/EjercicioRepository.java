@@ -8,8 +8,10 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaroEjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.EjercicioRoomDatabase;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaAddEjercicio;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetEjercicios;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -84,4 +86,29 @@ public class EjercicioRepository {
         }
     }
 
+    public List<EjercicioLocal> getEjercicios() {
+        FutureTask t = new FutureTask(new TareaGetEjercicios());
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        List<EjercicioLocal> ejercicioLocals = null;
+        try {
+            ejercicioLocals = (ArrayList<EjercicioLocal>) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return ejercicioLocals;
+        }
+    }
 }

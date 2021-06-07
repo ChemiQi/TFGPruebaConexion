@@ -34,4 +34,8 @@ public class EjercicioViewModel  extends AndroidViewModel {
     public int obtenerIdEjercicio(){
         return ejercicioRepository.getId();
     }
+
+    public List<EjercicioLocal> allEjercicios (){
+        return ejercicioRepository.getEjercicios();
+    }
 }

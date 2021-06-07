@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
+
 import java.io.Serializable;
 import java.sql.Blob;
 
@@ -46,6 +49,15 @@ public class EjercicioLocal  implements Serializable {
     }
 
     public EjercicioLocal() {
+    }
+
+    public EjercicioLocal(Ejercicio ejercicioPorId) {
+        this.idEjercicio = ejercicioPorId.getIdEjercicio();
+        this.nombreMusculo = ejercicioPorId.getMusculo().getNombreMusculo();
+        this.nombre = ejercicioPorId.getNombreEjercicio();
+        this.descripcion = ejercicioPorId.getDescripcionEjercicio();
+        this.created = false;
+        this.imagenEjercicio = ImagenesBlobBitmap.bitmap_to_bytes(ejercicioPorId.getImageMusculo());
     }
 
     public int getIdEjercicio() {

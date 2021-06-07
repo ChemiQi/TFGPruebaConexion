@@ -17,7 +17,7 @@ public class TareaAddEjercicio implements Callable {
             EjercicioRepository.mEjercicioDao.insert(ejercicioLocal);
             return true;
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR EJERCICIO");
+            System.out.println("ERROR AL INSERTAR EJERCICIO a base datos local");
             return false;
         }
     }
