@@ -68,6 +68,7 @@
         android:layout_marginEnd="70dp"
         android:layout_marginRight="70dp"
         android:text="@string/editar"
+        android:onClick="descargarEditar"
         app:layout_constraintEnd_toEndOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
@@ -79,6 +80,7 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="28dp"
         android:text="@string/atr_s"
+        android:onClick="atras"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 

@@ -173,20 +173,7 @@ public class CrearTablaActivity extends AppCompatActivity {
                 nombreTabla = data.getStringExtra(PopUpAnadirTabla.EXTRA_NOMBRETABLA_POPUPNOMBRETALBA);
                 CurrentUser.setUser(new User(1,"","",""));
                 Tabla tablaCreada = new Tabla(nombreTabla,diasSeleccionados);
-               /* Integer itTabla = 1;  ------------------------ TABLA ONLINE
-                        //TablaController.obtenerUltimoIdTablaUsuario(tablaCreada);
-                if(itTabla != null){
-                    tablaCreada.setId(itTabla);
-                    tablaCreada.setListaDiasEjercicio(listaDiasEjercicio);
-                    if(TablaController.addEjerciciosTablaUser(tablaCreada)){
-                        //finish();
-                    }else{
-                        System.out.println("ERROR CREAR TABLA");
-                    }
-                }
-*/
                 addTablaDatosLocal(tablaCreada);
-
             }
         }
         else if(requestCode == PETICION2){
@@ -231,7 +218,7 @@ public class CrearTablaActivity extends AppCompatActivity {
     }
 
     public void cancelarCrearTabla(View view) {
-
+        finish();
     }
 
     public void guardarTabla(View view) {
@@ -282,7 +269,6 @@ public class CrearTablaActivity extends AppCompatActivity {
     private boolean comprobarEjerciciosLocales(List<TablaEjercicioRelacion> tablaRelacion) {
         boolean comprobacion = false;
         ejercicioLocals2 = ejercicioViewModel.allEjercicios();
-        //ejercicioLocals2.forEach(ejercicioLocal -> ejercicioLocal.mostrar());
         tablaRelacion.forEach(e -> System.out.println("EJERCICIO LISTA ->" + e.getIdEjercicio()));
         for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
             if(!ejercicioLocals2.stream().anyMatch(ejercicioLocal -> ejercicioLocal.getIdEjercicio() == tablaEjercicioRelacion.getIdEjercicio())) {

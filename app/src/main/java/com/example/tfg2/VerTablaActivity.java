@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
+import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
@@ -46,9 +49,18 @@ public class VerTablaActivity extends AppCompatActivity {
     Spinner sp_diasEntreno_verTabla;
     TextView txt_titulo_verTabla;
     TextView txt_textoPreguntaDias_verTabla;
+    Button btn_editarguardar_verTabla;
 
     private TablaEjercicioRelacionViewModel  tr;
     private EjercicioViewModel ejercicioViewModel;
+    private List<EjercicioLocal> ejercicioLocals2;
+    private TablaViewModel tablaViewModel;
+
+    boolean descargado = false;
+    boolean editado = false;
+
+    TablaLocal tablaLocal;
+    Tabla tablaOnline;
 
     int dias = 0;
 
@@ -69,36 +81,41 @@ public class VerTablaActivity extends AppCompatActivity {
         ly_contenedorFilas_verTablas = (LinearLayout) findViewById(R.id.ly_contenedorFilas_verTablas);
         txt_textoPreguntaDias_verTabla.setVisibility(View.INVISIBLE);
         sp_diasEntreno_verTabla.setVisibility(View.INVISIBLE);
+        btn_editarguardar_verTabla = (Button) findViewById(R.id.btn_editarguardar_verTabla);
 
         //Crear repositorios
         tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
+        tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
 
         // ---------------------------------- RECIBIR DATOS
         Intent intent = getIntent();
         TablaLocal tabla = (TablaLocal) intent.getSerializableExtra(TablaLocalViewHolder.TABLA_A_CREARTABLAACTIVITY);
         if(tabla != null){
+            System.out.println("ENTRA EN TABLA LOCAL VER");
+            editado = true;
             List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tabla.getIdTabla());
             txt_titulo_verTabla.setText(tabla.getNombre());
             if(datosTabla != null) {
                 diaMaximoEjerciico(datosTabla);
-
                 ponerDatosTabla(datosTabla);
-
                 putsLinearLayouts(dias);
             }
         }
-        Tabla tablaOnline = (Tabla) intent.getSerializableExtra(TablaViewHolder.TABLADESCARGADA_A_CREARTABLAACTIVITY);
+         tablaOnline = (Tabla) intent.getSerializableExtra(TablaViewHolder.TABLADESCARGADA_A_CREARTABLAACTIVITY);
         if(tablaOnline != null){
+            System.out.println("ENTRA EN TABLA ONLINE VER");
             txt_titulo_verTabla.setText(tablaOnline.getNombre());
             List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tablaOnline.getId());
 
             if(datosTabla != null && !datosTabla.isEmpty()) {
+                System.out.println("ENTRA EN TENGO LA TABLA CRACK");
+                descargado = true;
                 diaMaximoEjerciico(datosTabla);
                 ponerDatosTabla(datosTabla);
                 putsLinearLayouts(dias);
             }else{
-                System.out.println("--------------" + tablaOnline.getId());
+                System.out.println("NNO TENGO LA TABLA CRACK");
                 List<TablaEjercicioRelacion> datosTablaDescargado = TablaController.obtenerTablaPorId(tablaOnline.getId());
                 if(datosTablaDescargado != null){
                     diaMaximoEjerciico(datosTablaDescargado);
@@ -111,9 +128,129 @@ public class VerTablaActivity extends AppCompatActivity {
 
         //_------------------------------------- ESTETICA
 
+        ponerTextoBoton();
+
+
+    }
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void descargarEditar(View view) {
+        if(editado){// ----------------------------------------------------- EDITAR
+            System.out.println("ENTRA EN EDITADO");
+        }else {//-------------------------------------- TABLA GLOBAL VER
+            btn_editarguardar_verTabla.setText("DESCARGAR");
+            if(!descargado){  // ------------------------------ DESCARGAR BOTON
+                System.out.println("ENTRA EN DESCARGADO");
+                addTablaDatosLocal(tablaOnline);
+            }else{
+                System.out.println("NO ENTRA EN DESCARGADO");
+            }
+        }
+    }
+
+    public void atras(View view) {
+        finish();
+    }
+
+
+    private void descargarEjerciciosALocal(List<TablaEjercicioRelacion> tablaRelacion){
+        ejercicioLocals2 = ejercicioViewModel.allEjercicios();
+        if(ejercicioLocals2.isEmpty()){
+            for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
+                if (ejercicioViewModel.insertarEjercicio(new EjercicioLocal(EjercicioController.getEjercicioPorId(tablaEjercicioRelacion.getIdEjercicio())))) {
+                    System.out.println("EJERCICIO DESCARGADO DB GLOBAL CORRECTAMENTE");
+                } else {
+                    System.out.println("EJERCICIO DESCARGADO DB GLOBAL MAL");
+                }
+            }
+
+        }
+        if(!ejercicioLocals2.isEmpty()) {
+            for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
+                for (EjercicioLocal ejercicioLocal : ejercicioLocals2) {
+                    if (ejercicioLocal.getIdEjercicio() != tablaEjercicioRelacion.getIdEjercicio()) {
+                        if (ejercicioViewModel.insertarEjercicio(new EjercicioLocal(EjercicioController.getEjercicioPorId(tablaEjercicioRelacion.getIdEjercicio())))) {
+                            System.out.println("EJERCICIO DESCARGADO DB GLOBAL CORRECTAMENTE");
+                        } else {
+                            System.out.println("EJERCICIO DESCARGADO DB GLOBAL MAL");
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void addTablaDatosLocal(Tabla tabla){
+        tablaLocal = new TablaLocal(tabla.getId(),tabla.getNombre(),dias,false);
+            if(tablaViewModel.addTablaLocal(tablaLocal)){
+                System.out.println("----------------------" + tablaLocal.getIdTabla());
+                List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
+                if(comprobarEjerciciosLocales(tablaRelacion)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("Hemos encontrado ejercicios no descargados. \n¿Quíeres descargar esos ejercicios para poder usarlo sin Internet?\nPodrás usarlo en otras tablas ")
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    descargarEjerciciosALocal(tablaRelacion);
+                                    adda(tablaRelacion);
+                                }
+                            })
+                            .setNegativeButton("No, usaré internet", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    adda(tablaRelacion);
+                                }
+                            });
+                    builder.show();
+                }else {
+                    adda(tablaRelacion);
+                }
+            }
+            else
+                System.out.println("ERROR AL AÑADIR TABLA");
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private boolean comprobarEjerciciosLocales(List<TablaEjercicioRelacion> tablaRelacion) {
+        boolean comprobacion = false;
+        ejercicioLocals2 = ejercicioViewModel.allEjercicios();
+        tablaRelacion.forEach(e -> System.out.println("EJERCICIO LISTA ->" + e.getIdEjercicio()));
+        for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
+            if(!ejercicioLocals2.stream().anyMatch(ejercicioLocal -> ejercicioLocal.getIdEjercicio() == tablaEjercicioRelacion.getIdEjercicio())) {
+                return true;
+            }
+        }
+        return comprobacion;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private List<TablaEjercicioRelacion> transformarDatosAEjercicioTabla(TablaLocal tablaLocal, ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio) {
+        List<TablaEjercicioRelacion> transformado = new ArrayList<TablaEjercicioRelacion>();
+        for(int i  = 0 ; i<tablaLocal.getDias() ; i++){
+            ArrayList<EjercicioInfo> ejercicioInfos = listaDiasEjercicio.get(i);
+            for(EjercicioInfo ejercicioInfo : ejercicioInfos){
+                transformado.add(new TablaEjercicioRelacion(tablaLocal,ejercicioInfo.getEjercicio(),ejercicioInfo.getRepeticiones(),ejercicioInfo.getSeries(),i));
+            }
+        }
+        return transformado;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void adda(List<TablaEjercicioRelacion> tablaRelacion){
+
+        if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
+            System.out.println("AÑADIDO CORRECTAMENTE");
+            finish();
+        }else{
+            if(tablaViewModel.borrarTabla(tablaLocal)){
+                System.out.println("TABLA BORRADA");
+            }else {
+                System.out.println("ERROR AL BORRAR TABLA");
+            }
+        }
     }
 
     private void ponerDatosTabla(List<TablaEjercicioRelacion> datosTabla) {
@@ -130,7 +267,6 @@ public class VerTablaActivity extends AppCompatActivity {
             if(ejercicioLocal == null) {
                 ejercicioLocal = new EjercicioLocal(EjercicioController.getEjercicioPorId(e.getIdEjercicio()));
             }
-
         if(ejercicioLocal != null){
             return new EjercicioInfo(ejercicioLocal,e);
         }
@@ -206,4 +342,17 @@ public class VerTablaActivity extends AppCompatActivity {
                 return Color.parseColor("#CCFFFFFF");
         }
     }
+    private void ponerTextoBoton() {
+        if(editado){// ----------------------------------------------------- EDITAR
+        }else {//-------------------------------------- TABLA GLOBAL VER
+            btn_editarguardar_verTabla.setText("DESCARGAR");
+            if(!descargado) {
+                btn_editarguardar_verTabla.setEnabled(true);
+            }else{
+                btn_editarguardar_verTabla.setEnabled(false);
+            }
+        }
+    }
+
+
 }
