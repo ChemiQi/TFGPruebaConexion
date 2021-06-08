@@ -1,11 +1,17 @@
 package com.example.tfg2.ejercicios.clases;
 
+import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
+import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
+import com.example.tfg2.musculos.clases.Musculo;
+import com.example.tfg2.utilidades.ImagenesBlobBitmap;
+
 import java.io.Serializable;
 
 public class EjercicioInfo  implements Serializable {
     Ejercicio ejercicio;
     int series;
     int repeticiones;
+    boolean created ;
 
     public EjercicioInfo(Ejercicio ejercicio, int series, int repeticiones) {
         this.ejercicio = ejercicio;
@@ -15,6 +21,13 @@ public class EjercicioInfo  implements Serializable {
     }
 
     public EjercicioInfo() {
+    }
+
+    public EjercicioInfo(EjercicioLocal ejercicioLocal, TablaEjercicioRelacion ejercicioRelacion) {
+
+        this.ejercicio = new Ejercicio(ejercicioLocal.getIdEjercicio(),new Musculo(ejercicioLocal.getNombreMusculo()),ejercicioLocal.getNombre(),ejercicioLocal.getDescripcion(), ImagenesBlobBitmap.bytes_to_bitmap(ejercicioLocal.getImagenEjercicio()));
+        this.series = ejercicioRelacion.getSeries();
+        this.repeticiones = ejercicioRelacion.getRepeticiones();
     }
 
     public Ejercicio getEjercicio() {

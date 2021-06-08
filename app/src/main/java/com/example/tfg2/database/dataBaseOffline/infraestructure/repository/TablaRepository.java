@@ -8,9 +8,11 @@ import androidx.lifecycle.LiveData;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaRoomDatabase;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetId;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaComprobarTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaDeleteTabla;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetIdTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetLastTabla;
 
 import java.util.List;
@@ -139,5 +141,32 @@ public class TablaRepository {
         finally {
             return insercionOK;
         }
+    }
+
+    public int comprobarIdTabla() {
+        FutureTask t = new FutureTask(new TareaGetIdTabla());
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        Integer numero = null;
+        try {
+            numero = (Integer) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return numero;
+        }
+
     }
 }

@@ -36,4 +36,8 @@ public class TablaEjercicioRelacionViewModel extends AndroidViewModel {
     public LiveData<List<TablaEjercicioRelacion>> obtenerTablas(){
         return tablaEjercicioRelacionRepository.getAllInfo();
     }
+
+    public List<TablaEjercicioRelacion> tablaPorIdTabla(int idTabla){
+        return tablaEjercicioRelacionRepository.getTablaPorIdTabla(idTabla);
+    }
 }

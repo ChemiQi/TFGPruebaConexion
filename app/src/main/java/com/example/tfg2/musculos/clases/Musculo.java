@@ -26,6 +26,10 @@ public class Musculo implements Serializable {
         this.idMusculo = idMusculo;
     }
 
+    public Musculo(String nombreMusculo){
+        this.nombreMusculo = nombreMusculo;
+    }
+
     public int getIdMusculo() {
         return idMusculo;
     }

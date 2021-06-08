@@ -19,4 +19,7 @@ public interface DaoTablaEjercicioRelacion {
 
     @Insert
     void insert(TablaEjercicioRelacion tablaEjercicioRelacion);
+
+    @Query("SELECT * FROM tabla_has_ejercicios WHERE idTabla = :idTabla")
+    List<TablaEjercicioRelacion> conseguirTablasPorIdTabla(int idTabla);
 }

@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearTablaActivity">
-
+    tools:context=".VerTablaActivity">
     <TextView
         android:id="@+id/txt_titulo_verTabla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Crear Tabla"
+        android:text="@string/crear_tabla"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +25,7 @@
         android:layout_marginLeft="68dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="¿En cuátos dias se dividirá tu entreno?"
+        android:text="@string/en_cu_tos_dias_se_dividir_tu_entreno"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_titulo_verTabla" />
 
@@ -68,8 +67,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="70dp"
         android:layout_marginRight="70dp"
-        android:onClick="guardarTabla"
-        android:text="Guardar"
+        android:text="@string/editar"
         app:layout_constraintEnd_toEndOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
@@ -80,8 +78,8 @@
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="28dp"
-        android:onClick="cancelarCrearTabla"
-        android:text="Cancelar"
+        android:text="@string/atr_s"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

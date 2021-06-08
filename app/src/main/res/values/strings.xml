@@ -34,6 +34,10 @@
     <string name="nombre_de_la_tabla">Nombre de la tabla</string>
     <string name="mi_tabla">Mi tabla</string>
     <string name="button">Button</string>
+    <string name="editar">Editar</string>
+    <string name="atr_s">Atrás</string>
+    <string name="en_cu_tos_dias_se_dividir_tu_entreno">¿En cuátos dias se dividirá tu entreno?</string>
+    <string name="crear_tabla">Crear Tabla</string>
 
 
     <string-array name="diasGimnasio">

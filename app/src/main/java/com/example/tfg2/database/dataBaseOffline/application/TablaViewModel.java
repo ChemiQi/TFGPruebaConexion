@@ -46,4 +46,8 @@ public class TablaViewModel extends AndroidViewModel {
     public boolean borrarTabla(TablaLocal tablaLocal) {
         return tablaRepository.deleteTable(tablaLocal);
     }
+
+    public int comprobarIdTablaMax() {
+        return tablaRepository.comprobarIdTabla();
+    }
 }

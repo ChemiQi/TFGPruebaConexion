@@ -72,7 +72,7 @@ public class ListaTablaLocalAdapter extends RecyclerView.Adapter<TablaLocalViewH
     @NonNull
     @Override
     public TablaLocalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TablaLocalViewHolder(mInflater.inflate(R.layout.imte_rv_tablaslocal,parent,false));
+        return new TablaLocalViewHolder(mInflater.inflate(R.layout.imte_rv_tablaslocal,parent,false),this);
     }
 
     @Override

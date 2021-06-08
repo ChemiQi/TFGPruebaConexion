@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,14 +31,10 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
-import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
-import com.example.tfg2.ejercicios.viewHolder.EjercicioViewHolder;
 import com.example.tfg2.tabla.clases.Tabla;
-import com.example.tfg2.tabla.controladores.TablaController;
-import com.example.tfg2.tabla.modelos.TablaDB;
 import com.example.tfg2.user.clases.CurrentUser;
 import com.example.tfg2.user.clases.User;
 import com.example.tfg2.utilidades.ImagenesBlobBitmap;
@@ -53,7 +48,6 @@ public class CrearTablaActivity extends AppCompatActivity {
     public static final int PETICION4 = 3;
     LinearLayout ly_contenedorFilas_crearTabla;
     Spinner sp_diasEntreno_crearTabla;
-    List<LinearLayout> listaDeFilas = new ArrayList<LinearLayout>();
     ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
     int diasSeleccionados = 0;
     private String nombreTabla = "";
@@ -78,8 +72,8 @@ public class CrearTablaActivity extends AppCompatActivity {
         tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
-        ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_crearTabla);
-        sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_crearTabla);
+        ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_verTablas);
+        sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_verTabla);
 
         crearListasPorDia();
 
@@ -208,6 +202,7 @@ public class CrearTablaActivity extends AppCompatActivity {
                 putsLinearLayouts(diasSeleccionados);
             }else if(requestCode == RESULT_CANCELED){
                 System.out.println("ERROR");
+                AnadirEjercicio.esperaActivacion = true;
             }else {
                 AnadirEjercicio.esperaActivacion = true;
             }
@@ -250,7 +245,11 @@ public class CrearTablaActivity extends AppCompatActivity {
     private void addTablaDatosLocal(Tabla tabla){
          tablaLocal = new TablaLocal(tabla.getNombre(),diasSeleccionados,true);
         if(tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())){
+            if(tablaViewModel.comprobarIdTablaMax() < 200 ) {
+                tablaLocal.setIdTabla(200);
+            }
             if(tablaViewModel.addTablaLocal(tablaLocal)){
+                System.out.println("----------------------" + tablaLocal.getIdTabla());
                 tablaLocal = tablaViewModel.obtenerUltimaTabla();
                 List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
                 if(comprobarEjerciciosLocales(tablaRelacion)){
@@ -274,12 +273,11 @@ public class CrearTablaActivity extends AppCompatActivity {
             }
             else
                 System.out.println("ERROR AL AÑADIR TABLA");
+
         }else{
             System.out.println("NOMBRE REPETIDO");
         }
     }
-
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     private boolean comprobarEjerciciosLocales(List<TablaEjercicioRelacion> tablaRelacion) {
         boolean comprobacion = false;
@@ -338,6 +336,7 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void adda(List<TablaEjercicioRelacion> tablaRelacion){
+
         if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
             System.out.println("AÑADIDO CORRECTAMENTE");
             finish();

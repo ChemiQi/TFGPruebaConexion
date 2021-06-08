@@ -33,5 +33,8 @@ public interface DaoTablaLocal {
     @Query("SELECT * from tabla_user order by idTabla desc limit 1")
     TablaLocal conseguirUltimaTabla();
 
+    @Query("SELECT MAX(idTabla) from tabla_user")
+    int getIdMax();
+
 
 }

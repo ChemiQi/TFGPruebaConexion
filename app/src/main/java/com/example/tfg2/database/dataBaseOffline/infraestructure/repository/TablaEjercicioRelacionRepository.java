@@ -14,6 +14,7 @@ import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.room
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddOneDataTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaObtenerTablaInfoPorIdTabla;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 
 import java.util.ArrayList;
@@ -92,5 +93,31 @@ public class TablaEjercicioRelacionRepository {
 
     public LiveData<List<TablaEjercicioRelacion>> getAllInfo() {
         return mAllTablaEjercicio;
+    }
+
+    public List<TablaEjercicioRelacion> getTablaPorIdTabla(int idTabla) {
+        FutureTask t = new FutureTask(new TareaObtenerTablaInfoPorIdTabla(idTabla));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        List<TablaEjercicioRelacion> tablaEjercicioRelacions = null;
+        try {
+            tablaEjercicioRelacions = (List<TablaEjercicioRelacion>) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return tablaEjercicioRelacions;
+        }
     }
 }
