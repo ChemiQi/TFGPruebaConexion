@@ -11,7 +11,7 @@ public class EjercicioInfo  implements Serializable {
     Ejercicio ejercicio;
     int series;
     int repeticiones;
-    boolean created ;
+    Boolean created ;
 
     public EjercicioInfo(Ejercicio ejercicio, int series, int repeticiones) {
         this.ejercicio = ejercicio;
@@ -28,6 +28,7 @@ public class EjercicioInfo  implements Serializable {
         this.ejercicio = new Ejercicio(ejercicioLocal.getIdEjercicio(),new Musculo(ejercicioLocal.getNombreMusculo()),ejercicioLocal.getNombre(),ejercicioLocal.getDescripcion(), ImagenesBlobBitmap.bytes_to_bitmap(ejercicioLocal.getImagenEjercicio()));
         this.series = ejercicioRelacion.getSeries();
         this.repeticiones = ejercicioRelacion.getRepeticiones();
+        this.created = ejercicioLocal.getCreated();
     }
 
     public Ejercicio getEjercicio() {
@@ -52,6 +53,14 @@ public class EjercicioInfo  implements Serializable {
 
     public void setRepeticiones(int repeticiones) {
         this.repeticiones = repeticiones;
+    }
+
+    public Boolean getCreated() {
+        return created;
+    }
+
+    public void setCreated(Boolean created) {
+        this.created = created;
     }
 
     @Override

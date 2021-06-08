@@ -3,6 +3,7 @@ package com.example.tfg2.tabla.modelos;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
@@ -17,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TablaDB {
     public static Integer obtenerIdTablaUser()
@@ -142,6 +144,39 @@ public class TablaDB {
 
 
                 tablaTfg.add(new Tabla(idTabla,nombre,descripcion,dias));
+            }
+            resultadosql.close();
+            pst.close();
+            conexion.close();
+            return tablaTfg;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static List<TablaEjercicioRelacion> obtenerTablaPorIdTabla(int idTabla) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if(conexion == null)
+        {
+            return null;
+        }
+        //---------------------------------
+        List<TablaEjercicioRelacion> tablaTfg = new ArrayList<>();
+        try {
+            String ordensql = "select *  from info_tabla_ejercicios where idtabla_ejercicios = ?;";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(1,idTabla);
+            ResultSet resultadosql = pst.executeQuery();
+            //------------------------------------------------
+            while(resultadosql.next())
+            {
+                int idejercicio = resultadosql.getInt("idejercicio");
+                int serie = resultadosql.getInt("series");
+                int repeticiones = resultadosql.getInt("repeticiones");
+                int dia = resultadosql.getInt("dia");
+
+
+                tablaTfg.add(new TablaEjercicioRelacion(idTabla,idejercicio,serie,repeticiones,dia));
             }
             resultadosql.close();
             pst.close();

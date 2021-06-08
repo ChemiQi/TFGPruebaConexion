@@ -51,7 +51,7 @@ public class ListaTablaAdapter extends RecyclerView.Adapter<TablaViewHolder> {
     @NonNull
     @Override
     public TablaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TablaViewHolder(mInflater.inflate(R.layout.item_rv_tablas,parent,false));
+        return new TablaViewHolder(mInflater.inflate(R.layout.item_rv_tablas,parent,false),this);
     }
 
     @Override

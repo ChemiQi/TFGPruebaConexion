@@ -45,13 +45,17 @@ public class EjercicioInfoVIewHolder extends RecyclerView.ViewHolder implements 
 
         EjercicioInfo ejercicioInfo = listaEjercicoInfoEnTablaAdapter.getListaEjercicioInfo().get(mPosition);
         Intent intent = new Intent(listaEjercicoInfoEnTablaAdapter.getC(), PopUpAnadirEjercicio.class);
-        if(ejercicioInfo.getEjercicio().getImageMusculo() != null) {
-            Bitmap imagenGuardada =ejercicioInfo.getEjercicio().getImageMusculo();
-            byte [] imagen = transformarImagen(imagenGuardada);
-            ejercicioInfo.getEjercicio().setImageMusculo(null);
-            intent.putExtra(EXTRA_IMAGEN_EJERCICIO_EJERCICIOINFOHOWLDER,imagen);
-        }
+        try {
+            if (ejercicioInfo.getEjercicio().getImageMusculo() != null) {
+                Bitmap imagenGuardada = ejercicioInfo.getEjercicio().getImageMusculo();
+                byte[] imagen = transformarImagen(imagenGuardada);
+                ejercicioInfo.getEjercicio().setImageMusculo(null);
+                intent.putExtra(EXTRA_IMAGEN_EJERCICIO_EJERCICIOINFOHOWLDER, imagen);
+            }
+        }catch (Exception e)
+        {
 
+        }
         intent.putExtra(EXTRA_OBJETO_EJERCICIOINFO,ejercicioInfo);
         listaEjercicoInfoEnTablaAdapter.getC().startActivity(intent);
     }

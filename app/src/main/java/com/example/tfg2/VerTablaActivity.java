@@ -27,7 +27,9 @@ import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.tabla.clases.Tabla;
+import com.example.tfg2.tabla.controladores.TablaController;
 import com.example.tfg2.tabla.viewHolder.TablaLocalViewHolder;
+import com.example.tfg2.tabla.viewHolder.TablaViewHolder;
 import com.example.tfg2.utilidades.Exceptions.ExceptionNoEncontrado;
 
 import java.util.ArrayList;
@@ -59,10 +61,14 @@ public class VerTablaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_tabla);
 
+
+
         sp_diasEntreno_verTabla = (Spinner) findViewById(R.id.sp_diasEntreno_verTabla);
         txt_titulo_verTabla = (TextView) findViewById(R.id.txt_titulo_verTabla);
         txt_textoPreguntaDias_verTabla = (TextView) findViewById(R.id.txt_textoPreguntaDias_verTabla);
         ly_contenedorFilas_verTablas = (LinearLayout) findViewById(R.id.ly_contenedorFilas_verTablas);
+        txt_textoPreguntaDias_verTabla.setVisibility(View.INVISIBLE);
+        sp_diasEntreno_verTabla.setVisibility(View.INVISIBLE);
 
         //Crear repositorios
         tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
@@ -71,17 +77,41 @@ public class VerTablaActivity extends AppCompatActivity {
         // ---------------------------------- RECIBIR DATOS
         Intent intent = getIntent();
         TablaLocal tabla = (TablaLocal) intent.getSerializableExtra(TablaLocalViewHolder.TABLA_A_CREARTABLAACTIVITY);
-        List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tabla.getIdTabla());
+        if(tabla != null){
+            List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tabla.getIdTabla());
+            txt_titulo_verTabla.setText(tabla.getNombre());
+            if(datosTabla != null) {
+                diaMaximoEjerciico(datosTabla);
+
+                ponerDatosTabla(datosTabla);
+
+                putsLinearLayouts(dias);
+            }
+        }
+        Tabla tablaOnline = (Tabla) intent.getSerializableExtra(TablaViewHolder.TABLADESCARGADA_A_CREARTABLAACTIVITY);
+        if(tablaOnline != null){
+            txt_titulo_verTabla.setText(tablaOnline.getNombre());
+            List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tablaOnline.getId());
+
+            if(datosTabla != null && !datosTabla.isEmpty()) {
+                diaMaximoEjerciico(datosTabla);
+                ponerDatosTabla(datosTabla);
+                putsLinearLayouts(dias);
+            }else{
+                System.out.println("--------------" + tablaOnline.getId());
+                List<TablaEjercicioRelacion> datosTablaDescargado = TablaController.obtenerTablaPorId(tablaOnline.getId());
+                if(datosTablaDescargado != null){
+                    diaMaximoEjerciico(datosTablaDescargado);
+                    ponerDatosTabla(datosTablaDescargado);
+                    putsLinearLayouts(dias);
+                }
+            }
+
+        }
 
         //_------------------------------------- ESTETICA
-        txt_textoPreguntaDias_verTabla.setVisibility(View.INVISIBLE);
-        sp_diasEntreno_verTabla.setVisibility(View.INVISIBLE);
-        txt_titulo_verTabla.setText(tabla.getNombre());
-         diaMaximoEjerciico(datosTabla);
 
-        ponerDatosTabla(datosTabla);
 
-        putsLinearLayouts(dias);
 
 
     }
@@ -94,11 +124,13 @@ public class VerTablaActivity extends AppCompatActivity {
 
     private EjercicioInfo ejercicioPosicionDesdeTablaEjercicioRelacion(TablaEjercicioRelacion e) {
         EjercicioLocal ejercicioLocal = null;
-        try {
+
+
             ejercicioLocal = ejercicioViewModel.obtenerejercicioPorId(e.getIdEjercicio());
-        }catch (Exception e1){
-            ejercicioLocal =new EjercicioLocal(EjercicioController.getEjercicioPorId(e.getIdEjercicio()));
-        }
+            if(ejercicioLocal == null) {
+                ejercicioLocal = new EjercicioLocal(EjercicioController.getEjercicioPorId(e.getIdEjercicio()));
+            }
+
         if(ejercicioLocal != null){
             return new EjercicioInfo(ejercicioLocal,e);
         }
@@ -113,7 +145,6 @@ public class VerTablaActivity extends AppCompatActivity {
                 max = e.getDia();
             }
         }
-        System.out.println("----------" + max);
         dias = (max+1);
         for(int i = 0; i<dias; i++){
             ArrayList<EjercicioInfo> a = new ArrayList<EjercicioInfo>();

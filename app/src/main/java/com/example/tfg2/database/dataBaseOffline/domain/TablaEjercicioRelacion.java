@@ -31,6 +31,13 @@ public class TablaEjercicioRelacion implements Serializable {
 
     public TablaEjercicioRelacion() {
     }
+    public TablaEjercicioRelacion(int idTabla,int idEjercicio, int repeticiones, int series, int dia) {
+        this.idTabla = idTabla;
+        this.idEjercicio = idEjercicio;
+        this.repeticiones = repeticiones;
+        this.series = series;
+        this.dia = dia;
+    }
 
     public TablaEjercicioRelacion(TablaLocal tabla, Ejercicio ejercicio, int repeticiones, int series, int dia) {
 

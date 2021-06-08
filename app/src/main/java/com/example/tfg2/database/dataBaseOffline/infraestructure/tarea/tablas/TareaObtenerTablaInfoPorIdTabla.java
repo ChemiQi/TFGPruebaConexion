@@ -18,7 +18,7 @@ public class TareaObtenerTablaInfoPorIdTabla implements Callable {
 
             return TablaEjercicioRelacionRepository.mEjercicioTablaDao.conseguirTablasPorIdTabla(idTabla);
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR EJERCICIO");
+
             return null;
         }
     }
