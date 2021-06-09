@@ -4,21 +4,15 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
-import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaEjercicioRelacion;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaroEjercicioLocal;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.EjercicioRoomDatabase;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaEjercicioRelacionRoomDatabase;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddOneDataTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddTablaEjercicioRelacion;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaBorrarDatosTablaPorId;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaComprobarEjercicioEnUso;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaObtenerTablaInfoPorIdTabla;
-import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

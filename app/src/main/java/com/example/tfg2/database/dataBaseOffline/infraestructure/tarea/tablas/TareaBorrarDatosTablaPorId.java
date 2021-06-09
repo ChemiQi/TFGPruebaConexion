@@ -1,6 +1,7 @@
-package com.example.tfg2.database.dataBaseOffline.infraestructure.repository;
+package com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas;
 
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.TablaEjercicioRelacionRepository;
 
 import java.util.concurrent.Callable;
 

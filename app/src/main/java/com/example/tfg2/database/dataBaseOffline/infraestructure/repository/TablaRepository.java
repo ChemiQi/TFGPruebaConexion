@@ -8,13 +8,13 @@ import androidx.lifecycle.LiveData;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaRoomDatabase;
-import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetId;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaComprobarTablaLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaDeleteTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetIdTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetLastTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaObtenerTablaLocalPorId;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaUpdateTablaLocal;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
