@@ -24,4 +24,7 @@ public interface DaoTablaEjercicioRelacion {
     List<TablaEjercicioRelacion> conseguirTablasPorIdTabla(int idTabla);
     @Query("DELETE FROM tabla_has_ejercicios WHERE idTabla = :idTabla")
     void deletePorIdTabla(int idTabla);
+
+    @Query("SELECT * FROM tabla_has_ejercicios WHERE idEjercicio = :idEjercicio")
+    List<TablaEjercicioRelacion> buscarEjercicioEnUso(int idEjercicio);
 }

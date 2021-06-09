@@ -8,6 +8,7 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaroEjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.EjercicioRoomDatabase;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaAddEjercicio;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaBorrarEjercicioPorId;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetEjercicioLocalPorId;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetEjercicios;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicio.TareaGetId;
@@ -136,6 +137,32 @@ public class EjercicioRepository {
         }
         finally {
             return ejercicioLocal;
+        }
+    }
+
+    public boolean borrarEjercicioPorId(int idEjercicio) {
+        FutureTask t = new FutureTask(new TareaBorrarEjercicioPorId(idEjercicio));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean ok = false;
+        try {
+            ok = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return ok;
         }
     }
 }

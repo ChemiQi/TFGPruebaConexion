@@ -174,7 +174,7 @@ public class EjercicioDB {
             //------------------------------------------------
             while(resultadosql.next())
             {
-                //int idJercicio = resultadosql.getInt("idejercicio_user");
+                int idJercicio = resultadosql.getInt("idejercicio_user");
                 String nombre = resultadosql.getString("nombre");
                 String descripcion = resultadosql.getString("descripcion");
                 String nombreMusculo = resultadosql.getString("nombremusculo");
@@ -183,7 +183,7 @@ public class EjercicioDB {
                 Bitmap bmImage = ImagenesBlobBitmap.blob_to_bitmap(imagen,200,200);
                 int idParteDelCuerpo = resultadosql.getInt("idpc");
 
-                listaEjercicios.add(new Ejercicio(new Musculo(idMusculo,nombreMusculo),new PartesDelCuerpo(idParteDelCuerpo),nombre,descripcion,bmImage));
+                listaEjercicios.add(new Ejercicio(idJercicio,new Musculo(idMusculo,nombreMusculo),new PartesDelCuerpo(idParteDelCuerpo),nombre,descripcion,bmImage));
             }
             resultadosql.close();
             pst.close();
@@ -302,5 +302,29 @@ public class EjercicioDB {
     }
 
 
+    public static boolean borrarEjercicioUsuarioPorId(int id) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if (conexion == null) {
+            return false;
+        }
 
+        Boolean ok = false;
+        try {
+            String ordensql = "DELETE FROM ejercicio_user WHERE idejercicio_user = ?";
+            PreparedStatement pst = conexion.prepareStatement(ordensql);
+            pst.setInt(1, id);
+            int filasAfectadas = pst.executeUpdate();
+            pst.close();
+            conexion.close();
+            if (filasAfectadas > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR COGER EJERCICIO DB GLOBAL");
+            return false;
+
+        }
+    }
 }

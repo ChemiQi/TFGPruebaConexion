@@ -33,4 +33,7 @@ public interface DaroEjercicioLocal {
 
     @Query("Select * FROM ejercicio_user WHERE idEjercicio = :idEjercicio")
     EjercicioLocal getEjercicioPorId(int idEjercicio);
+
+    @Query("DELETE FROM ejercicio_user WHERE idEjercicio = :idEjercicio")
+    void deletePorId(int idEjercicio);
 }

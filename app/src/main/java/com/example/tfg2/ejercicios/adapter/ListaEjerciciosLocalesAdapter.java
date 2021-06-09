@@ -93,6 +93,10 @@ public class ListaEjerciciosLocalesAdapter extends RecyclerView.Adapter<ListaEje
             holder.img_ejercicio_rv_EjercicioLocal.setImageBitmap(ImagenesBlobBitmap.bytes_to_bitmap(ejercicioActual.getImagenEjercicio()));
         }
 
+        if(ejercicioActual.getIdEjercicio() < 200){
+            holder.btn_subirArchivos_itmeEjerciciosLocales.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     @Override

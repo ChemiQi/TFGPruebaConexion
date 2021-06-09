@@ -14,6 +14,7 @@ import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.room
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddOneDataTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaAddTablaLocal;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaComprobarEjercicioEnUso;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaObtenerTablaInfoPorIdTabla;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
 
@@ -123,6 +124,32 @@ public class TablaEjercicioRelacionRepository {
 
     public boolean deleteDatosTabla(int idTabla) {
         FutureTask t = new FutureTask(new TareaBorrarDatosTablaPorId(idTabla));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insercionOK = false;
+        try {
+            insercionOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insercionOK;
+        }
+    }
+
+    public boolean comprobarEjercicioEnUso(int idEjercicio) {
+        FutureTask t = new FutureTask(new TareaComprobarEjercicioEnUso(idEjercicio));
         ExecutorService es = Executors.newSingleThreadExecutor();
         es.submit(t);
         boolean insercionOK = false;

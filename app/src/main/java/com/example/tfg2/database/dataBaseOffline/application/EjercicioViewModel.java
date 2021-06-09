@@ -42,4 +42,8 @@ public class EjercicioViewModel  extends AndroidViewModel {
     public EjercicioLocal obtenerejercicioPorId(int id){
         return ejercicioRepository.getEjercicioPorId(id);
     }
+
+    public boolean borrarEjercicioLocal(int idEjercicio) {
+        return ejercicioRepository.borrarEjercicioPorId(idEjercicio);
+    }
 }

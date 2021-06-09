@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.tareas.TareaAñadirFoto;
+import com.example.tfg2.ejercicios.tareas.TareaBorrarEjercicioPorIdSubido;
 import com.example.tfg2.ejercicios.tareas.TaskAddEjercicioUser;
 import com.example.tfg2.ejercicios.tareas.TaskComrpobarEjercicioUser;
 import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorId;
@@ -14,8 +15,6 @@ import com.example.tfg2.musculos.clases.Musculo;
 import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorMusculo;
 import com.example.tfg2.ejercicios.tareas.TaskGetEjercicioPorParteDelCuerpo;
 import com.example.tfg2.partesDelCuerpo.clases.PartesDelCuerpo;
-import com.example.tfg2.user.clases.CurrentUser;
-import com.example.tfg2.user.clases.User;
 
 
 import java.util.ArrayList;
@@ -230,6 +229,32 @@ public class EjercicioController {
             e.printStackTrace();
         } finally {
             return ejercicio;
+        }
+    }
+
+    public static boolean borrarEjercicioPorId(int id) {
+        FutureTask t = new FutureTask(new TareaBorrarEjercicioPorIdSubido(id));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insertadoOK = false;
+        try {
+            insertadoOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insertadoOK;
         }
     }
 }

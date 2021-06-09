@@ -44,4 +44,8 @@ public class TablaEjercicioRelacionViewModel extends AndroidViewModel {
     public boolean borrarDatosTabla(int idTabla) {
         return tablaEjercicioRelacionRepository.deleteDatosTabla(idTabla);
     }
+
+    public boolean comprobarEjercicioEnUso(int idEjercicio) {
+        return tablaEjercicioRelacionRepository.comprobarEjercicioEnUso(idEjercicio);
+    }
 }
