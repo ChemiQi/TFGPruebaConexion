@@ -25,6 +25,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
+            android:onClick="irEntrenar"
             android:text="¡A entrenar!" />
 
         <Button

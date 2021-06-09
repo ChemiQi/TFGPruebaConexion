@@ -19,7 +19,7 @@ public class TablaViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     public TablaViewHolder(@NonNull View itemView,ListaTablaAdapter listaTablaAdapter) {
         super(itemView);
-        txt_nombreTabla_itemTablaLocal = itemView.findViewById(R.id.txt_nombreTabla_itemTablaLocal);
+        txt_nombreTabla_itemTablaLocal = itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar);
         this.listaTablaAdapter = listaTablaAdapter;
         itemView.setOnClickListener(this);
     }

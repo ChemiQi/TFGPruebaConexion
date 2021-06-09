@@ -38,6 +38,7 @@
     <string name="atr_s">Atrás</string>
     <string name="en_cu_tos_dias_se_dividir_tu_entreno">¿En cuátos dias se dividirá tu entreno?</string>
     <string name="crear_tabla">Crear Tabla</string>
+    <string name="elige_la_tabla_del_entrenamiento">Elige la tabla del entrenamiento</string>
 
 
     <string-array name="diasGimnasio">

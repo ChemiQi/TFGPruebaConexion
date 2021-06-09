@@ -1,26 +1,18 @@
 package com.example.tfg2.tabla.viewHolder;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tfg2.CrearTablaActivity;
 import com.example.tfg2.PopUpActivarTabla;
 import com.example.tfg2.R;
-import com.example.tfg2.TablasTablasLocales;
 import com.example.tfg2.VerTablaActivity;
 import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
-import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
-import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.tabla.adapter.ListaTablaLocalAdapter;
 
 public class TablaLocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -35,7 +27,7 @@ public class TablaLocalViewHolder extends RecyclerView.ViewHolder implements Vie
     public TextView txt_nombreTabla_itemTablaLocal;
     public TablaLocalViewHolder(@NonNull View itemView, ListaTablaLocalAdapter listaTablaLocalAdapter) {
         super(itemView);
-        txt_nombreTabla_itemTablaLocal = (TextView) itemView.findViewById(R.id.txt_nombreTabla_itemTablaLocal);
+        txt_nombreTabla_itemTablaLocal = (TextView) itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar);
         item_btn_activarTablaActiva_tablaLocal = (Button) itemView.findViewById(R.id.item_btn_activarTablaActiva_tablaLocal);
         viewLocal = itemView;
         this.listaTablaLocalAdapter = listaTablaLocalAdapter;
