@@ -18,6 +18,8 @@ public class TablaLocal implements Serializable {
 
     Boolean created;
 
+    Boolean active;
+
     public TablaLocal() {
     }
 
@@ -25,7 +27,7 @@ public class TablaLocal implements Serializable {
         this.nombre = nombre;
         this.dias = dias;
         this.created = created;
-
+        active = false;
     }
 
     public TablaLocal(int idTabla, @NonNull String nombre,int dias, Boolean created) {
@@ -33,6 +35,15 @@ public class TablaLocal implements Serializable {
         this.nombre = nombre;
         this.dias = dias;
         this.created = created;
+        active = false;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public int getIdTabla() {

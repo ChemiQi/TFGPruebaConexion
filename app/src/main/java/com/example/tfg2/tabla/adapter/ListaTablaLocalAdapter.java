@@ -79,6 +79,13 @@ public class ListaTablaLocalAdapter extends RecyclerView.Adapter<TablaLocalViewH
     public void onBindViewHolder(@NonNull TablaLocalViewHolder holder, int position) {
         TablaLocal tablaActual = tablaLocals.get(position);
         holder.txt_nombreTabla_itemTablaLocal.setText(String.valueOf(tablaActual.getNombre()));
+
+        if(!tablaActual.getActive()){
+            holder.item_btn_activarTablaActiva_tablaLocal.setText("+");
+        }else{
+            holder.item_btn_activarTablaActiva_tablaLocal.setText("-");
+        }
+
     }
 
     @Override
