@@ -35,6 +35,10 @@ public class TablaViewModel extends AndroidViewModel {
         return tablaRepository.insertarTabla(tablaLocal);
     }
 
+    public boolean updateTablaLocal(TablaLocal tablaLocal){
+        return tablaRepository.updateTablaLocal(tablaLocal);
+    }
+
     public LiveData<List<TablaLocal>> obtenerTablas(){
         return tablaRepository.getAllTablas();
     }
@@ -45,6 +49,10 @@ public class TablaViewModel extends AndroidViewModel {
 
     public boolean borrarTabla(TablaLocal tablaLocal) {
         return tablaRepository.deleteTable(tablaLocal);
+    }
+
+    public TablaLocal obtenerTablaPorId(int id){
+        return tablaRepository.obtenerTablaPorId(id);
     }
 
     public int comprobarIdTablaMax() {

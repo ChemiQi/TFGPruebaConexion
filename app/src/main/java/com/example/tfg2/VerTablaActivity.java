@@ -1,5 +1,6 @@
 package com.example.tfg2;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -35,6 +36,7 @@ import com.example.tfg2.tabla.viewHolder.TablaLocalViewHolder;
 import com.example.tfg2.tabla.viewHolder.TablaViewHolder;
 import com.example.tfg2.utilidades.Exceptions.ExceptionNoEncontrado;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,9 +44,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.example.tfg2.CrearTablaActivity.EXTRA_POSITIONDIA;
+import static com.example.tfg2.CrearTablaActivity.PETICION4;
 
 public class VerTablaActivity extends AppCompatActivity {
-    private static final int PETICION2 = 2;
+    private static final int PETICION2VERTABLA = 2;
+    public static final String EXTRA_TABLA_EDITAR = "chema.martinez/tablaAEditar";
     LinearLayout ly_contenedorFilas_verTablas;
     Spinner sp_diasEntreno_verTabla;
     TextView txt_titulo_verTabla;
@@ -55,6 +59,7 @@ public class VerTablaActivity extends AppCompatActivity {
     private EjercicioViewModel ejercicioViewModel;
     private List<EjercicioLocal> ejercicioLocals2;
     private TablaViewModel tablaViewModel;
+    List<TablaEjercicioRelacion> datosTabla;
 
     boolean descargado = false;
     boolean editado = false;
@@ -93,8 +98,10 @@ public class VerTablaActivity extends AppCompatActivity {
         TablaLocal tabla = (TablaLocal) intent.getSerializableExtra(TablaLocalViewHolder.TABLA_A_CREARTABLAACTIVITY);
         if(tabla != null){
             System.out.println("ENTRA EN TABLA LOCAL VER");
+            if(tabla.getIdTabla() < 199)
+                btn_editarguardar_verTabla.setEnabled(false);
             editado = true;
-            List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tabla.getIdTabla());
+             datosTabla = tr.tablaPorIdTabla(tabla.getIdTabla());
             txt_titulo_verTabla.setText(tabla.getNombre());
             if(datosTabla != null) {
                 diaMaximoEjerciico(datosTabla);
@@ -106,10 +113,11 @@ public class VerTablaActivity extends AppCompatActivity {
         if(tablaOnline != null){
             System.out.println("ENTRA EN TABLA ONLINE VER");
             txt_titulo_verTabla.setText(tablaOnline.getNombre());
-            List<TablaEjercicioRelacion> datosTabla = tr.tablaPorIdTabla(tablaOnline.getId());
+             datosTabla = tr.tablaPorIdTabla(tablaOnline.getId());
 
             if(datosTabla != null && !datosTabla.isEmpty()) {
                 System.out.println("ENTRA EN TENGO LA TABLA CRACK");
+
                 descargado = true;
                 diaMaximoEjerciico(datosTabla);
                 ponerDatosTabla(datosTabla);
@@ -125,11 +133,8 @@ public class VerTablaActivity extends AppCompatActivity {
             }
 
         }
-
         //_------------------------------------- ESTETICA
-
         ponerTextoBoton();
-
 
     }
 
@@ -139,6 +144,9 @@ public class VerTablaActivity extends AppCompatActivity {
     public void descargarEditar(View view) {
         if(editado){// ----------------------------------------------------- EDITAR
             System.out.println("ENTRA EN EDITADO");
+            Intent intent2 = new Intent(this,CrearTablaActivity.class);
+            intent2.putExtra(EXTRA_TABLA_EDITAR, (Serializable) datosTabla);
+            startActivityForResult(intent2,PETICION2VERTABLA);
         }else {//-------------------------------------- TABLA GLOBAL VER
             btn_editarguardar_verTabla.setText("DESCARGAR");
             if(!descargado){  // ------------------------------ DESCARGAR BOTON
@@ -148,6 +156,21 @@ public class VerTablaActivity extends AppCompatActivity {
                 System.out.println("NO ENTRA EN DESCARGADO");
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PETICION2VERTABLA) {
+            System.out.println("ENTRA EN PETICION2VERTABL -----------------------------------");
+            if(resultCode == RESULT_OK){
+                System.out.println("RESULTO OK--------------------------------------");
+                finish();
+            }else{
+                finish();
+            }
+        }
+
     }
 
     public void atras(View view) {

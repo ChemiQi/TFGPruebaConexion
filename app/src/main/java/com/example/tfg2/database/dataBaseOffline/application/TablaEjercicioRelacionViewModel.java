@@ -40,4 +40,8 @@ public class TablaEjercicioRelacionViewModel extends AndroidViewModel {
     public List<TablaEjercicioRelacion> tablaPorIdTabla(int idTabla){
         return tablaEjercicioRelacionRepository.getTablaPorIdTabla(idTabla);
     }
+
+    public boolean borrarDatosTabla(int idTabla) {
+        return tablaEjercicioRelacionRepository.deleteDatosTabla(idTabla);
+    }
 }

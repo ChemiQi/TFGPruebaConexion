@@ -120,4 +120,30 @@ public class TablaEjercicioRelacionRepository {
             return tablaEjercicioRelacions;
         }
     }
+
+    public boolean deleteDatosTabla(int idTabla) {
+        FutureTask t = new FutureTask(new TareaBorrarDatosTablaPorId(idTabla));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insercionOK = false;
+        try {
+            insercionOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insercionOK;
+        }
+    }
 }

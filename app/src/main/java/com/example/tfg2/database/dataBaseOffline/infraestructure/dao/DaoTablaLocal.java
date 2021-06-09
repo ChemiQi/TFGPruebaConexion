@@ -36,5 +36,9 @@ public interface DaoTablaLocal {
     @Query("SELECT MAX(idTabla) from tabla_user")
     int getIdMax();
 
+    @Query("SELECT * FROM tabla_user WHERE idTabla = :id")
+    TablaLocal obtenerTablaPorId(int id);
+
+
 
 }

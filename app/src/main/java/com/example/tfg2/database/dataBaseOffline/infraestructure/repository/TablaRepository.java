@@ -14,6 +14,7 @@ import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.Ta
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaDeleteTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetIdTabla;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaGetLastTabla;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaObtenerTablaLocalPorId;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -168,5 +169,57 @@ public class TablaRepository {
             return numero;
         }
 
+    }
+
+    public TablaLocal obtenerTablaPorId(int id) {
+        FutureTask t = new FutureTask(new TareaObtenerTablaLocalPorId(id));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        TablaLocal tablaLocal = null;
+        try {
+            tablaLocal = (TablaLocal) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return tablaLocal;
+        }
+    }
+
+    public boolean updateTablaLocal(TablaLocal tablaLocal) {
+        FutureTask t = new FutureTask(new TareaUpdateTablaLocal(tablaLocal));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean ok = false;
+        try {
+            ok = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return ok;
+        }
     }
 }

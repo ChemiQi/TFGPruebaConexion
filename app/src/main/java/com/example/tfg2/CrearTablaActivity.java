@@ -46,6 +46,7 @@ public class CrearTablaActivity extends AppCompatActivity {
     private static final int PETICION2 = 2;
     public static final String EXTRA_POSITIONDIA = "";
     public static final int PETICION4 = 3;
+    private static final String NOMBRE_TABLA_LOCAL = "chema.martinez/nombreTablaLocalEncontrado";
     LinearLayout ly_contenedorFilas_crearTabla;
     Spinner sp_diasEntreno_crearTabla;
     ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
@@ -56,7 +57,12 @@ public class CrearTablaActivity extends AppCompatActivity {
     private TablaEjercicioRelacionViewModel  tr;
     private EjercicioViewModel ejercicioViewModel;
     List<EjercicioLocal> ejercicioLocals2;
+    List<TablaEjercicioRelacion> datosRecibidosTabla;
     TablaLocal tablaLocal;
+
+
+    boolean editar = false;
+
 
     int position;
 
@@ -91,6 +97,7 @@ public class CrearTablaActivity extends AppCompatActivity {
         }
 
 
+
 //------------- Seleccion de dias //-----------------------------------------------
         sp_diasEntreno_crearTabla.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,6 +110,18 @@ public class CrearTablaActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        Intent intentFromVerTabla = getIntent();
+        datosRecibidosTabla = (List<TablaEjercicioRelacion>) intentFromVerTabla.getSerializableExtra(VerTablaActivity.EXTRA_TABLA_EDITAR);
+        if(datosRecibidosTabla != null){
+            System.out.println("RECIBIDO CORRECTAMENTE");
+            diaMaximoEjerciico(datosRecibidosTabla);
+            ponerDatosTabla(datosRecibidosTabla);
+            editar = true;
+            tablaLocal = tablaViewModel.obtenerTablaPorId(datosRecibidosTabla.get(0).getIdTabla());
+        }else{
+            System.out.println("ERROR AL RECIBIR");
+        }
+
 //------------------------------------------------------------------------//
     }
 
@@ -169,8 +188,9 @@ public class CrearTablaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PETICION4){
             if(resultCode == RESULT_OK){
-
+                System.out.println("------------------------------------ENTRE EN RESULT CODE PETICION 4");
                 nombreTabla = data.getStringExtra(PopUpAnadirTabla.EXTRA_NOMBRETABLA_POPUPNOMBRETALBA);
+                System.out.println("---------------------------"+nombreTabla);
                 CurrentUser.setUser(new User(1,"","",""));
                 Tabla tablaCreada = new Tabla(nombreTabla,diasSeleccionados);
                 addTablaDatosLocal(tablaCreada);
@@ -223,6 +243,13 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     public void guardarTabla(View view) {
         Intent intent  = new Intent(this,PopUpAnadirTabla.class);
+        if(editar == true){
+            if(tablaLocal != null){
+                intent.putExtra(NOMBRE_TABLA_LOCAL,tablaLocal.getNombre());
+                System.out.println("TABLA LOCAL NO NUL");
+            }
+
+        }
         startActivityForResult(intent,PETICION4);
     }
 
@@ -230,39 +257,112 @@ public class CrearTablaActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void addTablaDatosLocal(Tabla tabla){
-         tablaLocal = new TablaLocal(tabla.getNombre(),diasSeleccionados,true);
-        if(tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())){
-            if(tablaViewModel.comprobarIdTablaMax() < 200 ) {
-                tablaLocal.setIdTabla(200);
+        if(editar == false) { // CREAR TABLA _---------------------------------------------------------------------------------
+            tablaLocal = new TablaLocal(tabla.getNombre(), diasSeleccionados, true);
+            if (tablaViewModel.nombreTablaDisponible(tablaLocal.getNombre())) {
+                if (tablaViewModel.comprobarIdTablaMax() < 200) {
+                    tablaLocal.setIdTabla(200);
+                }
+                if (tablaViewModel.addTablaLocal(tablaLocal)) {
+                    System.out.println("----------------------" + tablaLocal.getIdTabla());
+                    tablaLocal = tablaViewModel.obtenerUltimaTabla();
+                    List<TablaEjercicioRelacion> tablaRelacion = transformarDatosAEjercicioTabla(tablaLocal, listaDiasEjercicio);
+                    if (comprobarEjerciciosLocales(tablaRelacion)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage("Hemos encontrado ejercicios no descargados. \n¿Quíeres descargar esos ejercicios para poder usarlo sin Internet?\nPodrás usarlo en otras tablas ")
+                                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        descargarEjerciciosALocal(tablaRelacion);
+                                        adda(tablaRelacion);
+                                    }
+                                })
+                                .setNegativeButton("No, usaré internet", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        adda(tablaRelacion);
+                                    }
+                                });
+                        builder.show();
+                    } else {
+                        adda(tablaRelacion);
+                    }
+                } else
+                    System.out.println("ERROR AL AÑADIR TABLA");
+
+            } else {
+                System.out.println("NOMBRE REPETIDO");
             }
-            if(tablaViewModel.addTablaLocal(tablaLocal)){
-                System.out.println("----------------------" + tablaLocal.getIdTabla());
-                tablaLocal = tablaViewModel.obtenerUltimaTabla();
-                List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
-                if(comprobarEjerciciosLocales(tablaRelacion)){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Hemos encontrado ejercicios no descargados. \n¿Quíeres descargar esos ejercicios para poder usarlo sin Internet?\nPodrás usarlo en otras tablas ")
-                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    descargarEjerciciosALocal(tablaRelacion);
-                                    adda(tablaRelacion);
-                                }
-                            })
-                            .setNegativeButton("No, usaré internet", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    adda(tablaRelacion);
-                                }
-                            });
-                    builder.show();
-                }else {
-                    adda(tablaRelacion);
+        }else{  // EDITAR TABLA ---------------------------------------------------------
+            if(!tabla.getNombre().equalsIgnoreCase(tablaLocal.getNombre())){
+                System.out.println("NOMBRE DISTINTO EDITAR ");
+                if(tablaViewModel.nombreTablaDisponible(nombreTabla)){
+                    System.out.println(tablaLocal.getNombre()  + tablaLocal.getIdTabla() + tablaLocal.getCreated() + tablaLocal.getDias());
+                    tablaLocal = new TablaLocal(tablaLocal.getIdTabla(),nombreTabla,diasSeleccionados,true);
+                    if(tr.borrarDatosTabla(tablaLocal.getIdTabla())){
+                        List<TablaEjercicioRelacion> tablaRelacion = transformarDatosAEjercicioTabla(tablaLocal, listaDiasEjercicio);
+                        if (comprobarEjerciciosLocales(tablaRelacion)) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                            builder.setMessage("Hemos encontrado ejercicios no descargados. \n¿Quíeres descargar esos ejercicios para poder usarlo sin Internet?\nPodrás usarlo en otras tablas ")
+                                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            descargarEjerciciosALocal(tablaRelacion);
+                                            tablaViewModel.updateTablaLocal(tablaLocal);
+                                            adda(tablaRelacion);
+                                            enviarRespuestaVerActivity();
+                                        }
+                                    })
+                                    .setNegativeButton("No, usaré internet", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            tablaViewModel.updateTablaLocal(tablaLocal);
+                                            adda(tablaRelacion);
+                                            enviarRespuestaVerActivity();
+
+                                        }
+                                    });
+                            builder.show();
+                        } else {
+                            tablaViewModel.updateTablaLocal(tablaLocal);
+                            adda(tablaRelacion);
+                            enviarRespuestaVerActivity();
+
+                        }
+                    }
+
+                }else{
+                    System.out.println(" -------------------NOMBRE NO DISPONIBLE");
+                }
+            }else{
+                System.out.println(tablaLocal.getNombre()  + tablaLocal.getIdTabla() + tablaLocal.getCreated() + tablaLocal.getDias());
+                tablaLocal = new TablaLocal(tablaLocal.getIdTabla(),tablaLocal.getNombre(),diasSeleccionados,true);
+                if(tr.borrarDatosTabla(tablaLocal.getIdTabla())){
+                    List<TablaEjercicioRelacion> tablaRelacion = transformarDatosAEjercicioTabla(tablaLocal, listaDiasEjercicio);
+                    if (comprobarEjerciciosLocales(tablaRelacion)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage("Hemos encontrado ejercicios no descargados. \n¿Quíeres descargar esos ejercicios para poder usarlo sin Internet?\nPodrás usarlo en otras tablas ")
+                                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        descargarEjerciciosALocal(tablaRelacion);
+                                        tablaViewModel.updateTablaLocal(tablaLocal);
+                                        adda(tablaRelacion);
+                                        enviarRespuestaVerActivity();
+
+                                    }
+                                })
+                                .setNegativeButton("No, usaré internet", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        tablaViewModel.updateTablaLocal(tablaLocal);
+                                        adda(tablaRelacion);
+                                        enviarRespuestaVerActivity();
+                                    }
+                                });
+                        builder.show();
+                    } else {
+                        tablaViewModel.updateTablaLocal(tablaLocal);
+                        adda(tablaRelacion);
+                        enviarRespuestaVerActivity();
+
+                    }
                 }
             }
-            else
-                System.out.println("ERROR AL AÑADIR TABLA");
-
-        }else{
-            System.out.println("NOMBRE REPETIDO");
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -320,6 +420,8 @@ public class CrearTablaActivity extends AppCompatActivity {
         return transformado;
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void adda(List<TablaEjercicioRelacion> tablaRelacion){
 
@@ -333,5 +435,45 @@ public class CrearTablaActivity extends AppCompatActivity {
                 System.out.println("ERROR AL BORRAR TABLA");
             }
         }
+    }
+
+    private void ponerDatosTabla(List<TablaEjercicioRelacion> datosTabla) {
+        for(TablaEjercicioRelacion e :datosTabla){
+            listaDiasEjercicio.get(e.getDia()).add(ejercicioPosicionDesdeTablaEjercicioRelacion(e));
+        }
+    }
+    private EjercicioInfo ejercicioPosicionDesdeTablaEjercicioRelacion(TablaEjercicioRelacion e) {
+        EjercicioLocal ejercicioLocal = null;
+
+
+        ejercicioLocal = ejercicioViewModel.obtenerejercicioPorId(e.getIdEjercicio());
+        if(ejercicioLocal == null) {
+            ejercicioLocal = new EjercicioLocal(EjercicioController.getEjercicioPorId(e.getIdEjercicio()));
+        }
+        if(ejercicioLocal != null){
+            return new EjercicioInfo(ejercicioLocal,e);
+        }
+        return new EjercicioInfo();
+    }
+    private void diaMaximoEjerciico(List<TablaEjercicioRelacion> datosTabla) {
+
+        int max = 0;
+        for(TablaEjercicioRelacion e : datosTabla){
+            if(e.getDia() > max){
+                max = e.getDia();
+            }
+        }
+        sp_diasEntreno_crearTabla.setSelection(max);
+        for(int i = 0; i<max; i++){
+            ArrayList<EjercicioInfo> a = new ArrayList<EjercicioInfo>();
+            listaDiasEjercicio.add(a);
+        }
+
+    }
+
+    private void enviarRespuestaVerActivity(){
+        Intent inten5 = new Intent (this,VerTablaActivity.class);
+        setResult(RESULT_OK,inten5);
+        finish();
     }
 }
