@@ -19,6 +19,7 @@ import com.example.tfg2.tabla.adapter.ListaTablaEntrenarAdapter;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class EntrenarActivity extends AppCompatActivity {
@@ -49,7 +50,7 @@ public class EntrenarActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onChanged(List<TablaLocal> tablaLocals) {
-
+                    tablaLocals = tablaLocals.stream().filter(e-> e.getActive()).collect(Collectors.toList());
                     listaTablaEntrenarAdapter.setListaTablasLocales(tablaLocals);
                 }
             });

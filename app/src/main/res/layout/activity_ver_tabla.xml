@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".VerTablaActivity">
     <TextView
-        android:id="@+id/txt_titulo_verTabla"
+        android:id="@+id/txt_titulo_verGrupoEjercicios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,7 +27,7 @@
         android:gravity="center"
         android:text="@string/en_cu_tos_dias_se_dividir_tu_entreno"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_verTabla" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_verGrupoEjercicios" />
 
     <!-- TODO EL SCROLL, DENTRO TODO LOS BOTONES -->
     <Spinner
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_textoPreguntaDias_verTabla">
 
         <LinearLayout
-            android:id="@+id/ly_contenedorFilas_verTablas"
+            android:id="@+id/ly_contenedorFilas_verGrupoEjercicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <Button
-        android:id="@+id/btn_cancerlar_verTabla"
+        android:id="@+id/btn_cancerlar_verGrupoEjercicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"

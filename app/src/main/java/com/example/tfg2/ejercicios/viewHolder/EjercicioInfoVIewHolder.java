@@ -45,9 +45,10 @@ public class EjercicioInfoVIewHolder extends RecyclerView.ViewHolder implements 
 
         EjercicioInfo ejercicioInfo = listaEjercicoInfoEnTablaAdapter.getListaEjercicioInfo().get(mPosition);
         Intent intent = new Intent(listaEjercicoInfoEnTablaAdapter.getC(), PopUpAnadirEjercicio.class);
+        Bitmap imagenGuardada = null;
         try {
             if (ejercicioInfo.getEjercicio().getImageMusculo() != null) {
-                Bitmap imagenGuardada = ejercicioInfo.getEjercicio().getImageMusculo();
+                imagenGuardada = ejercicioInfo.getEjercicio().getImageMusculo();
                 byte[] imagen = transformarImagen(imagenGuardada);
                 ejercicioInfo.getEjercicio().setImageMusculo(null);
                 intent.putExtra(EXTRA_IMAGEN_EJERCICIO_EJERCICIOINFOHOWLDER, imagen);
@@ -58,6 +59,9 @@ public class EjercicioInfoVIewHolder extends RecyclerView.ViewHolder implements 
         }
         intent.putExtra(EXTRA_OBJETO_EJERCICIOINFO,ejercicioInfo);
         listaEjercicoInfoEnTablaAdapter.getC().startActivity(intent);
+        if(imagenGuardada != null){
+            ejercicioInfo.getEjercicio().setImageMusculo(imagenGuardada);
+        }
     }
 
     private byte[] transformarImagen(Bitmap bmFoto){

@@ -78,7 +78,7 @@ public class CrearTablaActivity extends AppCompatActivity {
         tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
-        ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_verTablas);
+        ly_contenedorFilas_crearTabla = findViewById(R.id.ly_contenedorFilas_verGrupoEjercicio);
         sp_diasEntreno_crearTabla = findViewById(R.id.sp_diasEntreno_verTabla);
 
         crearListasPorDia();

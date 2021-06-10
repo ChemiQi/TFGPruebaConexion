@@ -28,23 +28,15 @@ import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
-import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.tabla.controladores.TablaController;
 import com.example.tfg2.tabla.viewHolder.TablaLocalViewHolder;
 import com.example.tfg2.tabla.viewHolder.TablaViewHolder;
-import com.example.tfg2.utilidades.Exceptions.ExceptionNoEncontrado;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import static com.example.tfg2.CrearTablaActivity.EXTRA_POSITIONDIA;
-import static com.example.tfg2.CrearTablaActivity.PETICION4;
 
 public class VerTablaActivity extends AppCompatActivity {
     private static final int PETICION2VERTABLA = 2;
@@ -81,9 +73,9 @@ public class VerTablaActivity extends AppCompatActivity {
 
 
         sp_diasEntreno_verTabla = (Spinner) findViewById(R.id.sp_diasEntreno_verTabla);
-        txt_titulo_verTabla = (TextView) findViewById(R.id.txt_titulo_verTabla);
+        txt_titulo_verTabla = (TextView) findViewById(R.id.txt_titulo_verGrupoEjercicios);
         txt_textoPreguntaDias_verTabla = (TextView) findViewById(R.id.txt_textoPreguntaDias_verTabla);
-        ly_contenedorFilas_verTablas = (LinearLayout) findViewById(R.id.ly_contenedorFilas_verTablas);
+        ly_contenedorFilas_verTablas = (LinearLayout) findViewById(R.id.ly_contenedorFilas_verGrupoEjercicio);
         txt_textoPreguntaDias_verTabla.setVisibility(View.INVISIBLE);
         sp_diasEntreno_verTabla.setVisibility(View.INVISIBLE);
         btn_editarguardar_verTabla = (Button) findViewById(R.id.btn_editarguardar_verTabla);

@@ -28,6 +28,8 @@ public class TablaEjercicioRelacion implements Serializable {
     private int repeticiones;
     private int series;
     private int dia;
+    private double pesoMax;
+    private int repPesoMax;
 
     public TablaEjercicioRelacion() {
     }
@@ -37,6 +39,8 @@ public class TablaEjercicioRelacion implements Serializable {
         this.repeticiones = repeticiones;
         this.series = series;
         this.dia = dia;
+        this.pesoMax = 0.0;
+        this.repPesoMax = 0;
     }
 
     public TablaEjercicioRelacion(TablaLocal tabla, Ejercicio ejercicio, int repeticiones, int series, int dia) {
@@ -48,6 +52,8 @@ public class TablaEjercicioRelacion implements Serializable {
         this.repeticiones = repeticiones;
         this.series = series;
         this.dia = dia;
+        this.pesoMax = 0.0;
+        this.repPesoMax = 0;
     }
 
     public int getIdTabla() {
@@ -112,6 +118,22 @@ public class TablaEjercicioRelacion implements Serializable {
 
     public void setIdTablaEjercico(int idTablaEjercico) {
         this.idTablaEjercico = idTablaEjercico;
+    }
+
+    public double getPesoMax() {
+        return pesoMax;
+    }
+
+    public void setPesoMax(double pesoMax) {
+        this.pesoMax = pesoMax;
+    }
+
+    public int getRepPesoMax() {
+        return repPesoMax;
+    }
+
+    public void setRepPesoMax(int repPesoMax) {
+        this.repPesoMax = repPesoMax;
     }
 
     public void pintar(){
