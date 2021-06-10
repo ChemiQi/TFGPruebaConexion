@@ -46,6 +46,14 @@ public class ListaEjercicioPonerInfoAdapter extends RecyclerView.Adapter<Ejercic
         return mInflater;
     }
 
+    public List<EjercicioLocal> getEjercicioLocals() {
+        return ejercicioLocals;
+    }
+
+    public void setEjercicioLocals(List<EjercicioLocal> ejercicioLocals) {
+        this.ejercicioLocals = ejercicioLocals;
+    }
+
     public void setmInflater(LayoutInflater mInflater) {
         this.mInflater = mInflater;
     }
@@ -80,9 +88,9 @@ public class ListaEjercicioPonerInfoAdapter extends RecyclerView.Adapter<Ejercic
         }else{
             holder.txt_nombreEJercicio_itemEjercicioInfo.setText("");
         }
-        int pesoMax = (int)Math.round(ejercicioInfo.getRepPesoMax());
-        holder.txt_nuRep_itemTablaEjercicioInfo.setText(String.valueOf(pesoMax));
-        holder.txt_nuRep_itemTablaEjercicioInfo2.setText(String.valueOf(ejercicioInfo.getPesoMax()));
+        int pesoMax = (int)Math.round(ejercicioInfo.getPesoMax());
+        holder.txt_nuRep_itemTablaEjercicioInfo.setText(String.valueOf(ejercicioInfo.getRepPesoMax()));
+        holder.txt_nuRep_itemTablaEjercicioInfo2.setText(String.valueOf(pesoMax));
     }
 
     @Override

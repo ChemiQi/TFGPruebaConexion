@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.dao.DaoTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.repository.roomDB.TablaEjercicioRelacionRoomDatabase;
+import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.ejercicioInfo.TareaActualizarDatosTablaInfo;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddOneDataTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.AddTablaEjercicioRelacion;
 import com.example.tfg2.database.dataBaseOffline.infraestructure.tarea.tablas.TareaBorrarDatosTablaPorId;
@@ -144,6 +145,32 @@ public class TablaEjercicioRelacionRepository {
 
     public boolean comprobarEjercicioEnUso(int idEjercicio) {
         FutureTask t = new FutureTask(new TareaComprobarEjercicioEnUso(idEjercicio));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(t);
+        boolean insercionOK = false;
+        try {
+            insercionOK = (boolean) t.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return insercionOK;
+        }
+    }
+
+    public boolean update(TablaEjercicioRelacion tablaEjercicioRelacion) {
+        FutureTask t = new FutureTask(new TareaActualizarDatosTablaInfo(tablaEjercicioRelacion));
         ExecutorService es = Executors.newSingleThreadExecutor();
         es.submit(t);
         boolean insercionOK = false;

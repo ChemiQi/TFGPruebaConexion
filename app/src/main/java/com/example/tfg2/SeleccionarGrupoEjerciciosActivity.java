@@ -188,6 +188,7 @@ public class SeleccionarGrupoEjerciciosActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),PonerDatosActivity.class);
                         intent.putExtra(EXTRA_EJERCICIOAENVIARAVEREJERCICIOS,(Integer) btn.getTag());
                         intent.putExtra(EXTRA_TABLA_PONERDATOS,tabla);
+                        System.out.println(tabla.getIdTabla() + tabla.getNombre());
                         startActivity(intent);
                     }
                 });

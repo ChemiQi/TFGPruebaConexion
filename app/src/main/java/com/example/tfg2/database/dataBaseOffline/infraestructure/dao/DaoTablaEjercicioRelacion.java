@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 
@@ -27,4 +28,6 @@ public interface DaoTablaEjercicioRelacion {
 
     @Query("SELECT * FROM tabla_has_ejercicios WHERE idEjercicio = :idEjercicio")
     List<TablaEjercicioRelacion> buscarEjercicioEnUso(int idEjercicio);
+    @Update
+    void update(TablaEjercicioRelacion tablaEjercicioRelacion);
 }

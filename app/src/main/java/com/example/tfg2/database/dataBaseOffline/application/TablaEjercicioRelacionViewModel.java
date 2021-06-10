@@ -48,4 +48,8 @@ public class TablaEjercicioRelacionViewModel extends AndroidViewModel {
     public boolean comprobarEjercicioEnUso(int idEjercicio) {
         return tablaEjercicioRelacionRepository.comprobarEjercicioEnUso(idEjercicio);
     }
+
+    public boolean update(TablaEjercicioRelacion tablaEjercicioRelacion) {
+        return tablaEjercicioRelacionRepository.update(tablaEjercicioRelacion);
+    }
 }

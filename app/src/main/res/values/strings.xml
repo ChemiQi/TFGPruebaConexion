@@ -41,6 +41,8 @@
     <string name="elige_la_tabla_del_entrenamiento">Elige la tabla del entrenamiento</string>
     <string name="peso_maximo">Peso maximo</string>
     <string name="fotoejercicio">fotoEjercicio</string>
+    <string name="baraa">/</string>
+    <string name="_12">12</string>
 
 
     <string-array name="diasGimnasio">

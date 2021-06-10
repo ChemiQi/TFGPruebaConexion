@@ -22,4 +22,31 @@ public class TablaEjercicoRelacionInfoViewModel extends AndroidViewModel {
         this.listaEjercicioTablaInfo = tablaEjercicioRelacionInfoRepository.getLiveDataAllEjercicioInfo();
     }
 
+    public boolean buscarDatos(int idEjercicio, int idTabla) {
+        return tablaEjercicioRelacionInfoRepository.comprobarDatosExistentes(idEjercicio,idTabla);
+    }
+
+    public boolean insertarDatos(List<TablaEjercicioRelacionInfo> tablaEjercicioRelacionInfos) {
+        return tablaEjercicioRelacionInfoRepository.addListaInfoEjercicio(tablaEjercicioRelacionInfos);
+    }
+
+    public List<TablaEjercicioRelacionInfo> getDatosPorIdEjercicioEIdTabla(int idEjercicio, int idTabla) {
+        return tablaEjercicioRelacionInfoRepository.getDatosPorIdEjercicioTabla(idEjercicio,idTabla);
+    }
+
+    public boolean actualizarDatos(TablaEjercicioRelacionInfo tablaEjercicioRelacionInfo) {
+         return tablaEjercicioRelacionInfoRepository.actualizarDatos(tablaEjercicioRelacionInfo);
+    }
+
+    public TablaEjercicioRelacionInfo getMaxDataPorIdEjercicioYTabla(int idTabla, int idEjercicio) {
+        return tablaEjercicioRelacionInfoRepository.getMaxData(idTabla,idEjercicio);
+    }
+
+    public void borrarDatosPorTabla(int idTabla) {
+        tablaEjercicioRelacionInfoRepository.borrarDatosPorTabla(idTabla);
+    }
+
+    public List<TablaEjercicioRelacionInfo> obtenerDatos() {
+        return tablaEjercicioRelacionInfoRepository.getAllData();
+    }
 }

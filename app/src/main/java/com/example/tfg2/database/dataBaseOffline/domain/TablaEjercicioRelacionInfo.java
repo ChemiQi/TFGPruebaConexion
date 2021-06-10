@@ -36,6 +36,15 @@ public class TablaEjercicioRelacionInfo implements Serializable {
         this.peso = peso;
     }
 
+    public TablaEjercicioRelacionInfo(TablaEjercicioRelacion tablaEjercicioRelacion, int serie) {
+        this.idTabla = tablaEjercicioRelacion.getIdTabla();
+        this.idEjercicio = tablaEjercicioRelacion.getIdEjercicio();
+        this.repeticiones = tablaEjercicioRelacion.getRepPesoMax();
+        this.serie = serie;
+        this.peso = tablaEjercicioRelacion.getPesoMax();
+    }
+
+
 
     public int getIdTablaEjercicioRelacionInfo() {
         return idTablaEjercicioRelacionInfo;

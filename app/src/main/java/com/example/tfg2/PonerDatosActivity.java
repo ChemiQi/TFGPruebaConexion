@@ -55,10 +55,11 @@ public class PonerDatosActivity extends AppCompatActivity {
        if(tabla != null){
            txt_nombreTabla_ponerDatos.setText(tabla.getNombre());
        }
-        List<TablaEjercicioRelacion> ejercicioRelacion  = tr.tablaPorIdTabla(200);
+        List<TablaEjercicioRelacion> ejercicioRelacion  = tr.tablaPorIdTabla(tabla.getIdTabla());
         tablaEjercicio = ejercicioRelacion.stream().filter(e -> e.getDia() == dia).collect(Collectors.toList());
 
         ejercicioLocals = ejercicioViewModel.allEjercicios();
+
 
 
         listaEjercicioPonerInfoAdapter = new ListaEjercicioPonerInfoAdapter(this,tablaEjercicio,ejercicioLocals);
@@ -66,4 +67,5 @@ public class PonerDatosActivity extends AppCompatActivity {
         rv_verEjerciciosParaDatos.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
 }

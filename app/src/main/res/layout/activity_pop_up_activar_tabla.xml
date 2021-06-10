@@ -10,7 +10,7 @@
     tools:context=".PopUpActivarTabla">
 
     <TextView
-        android:id="@+id/txt_texto_popupActivarTabla"
+        android:id="@+id/txt_texto_ponerDatosPorEjercicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

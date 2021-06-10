@@ -9,20 +9,23 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
+import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicoRelacionInfoViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
-import com.example.tfg2.tabla.clases.Tabla;
+import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacionInfo;
 import com.example.tfg2.tabla.viewHolder.TablaLocalViewHolder;
 
 public class PopUpActivarTabla extends AppCompatActivity {
     private TablaViewModel tablaViewModel;
     private TablaLocal tablaLocal;
     private TextView txt_texto_popupActivarTabla;
+    private TablaEjercicoRelacionInfoViewModel tablaEjercicioRelacionInfoViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_activar_tabla);
-        txt_texto_popupActivarTabla = findViewById(R.id.txt_texto_popupActivarTabla);
+        txt_texto_popupActivarTabla = findViewById(R.id.txt_texto_ponerDatosPorEjercicio);
         tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
@@ -50,7 +53,13 @@ public class PopUpActivarTabla extends AppCompatActivity {
             tablaViewModel.updateTablaLocal(tablaLocal);
             finish();
         }else{
+            tablaEjercicioRelacionInfoViewModel= ViewModelProviders.of(this).get(TablaEjercicoRelacionInfoViewModel.class);
             tablaLocal.setActive(false);
+            System.out.println("ENTRA PARA DESACTIVAR");
+            tablaEjercicioRelacionInfoViewModel.borrarDatosPorTabla(tablaLocal.getIdTabla());
+            for(TablaEjercicioRelacionInfo e :tablaEjercicioRelacionInfoViewModel.obtenerDatos()){
+                System.out.println("------------------------------" + e.getIdTabla());
+            }
             tablaViewModel.updateTablaLocal(tablaLocal);
             finish();
         }
