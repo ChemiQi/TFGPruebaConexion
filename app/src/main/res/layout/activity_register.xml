@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -17,6 +18,7 @@
         android:layout_marginRight="32dp"
         android:gravity="center|center_horizontal"
         android:text="@string/registro"
+        android:textColor="@color/dark_magenta"
         android:textSize="72sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,17 +34,19 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
+        android:autofillHints=""
+        android:drawableLeft="@drawable/ic_account"
+        android:drawablePadding="8sp"
         android:ems="10"
         android:hint="@string/usuario"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grisclaro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_registro_crearcuenta"
-        android:autofillHints=""
-        android:drawableLeft="@drawable/ic_account"
-        android:drawablePadding="8sp"
-        />
+        android:drawableStart="@drawable/ic_account" />
 
 
     <EditText
@@ -51,16 +55,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:autofillHints=""
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawablePadding="8sp"
         android:ems="10"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grisclaro"
         app:layout_constraintEnd_toEndOf="@+id/edt_email_crearcuenta"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edt_email_crearcuenta"
         app:layout_constraintTop_toBottomOf="@+id/edt_email_crearcuenta"
-        android:drawableLeft="@drawable/ic_lock"
-        android:drawablePadding="8sp"
-        />
+        android:drawableStart="@drawable/ic_lock" />
 
 
     <EditText
@@ -68,33 +74,37 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/repetir_contrase_a"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/edt_pass_crearcuenta"
-        app:layout_constraintStart_toStartOf="@+id/edt_pass_crearcuenta"
-        app:layout_constraintTop_toBottomOf="@+id/edt_pass_crearcuenta"
         android:autofillHints=""
         android:drawableLeft="@drawable/ic_lock_open"
         android:drawablePadding="8sp"
-        />
+        android:ems="10"
+        android:hint="@string/repetir_contrase_a"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grisclaro"
+        app:layout_constraintEnd_toEndOf="@+id/edt_pass_crearcuenta"
+        app:layout_constraintStart_toStartOf="@+id/edt_pass_crearcuenta"
+        app:layout_constraintTop_toBottomOf="@+id/edt_pass_crearcuenta"
+        android:drawableStart="@drawable/ic_lock_open" />
 
     <EditText
         android:id="@+id/edt_email_crearcuenta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="8sp"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grisclaro"
         app:layout_constraintEnd_toEndOf="@+id/edt_name_crearcuenta"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edt_name_crearcuenta"
         app:layout_constraintTop_toBottomOf="@+id/edt_name_crearcuenta"
-        android:autofillHints=""
-        android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="8sp"
-        />
+        android:drawableStart="@drawable/ic_email" />
 
 
     <Button
@@ -102,8 +112,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/crear_cuenta"
         android:onClick="registerUserDB"
+        android:text="@string/crear_cuenta"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintEnd_toEndOf="@+id/edt_passrepeat_crearcuenta"
         app:layout_constraintStart_toStartOf="@+id/edt_passrepeat_crearcuenta"
         app:layout_constraintTop_toBottomOf="@+id/edt_passrepeat_crearcuenta" />

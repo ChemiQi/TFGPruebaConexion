@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".MainActivity">
 
     <ImageView
@@ -16,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/logo_demop" />
 
     <EditText
         android:id="@+id/edt_username_login"
@@ -28,40 +29,45 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:autofillHints=""
+        android:drawableLeft="@drawable/ic_account"
+        android:drawablePadding="8sp"
         android:ems="10"
         android:hint="@string/usuario"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grisclaro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:drawableLeft="@drawable/ic_account"
-        android:drawablePadding="8sp"
-        />
+        android:drawableStart="@drawable/ic_account" />
 
     <EditText
         android:id="@+id/edt_pass_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawablePadding="8sp"
         android:ems="10"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grisclaro"
         app:layout_constraintEnd_toEndOf="@+id/edt_username_login"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edt_username_login"
         app:layout_constraintTop_toBottomOf="@+id/edt_username_login"
-        android:autofillHints=""
-        android:drawableLeft="@drawable/ic_lock"
-        android:drawablePadding="8sp"
-        />
+        android:drawableStart="@drawable/ic_lock" />
 
     <Button
         android:id="@+id/bt_login_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/iniciar_sesion"
+        android:layout_marginTop="84dp"
         android:onClick="iniciarSesion"
+        android:text="@string/iniciar_sesion"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_pass_login" />
@@ -73,6 +79,7 @@
         android:onClick="goRegisterActivity"
         android:text="@string/crear_cuenta"
         android:textColor="@color/design_default_color_error"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/bt_login_login"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/bt_login_login"
@@ -86,6 +93,7 @@
         android:onClick="irContrasenaOlvidada"
         android:text="@string/has_olvidado_la_contrase_a"
         android:textColor="@color/design_default_color_error"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_pass_login"
         app:layout_constraintTop_toBottomOf="@+id/edt_pass_login" />
 
