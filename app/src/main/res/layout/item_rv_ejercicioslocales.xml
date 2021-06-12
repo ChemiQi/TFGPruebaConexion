@@ -16,6 +16,7 @@
             android:id="@+id/img_ejercicio_rv_EjercicioLocal"
             android:layout_width="96dp"
             android:layout_height="96dp"
+            android:layout_margin="4dp"
             app:civ_border_color="#FF000000"
             app:civ_border_width="1dp" />
         <!--android:src="@tools:sample/avatars"-->
@@ -35,6 +36,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:text="@string/nombre_ejercicio"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -45,7 +47,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/nombre_musculo" />
+                android:text="@string/nombre_musculo"
+                android:textColor="@color/grisclaro" />
 
         </LinearLayout>
 
@@ -54,11 +57,14 @@
             android:layout_height="match_parent"
             android:layout_margin="4sp">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_subirArchivos_itmeEjerciciosLocales"
-                android:layout_width="72dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/anadir" />
+                android:contentDescription="@string/subir_ejercicio"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/subir_boton" />
+
         </FrameLayout>
 
     </LinearLayout>

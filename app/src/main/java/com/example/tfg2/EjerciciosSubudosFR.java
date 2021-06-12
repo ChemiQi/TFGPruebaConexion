@@ -3,6 +3,7 @@ package com.example.tfg2;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
@@ -31,6 +33,7 @@ import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.ejercicios.modelos.EjercicioDB;
 import com.example.tfg2.user.clases.CurrentUser;
+import com.example.tfg2.utilidades.SpacingItemDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,7 @@ public class EjerciciosSubudosFR extends Fragment {
 
     private RecyclerView rv_verEjerciciosSubidos_ejerciciosSubidosFr;
    private ListaEjerciciosAdapter eAdapter;
+   private ImageButton btn_actualizar_ejecicioSubidosFr2;
     private Context context;
     ArrayList<Ejercicio> ejerciciosSubidos;
 
@@ -55,18 +59,37 @@ public class EjerciciosSubudosFR extends Fragment {
         vista = inflater.inflate(R.layout.fragment_ejercicios_subudos_f_r, container, false);
         context = vista.getContext();
         rv_verEjerciciosSubidos_ejerciciosSubidosFr = vista.findViewById(R.id.rv_verEjerciciosSubidos_ejerciciosSubidosFr);
+        btn_actualizar_ejecicioSubidosFr2 =(ImageButton) vista.findViewById(R.id.btn_actualizar_ejecicioSubidosFr2);
+        btn_actualizar_ejecicioSubidosFr2.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+
+        SpacingItemDecorator spacingItemDecorator = new SpacingItemDecorator(10);
+        rv_verEjerciciosSubidos_ejerciciosSubidosFr.addItemDecoration(spacingItemDecorator);
+        btn_actualizar_ejecicioSubidosFr2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                añadirEjerciciosTabla();
+            }
+        });
         añadirEjerciciosTabla();
         funcionArrastrar();
+
         return vista;
     }
 
 
     private void añadirEjerciciosTabla(){
-        ejerciciosSubidos = EjercicioController.obtenerEjerciciosUsuario(CurrentUser.getUser().getId());
-        for(Ejercicio e : ejerciciosSubidos)
-        eAdapter = new ListaEjerciciosAdapter(context,ejerciciosSubidos);
-        rv_verEjerciciosSubidos_ejerciciosSubidosFr.setAdapter(eAdapter);
-        rv_verEjerciciosSubidos_ejerciciosSubidosFr.setLayoutManager(new LinearLayoutManager(context));
+            try {
+                ejerciciosSubidos = EjercicioController.obtenerEjerciciosUsuario(CurrentUser.getUser().getId());
+                for (Ejercicio e : ejerciciosSubidos)
+                    eAdapter = new ListaEjerciciosAdapter(context, ejerciciosSubidos);
+
+                rv_verEjerciciosSubidos_ejerciciosSubidosFr.setAdapter(eAdapter);
+                rv_verEjerciciosSubidos_ejerciciosSubidosFr.setLayoutManager(new LinearLayoutManager(context));
+            }catch (Exception e){
+
+            }
+
+
 
     }
 

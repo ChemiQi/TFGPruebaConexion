@@ -81,8 +81,7 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
 
         if(ejercicioActual.getImageMusculo() != null){
             holder.img_ejercicio_rv_Ejercicio.setImageBitmap(ejercicioActual.getImageMusculo());
-        }
-        if(ejercicioActual.getImageMusculo() == null){
+        }else{
             Bitmap noImage = BitmapFactory.decodeResource(c.getResources(),R.drawable.noimage);
             holder.img_ejercicio_rv_Ejercicio.setImageBitmap(noImage);
         }

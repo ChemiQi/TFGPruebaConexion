@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".AnadirEjercicio">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Elegir Ejercicio"
+        android:textColor="@color/dark_magenta"
         android:textSize="36dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +29,8 @@
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="@string/parte_del_cuerpo"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_titulo_anadirEjercicio" />
 
@@ -37,6 +41,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/musculo"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
         app:layout_constraintStart_toStartOf="@+id/txt_parteDelCuerpo_anadirEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/txt_parteDelCuerpo_anadirEjercicio" />
@@ -80,6 +85,8 @@
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:text="Añadir"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintEnd_toEndOf="@+id/rv_ejercicios_anadirEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/rv_ejercicios_anadirEjercicio" />
 
@@ -90,8 +97,10 @@
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
         android:layout_marginTop="16dp"
-        android:text="cancelar"
         android:onClick="cancelarElegirEjerccio"
+        android:text="cancelar"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintStart_toStartOf="@+id/rv_ejercicios_anadirEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/rv_ejercicios_anadirEjercicio" />
 

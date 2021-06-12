@@ -67,6 +67,7 @@
         android:layout_marginTop="84dp"
         android:onClick="iniciarSesion"
         android:text="@string/iniciar_sesion"
+        android:textColor="@color/white"
         app:backgroundTint="@color/dark_magenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

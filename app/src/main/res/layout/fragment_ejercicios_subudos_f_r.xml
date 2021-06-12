@@ -5,6 +5,7 @@
     android:id="@+id/ejercicios_locales"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".EjerciciosLocalesFr">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,15 +24,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_actualizar_ejecicioSubidosFr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Actualizar"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/btn_actualizar_ejecicioSubidosFr2"
+        android:layout_width="103dp"
+        android:layout_height="101dp"
+        android:contentDescription="Actualizar"
+        android:scaleType="fitCenter"
+        android:src="@drawable/actualziar"
         app:layout_constraintEnd_toEndOf="@+id/rv_verEjerciciosSubidos_ejerciciosSubidosFr"
-        app:layout_constraintTop_toBottomOf="@+id/rv_verEjerciciosSubidos_ejerciciosSubidosFr"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_verEjerciciosSubidos_ejerciciosSubidosFr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

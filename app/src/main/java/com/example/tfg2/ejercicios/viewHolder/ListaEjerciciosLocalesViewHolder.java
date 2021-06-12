@@ -2,8 +2,10 @@ package com.example.tfg2.ejercicios.viewHolder;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +30,7 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
     public TextView txt_musculo_itemEjercicioLocal;
     public ImageView img_ejercicio_rv_EjercicioLocal;
     public ListaEjerciciosLocalesAdapter eAdapter;
-    public Button btn_subirArchivos_itmeEjerciciosLocales;
+    public ImageButton btn_subirArchivos_itmeEjerciciosLocales;
 
     View viewLocal;
 
@@ -39,7 +41,9 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
         txt_musculo_itemEjercicioLocal = (TextView) mItemView.findViewById(R.id.txt_musculo_itemEjercicioLocal);
         this.eAdapter = listaEjerciciosAdapter;
         img_ejercicio_rv_EjercicioLocal = (ImageView) mItemView.findViewById(R.id.img_ejercicio_rv_EjercicioLocal);
-        btn_subirArchivos_itmeEjerciciosLocales = (Button) mItemView.findViewById(R.id.btn_subirArchivos_itmeEjerciciosLocales);
+        btn_subirArchivos_itmeEjerciciosLocales = (ImageButton) mItemView.findViewById(R.id.btn_subirArchivos_itmeEjerciciosLocales);
+        btn_subirArchivos_itmeEjerciciosLocales.setBackgroundColor(Color.parseColor("#4D2E040A"));
+
         itemView.setOnClickListener(this);
 
         btn_subirArchivos_itmeEjerciciosLocales.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +51,8 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
             public void onClick(View v) {
                 AlertDialog.Builder alerta = new AlertDialog.Builder(viewLocal.getContext());
                 EjercicioLocal ejercicioLocal2 = listaEjerciciosAdapter.getListaEjerciciosLocales().get(getLayoutPosition());
-                alerta.setTitle("¿Quíeres añadir este ejercicio? \n" +  ejercicioLocal2.getNombre());
+                alerta.setTitle("Subir ejercicio");
+                alerta.setMessage("¿Quíeres añadir este ejercicio? \n" +  ejercicioLocal2.getNombre());
                 alerta.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -55,9 +60,9 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
                             System.out.println("NO REPETIDO, AÑADIRA EJERCICO");
                             EjercicioController.addEjercicioUser(ejercicioLocal2);
                         }else {
-                            System.out.println("REPETIDO, AVISO");
                             AlertDialog.Builder alertaEjercicioRepetido = new AlertDialog.Builder(viewLocal.getContext());
-                            alertaEjercicioRepetido.setTitle("Ejercicio con el mismo nombre. ¿Quieres subirlo igualmente?");
+                            alerta.setTitle("Ejercicio repetido");
+                            alertaEjercicioRepetido.setMessage("Ejercicio con el mismo nombre. ¿Quieres subirlo igualmente?");
                             alertaEjercicioRepetido.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

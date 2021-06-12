@@ -20,25 +20,20 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        btn_aEntrenar_menu = (Button) findViewById(R.id.btn_aEntrenar_menu);
-        btn_verCalenadrio_menu = (Button) findViewById(R.id.btn_verCalendario_menu);
-        btn_crearTabla_menu = (Button) findViewById(R.id.btn_crearTabla_menu);
-        btn_ajustes_menu = (Button) findViewById(R.id.bnt_ajustes_menu);
-
-    }
-
-    public void irVerTablas(View view) {
-        Intent intent = new Intent(this,TablasMenu.class);
-        startActivity(intent);
-    }
-
-    public void irEjercicios(View view) {
-        Intent intent = new Intent(this,TablasEjercicios.class);
-        startActivity(intent);
     }
 
     public void irEntrenar(View view) {
         Intent intent = new Intent(this,EntrenarActivity.class);
+        startActivity(intent);
+    }
+
+    public void cerrarSesion(View view) {
+        CurrentUser.setUser(null);
+        finish();
+    }
+
+    public void irEntrenamiento(View view) {
+        Intent intent = new Intent(this,EntrenamientoActivity.class);
         startActivity(intent);
     }
 }

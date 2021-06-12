@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG2">
-        <activity android:name=".PantallaPrincipalActivity"></activity>
+        <activity android:name=".EntrenamientoActivity"></activity>
+        <activity android:name=".PantallaPrincipalActivity" />
         <activity android:name=".PonerDatosPorEjercicioActivity" />
         <activity android:name=".SeleccionarGrupoEjerciciosActivity" />
         <activity android:name=".PonerDatosActivity" />
@@ -25,7 +26,9 @@
         <activity android:name=".AnadirEjercicio" />
         <activity android:name=".CrearTablaActivity" />
         <activity android:name=".TablasMenu" />
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".MenuActivity">
+
+        </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

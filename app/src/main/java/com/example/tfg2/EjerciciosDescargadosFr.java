@@ -2,6 +2,7 @@ package com.example.tfg2;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -20,20 +21,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
+import com.example.tfg2.utilidades.SpacingItemDecorator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class EjerciciosDescargadosFr extends Fragment {
+public class EjerciciosDescargadosFr extends Fragment  {
 
     private View vista;
-    private Button btn_anadirEjercicio_ejerciciosLocalesFr;
+    private ImageButton btn_anadirEjercicio_ejerciciosLocalesFr;
     private List<EjercicioLocal> ejercicioLocales;
     private RecyclerView rv_verEjerciciosDescargados_ejerciciosDescargadosFr;
     ListaEjerciciosLocalesAdapter listaEjerciciosLocalesAdapter;
@@ -50,17 +53,19 @@ public class EjerciciosDescargadosFr extends Fragment {
         // Inflate the layout for this fragment
         vista =  inflater.inflate(R.layout.fragment_ejercicios_descargados, container, false);
         rv_verEjerciciosDescargados_ejerciciosDescargadosFr = vista.findViewById(R.id.rv_verEjerciciosDescargados_ejerciciosDescargadosFr);
-
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
 
 
         Context context = vista.getContext();
         listaEjerciciosLocalesAdapter = new ListaEjerciciosLocalesAdapter(context);
+        SpacingItemDecorator spacingItemDecorator = new SpacingItemDecorator(10);
+        rv_verEjerciciosDescargados_ejerciciosDescargadosFr.addItemDecoration(spacingItemDecorator);
         rv_verEjerciciosDescargados_ejerciciosDescargadosFr.setAdapter(listaEjerciciosLocalesAdapter);
         rv_verEjerciciosDescargados_ejerciciosDescargadosFr.setLayoutManager(new LinearLayoutManager(context));
 
         actualizarEjerciciosLocales();
         funcionArrastrar();
+
 
 
         return vista;
@@ -141,4 +146,6 @@ public class EjerciciosDescargadosFr extends Fragment {
         });
         alerta.show();
     }
+
+
 }

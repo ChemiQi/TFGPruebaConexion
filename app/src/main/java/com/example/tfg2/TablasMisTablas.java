@@ -65,8 +65,10 @@ public class TablasMisTablas extends Fragment {
                 @Override
                 public void onChanged(List<TablaLocal> tablaLocals) {
                     tablaLocales = tablaLocals;
-                    tablaLocales = tablaLocales.stream().filter(e-> e.getCreated()).collect(Collectors.toList());
-                    listaTablaLocalAdapter.setListaTablasLocales(tablaLocales);
+                    if(tablaLocales != null) {
+                        tablaLocales = tablaLocales.stream().filter(e -> e.getCreated()).collect(Collectors.toList());
+                        listaTablaLocalAdapter.setListaTablasLocales(tablaLocales);
+                    }
                 }
             });
         }

@@ -2,11 +2,13 @@ package com.example.tfg2;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -114,14 +116,55 @@ public class CrearEjercicio extends AppCompatActivity {
     }
 
     public void crearEjercicioOffline(View view) {
+        if(parteDelCuerpoSeleccionado == null || parteDelCuerpoSeleccionado.equalsIgnoreCase("Selecciona..")){
+            AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+            alerta.setTitle("Campos vacios");
+            alerta.setMessage("Por favor, seleccione una parte del cuerpo");
 
-        EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado,String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()),String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
-                true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
-        if(ejercicioViewModel.obtenerIdEjercicio()  < 200){
-            ejercicioLocal.setIdEjercicio(200);
+            alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alerta.show();
+        }else{
+            if(musculoSeleccionado.equalsIgnoreCase("Selecciona..")){
+                AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+                alerta.setTitle("Campos vacios");
+                alerta.setMessage("Por favor, seleccione un musculo");
+
+                alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alerta.show();
+            }else {
+                if (String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()).equals("")) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+                    alerta.setTitle("Ejercicio sin nombre");
+                    alerta.setMessage("Por favor, escriba un nombre");
+                    alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alerta.show();
+                } else {
+                    EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado, String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()), String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
+                            true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
+                    if (ejercicioViewModel.obtenerIdEjercicio() < 200) {
+                        ejercicioLocal.setIdEjercicio(200);
+                    }
+                    ejercicioViewModel.insertarEjercicio(ejercicioLocal);
+                    finish();
+                }
+            }
         }
-        ejercicioViewModel.insertarEjercicio(ejercicioLocal);
-        finish();
+
     }
 
 

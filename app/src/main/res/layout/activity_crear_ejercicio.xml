@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".CrearEjercicio">
 
     <TextView
@@ -12,29 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/anadir_ejercicio"
+        android:textColor="@color/dark_magenta"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edt_nombreEjercicio_crearEjercicio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/nombre_ejercicio"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_musculos_crearEjercicio" />
 
     <ImageView
         android:id="@+id/img_imagenEjercicio_crearEjercicio"
@@ -56,102 +40,151 @@
 
         android:onClick="cargarImagenEjercicio"
         android:text="@string/seleccionar_imagen"
+        android:textColor="@color/white"
         android:textSize="12sp"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintEnd_toEndOf="@+id/img_imagenEjercicio_crearEjercicio"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/img_imagenEjercicio_crearEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/img_imagenEjercicio_crearEjercicio" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/edt_nombreEjercicio_crearEjercicio"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edt_nombreEjercicio_crearEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/edt_nombreEjercicio_crearEjercicio">
-
-        <EditText
-            android:id="@+id/edt_descripcionEjercicio_crearEjercicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/descripcion_ejercico"
-            android:inputType="textMultiLine" />
-    </ScrollView>
+    <Button
+        android:id="@+id/btn_cancelar_crearEjercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="8dp"
+        android:onClick="cancelarCrearEjercicio"
+        android:text="@android:string/cancel"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dark_magenta"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <Button
         android:id="@+id/btn_anadir_crearEjercicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="68dp"
         android:layout_marginRight="68dp"
-        android:text="@string/a_adir"
         android:onClick="crearEjercicioOffline"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView3"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+        android:text="@string/a_adir"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dark_magenta"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <Button
-        android:id="@+id/btn_cancelar_crearEjercicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginTop="16dp"
-        android:text="@android:string/cancel"
-        android:onClick="cancelarCrearEjercicio"
-        app:layout_constraintStart_toStartOf="@+id/scrollView3"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
-
-    <TextView
-        android:id="@+id/txt_parteDelCuerpo_crearEjercicio"
-        android:layout_width="75dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/parte_del_cuerpo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_añadirImagenJugador" />
-
-    <TextView
-        android:id="@+id/txt_musculo_crearEjercicio"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:text="@string/musculo"
-        app:layout_constraintEnd_toEndOf="@+id/txt_parteDelCuerpo_crearEjercicio"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txt_parteDelCuerpo_crearEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/txt_parteDelCuerpo_crearEjercicio" />
-
-    <Spinner
-        android:id="@+id/sp_musculos_crearEjercicio"
-        android:layout_width="255dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/sp_grupoMuscular_crearEjercicio"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/txt_musculo_crearEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/sp_grupoMuscular_crearEjercicio" />
-
-    <Spinner
-        android:id="@+id/sp_grupoMuscular_crearEjercicio"
-        android:layout_width="255dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_height="315dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.707"
-        app:layout_constraintStart_toEndOf="@+id/txt_parteDelCuerpo_crearEjercicio"
-        app:layout_constraintTop_toTopOf="@+id/txt_parteDelCuerpo_crearEjercicio" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_añadirImagenJugador">
+
+        <Spinner
+            android:id="@+id/sp_musculos_crearEjercicio"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/sp_grupoMuscular_crearEjercicio"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toEndOf="@+id/txt_musculo_crearEjercicio"
+            app:layout_constraintTop_toBottomOf="@+id/sp_grupoMuscular_crearEjercicio" />
+
+        <Spinner
+            android:id="@+id/sp_grupoMuscular_crearEjercicio"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/txt_parteDelCuerpo_crearEjercicio"
+            app:layout_constraintTop_toTopOf="@+id/txt_parteDelCuerpo_crearEjercicio" />
+
+        <EditText
+            android:id="@+id/edt_nombreEjercicio_crearEjercicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/nombre_ejercicio"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grisclaro"
+            app:layout_constraintEnd_toEndOf="@+id/sp_musculos_crearEjercicio"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_musculos_crearEjercicio" />
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/sp_musculos_crearEjercicio"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_nombreEjercicio_crearEjercicio">
+
+            <EditText
+                android:id="@+id/edt_descripcionEjercicio_crearEjercicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/descripcion_ejercico"
+                android:inputType="textMultiLine"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grisclaro" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/txt_parteDelCuerpo_crearEjercicio"
+            android:layout_width="75dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@string/parte_del_cuerpo"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_musculo_crearEjercicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/musculo"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/txt_parteDelCuerpo_crearEjercicio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_parteDelCuerpo_crearEjercicio" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

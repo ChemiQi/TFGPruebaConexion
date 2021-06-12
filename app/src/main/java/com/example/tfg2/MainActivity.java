@@ -3,9 +3,12 @@ package com.example.tfg2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tfg2.database.modelos.BaseDB;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_USERNAME_STRING ="" ;
     EditText edt_username_login;
     EditText edt_pass_login;
+    private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         edt_username_login = (EditText) findViewById(R.id.edt_username_login);
         edt_pass_login = (EditText) findViewById(R.id.edt_pass_login);
+        imageView = (ImageView) findViewById(R.id.imageView);
+
+        imageView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),R.drawable.logo_demop));
         if(BaseDB.conectarConBaseDeDatos() != null){
             System.out.println("CONECTADO CORRECTAMENTE");
         }else {

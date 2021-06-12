@@ -3,6 +3,7 @@ package com.example.tfg2.ejercicios.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,16 +49,6 @@ public class ListaEjerciciosLocalesAdapter extends RecyclerView.Adapter<ListaEje
 
     public void setListaEjerciciosLocales(List<EjercicioLocal> listaEjerciciosLocales) {
         this.listaEjerciciosLocales = listaEjerciciosLocales;
-        if(this.listaEjerciciosLocales == null){
-            {
-                Log.i("ejercicios","la lista ciudades es nulo");
-            }
-        }else{
-            for(EjercicioLocal c:listaEjerciciosLocales)
-            {
-                Log.i("ejercicio","ejercicio -> " + c.getNombre() + " " + c.getIdEjercicio());
-            }
-        }
         notifyDataSetChanged();
     }
 
@@ -95,6 +86,7 @@ public class ListaEjerciciosLocalesAdapter extends RecyclerView.Adapter<ListaEje
 
         if(ejercicioActual.getIdEjercicio() < 200){
             holder.btn_subirArchivos_itmeEjerciciosLocales.setVisibility(View.INVISIBLE);
+
         }
 
     }
