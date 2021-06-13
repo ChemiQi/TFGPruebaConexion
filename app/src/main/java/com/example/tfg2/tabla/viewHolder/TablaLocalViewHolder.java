@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -31,7 +30,7 @@ public class TablaLocalViewHolder extends RecyclerView.ViewHolder implements Vie
     @SuppressLint("WrongViewCast")
     public TablaLocalViewHolder(@NonNull View itemView, ListaTablaLocalAdapter listaTablaLocalAdapter) {
         super(itemView);
-        txt_nombreTabla_itemTablaLocal = (TextView) itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar);
+        txt_nombreTabla_itemTablaLocal = (TextView) itemView.findViewById(R.id.txt_diaEjercicios_elegirTabla);
         btn_imagen = (ImageButton) itemView.findViewById(R.id.btn_imagen);
         btn_imagen.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         viewLocal = itemView;

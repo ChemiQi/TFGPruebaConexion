@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="100dp"
-    android:layout_height="140dp"
+    android:layout_width="110dp"
+    android:layout_height="160dp"
+    android:background="@drawable/border"
     android:orientation="vertical"
     android:paddingTop="5sp">
 
@@ -29,6 +30,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="@string/_00"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -39,7 +41,32 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/_00"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/rep"
+            android:textColor="@color/negroclaro" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ser"
+            android:textColor="@color/negroclaro" />
     </LinearLayout>
 </LinearLayout>

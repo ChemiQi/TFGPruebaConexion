@@ -33,6 +33,8 @@ import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.tabla.controladores.TablaController;
 import com.example.tfg2.tabla.viewHolder.TablaLocalViewHolder;
 import com.example.tfg2.tabla.viewHolder.TablaViewHolder;
+import com.example.tfg2.utilidades.SpacingItemDecorator;
+import com.example.tfg2.utilidades.SpacingLadosDecorator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,10 +44,9 @@ public class VerTablaActivity extends AppCompatActivity {
     private static final int PETICION2VERTABLA = 2;
     public static final String EXTRA_TABLA_EDITAR = "chema.martinez/tablaAEditar";
     LinearLayout ly_contenedorFilas_verTablas;
-    Spinner sp_diasEntreno_verTabla;
     TextView txt_titulo_verTabla;
-    TextView txt_textoPreguntaDias_verTabla;
     Button btn_editarguardar_verTabla;
+
 
     private TablaEjercicioRelacionViewModel  tr;
     private EjercicioViewModel ejercicioViewModel;
@@ -79,13 +80,17 @@ public class VerTablaActivity extends AppCompatActivity {
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
         tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
 
+
         // ---------------------------------- RECIBIR DATOS
         Intent intent = getIntent();
         TablaLocal tabla = (TablaLocal) intent.getSerializableExtra(TablaLocalViewHolder.TABLA_A_CREARTABLAACTIVITY);
         if(tabla != null){
             System.out.println("ENTRA EN TABLA LOCAL VER");
-            if(tabla.getIdTabla() < 199)
+            if(tabla.getIdTabla() <= 199) {
                 btn_editarguardar_verTabla.setEnabled(false);
+                btn_editarguardar_verTabla.setBackgroundColor(Color.parseColor("#848484"));
+                btn_editarguardar_verTabla.setTextColor(Color.parseColor("#6E6E6E"));
+            }
             editado = true;
              datosTabla = tr.tablaPorIdTabla(tabla.getIdTabla());
             txt_titulo_verTabla.setText(tabla.getNombre());
@@ -359,6 +364,8 @@ public class VerTablaActivity extends AppCompatActivity {
                 btn_editarguardar_verTabla.setEnabled(true);
             }else{
                 btn_editarguardar_verTabla.setEnabled(false);
+                btn_editarguardar_verTabla.setBackgroundColor(Color.parseColor("#848484"));
+                btn_editarguardar_verTabla.setTextColor(Color.parseColor("#6E6E6E"));
             }
         }
     }

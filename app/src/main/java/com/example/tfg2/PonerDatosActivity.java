@@ -30,6 +30,7 @@ public class PonerDatosActivity extends AppCompatActivity {
     private EjercicioViewModel ejercicioViewModel;
     private RecyclerView rv_verEjerciciosParaDatos;
     private ListaEjercicioPonerInfoAdapter listaEjercicioPonerInfoAdapter;
+    private TextView txt_diaEjercicio_ponerDatos;
     List<TablaEjercicioRelacion> tablaEjercicio;
     List<EjercicioLocal> ejercicioLocals;
     Integer dia;
@@ -42,6 +43,7 @@ public class PonerDatosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_poner_datos);
 
         txt_nombreTabla_ponerDatos =(TextView) findViewById(R.id.txt_nombreTabla_ponerDatos);
+        txt_diaEjercicio_ponerDatos =(TextView) findViewById(R.id.txt_diaEjercicio_ponerDatos);
 
         tr =  ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
@@ -50,10 +52,10 @@ public class PonerDatosActivity extends AppCompatActivity {
         Intent intent = getIntent();
        dia = (Integer) intent.getSerializableExtra(SeleccionarGrupoEjerciciosActivity.EXTRA_EJERCICIOAENVIARAVEREJERCICIOS);
        TablaLocal tabla =(TablaLocal) intent.getSerializableExtra(SeleccionarGrupoEjerciciosActivity.EXTRA_TABLA_PONERDATOS);
-       System.out.println("-----------------------" + dia);
 
        if(tabla != null){
            txt_nombreTabla_ponerDatos.setText(tabla.getNombre());
+           txt_diaEjercicio_ponerDatos.setText("Dia: " + String.valueOf(dia + 1));
        }
         List<TablaEjercicioRelacion> ejercicioRelacion  = tr.tablaPorIdTabla(tabla.getIdTabla());
         tablaEjercicio = ejercicioRelacion.stream().filter(e -> e.getDia() == dia).collect(Collectors.toList());

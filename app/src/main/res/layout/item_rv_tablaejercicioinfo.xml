@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:layout_marginTop="5dp"
-    android:background="#E1B8B8"
+
+    android:background="@color/dark_magenta"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/nombre_ejercicio"
+                android:textColor="@color/grisclaro"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -63,6 +65,7 @@
                     android:layout_height="31dp"
                     android:gravity="center"
                     android:text="@string/rep"
+                    android:textColor="@color/grisclaro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -72,6 +75,7 @@
                     android:layout_height="127dp"
                     android:gravity="center"
                     android:text="@string/_00"
+                    android:textColor="@color/white"
                     android:textSize="80sp" />
             </LinearLayout>
 
@@ -87,6 +91,7 @@
                     android:layout_height="31dp"
                     android:gravity="center"
                     android:text="Peso Max"
+                    android:textColor="@color/grisclaro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -96,6 +101,7 @@
                     android:layout_height="127dp"
                     android:gravity="center"
                     android:text="@string/_00"
+                    android:textColor="@color/white"
                     android:textSize="80sp" />
             </LinearLayout>
         </LinearLayout>

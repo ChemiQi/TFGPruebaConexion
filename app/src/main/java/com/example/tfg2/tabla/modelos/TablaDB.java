@@ -176,7 +176,7 @@ public class TablaDB {
                 int dia = resultadosql.getInt("dia");
 
 
-                tablaTfg.add(new TablaEjercicioRelacion(idTabla,idejercicio,serie,repeticiones,dia));
+                tablaTfg.add(new TablaEjercicioRelacion(idTabla,idejercicio,repeticiones,serie,dia));
             }
             resultadosql.close();
             pst.close();

@@ -26,7 +26,7 @@ public class PopUpAnadirTabla extends AppCompatActivity {
         int ancho = medidasVentana.widthPixels;
         int alto = medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.85));
+        getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.30));
         //----------------------------------------------
     }
 

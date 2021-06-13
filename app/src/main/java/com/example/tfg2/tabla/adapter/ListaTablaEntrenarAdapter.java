@@ -77,7 +77,8 @@ public class ListaTablaEntrenarAdapter extends RecyclerView.Adapter<TablaEntrena
     public void onBindViewHolder(@NonNull TablaEntrenarViewHolder holder, int position) {
         TablaLocal tablaActual = tablaLocals.get(position);
         if(tablaActual != null){
-            holder.txt_nombreTabla_itemTablaEntrenar.setText(String.valueOf(tablaActual.getNombre()));
+            holder.txt_nombreTabla_itemTablaEntrenar3.setText(String.valueOf(tablaActual.getNombre()));
+            holder.txt_diaEjercicios_elegirTabla.setText(String.valueOf(tablaActual.getDias()));
         }
 
     }

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.tabla.adapter.ListaTablaEntrenarAdapter;
+import com.example.tfg2.utilidades.SpacingItemDecorator;
 
 
 import java.util.List;
@@ -43,9 +44,9 @@ public class EntrenarActivity extends AppCompatActivity {
         listaTablaEntrenarAdapter = new ListaTablaEntrenarAdapter(this,tablasLive);
         rv_verTablasActivas_aEntrenar.setAdapter(listaTablaEntrenarAdapter);
         rv_verTablasActivas_aEntrenar.setLayoutManager(new LinearLayoutManager(this));
-
+        SpacingItemDecorator spacingItemDecorator = new SpacingItemDecorator(10);
+        rv_verTablasActivas_aEntrenar.addItemDecoration(spacingItemDecorator);
         if(tablasLive != null){
-            System.out.println("ENTRA");
             tablasLive.observe(this, new Observer<List<TablaLocal>>() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override

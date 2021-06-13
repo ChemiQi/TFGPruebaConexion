@@ -134,15 +134,9 @@ public class CrearTablaActivity extends AppCompatActivity {
             HorizontalScrollView hsv = new HorizontalScrollView(getApplicationContext());
             hsv.setPadding(0,5,0,5);
 
-            //int red = Color.parseColor("FF0000");
-
-
-
             LinearLayout ly = new LinearLayout(getApplicationContext()); // recipiente por linea
             ly.setOrientation(LinearLayout.HORIZONTAL);
             ly.setBackgroundColor(ponerColoresFondo(i));
-
-
 
             ListaEjercicoInfoEnTablaAdapter adapter = new ListaEjercicoInfoEnTablaAdapter(this,listaDiasEjercicio.get(i));
 
@@ -246,7 +240,6 @@ public class CrearTablaActivity extends AppCompatActivity {
         if(editar == true){
             if(tablaLocal != null){
                 intent.putExtra(NOMBRE_TABLA_LOCAL,tablaLocal.getNombre());
-                System.out.println("TABLA LOCAL NO NUL");
             }
 
         }
@@ -289,7 +282,17 @@ public class CrearTablaActivity extends AppCompatActivity {
                     System.out.println("ERROR AL AÑADIR TABLA");
 
             } else {
-                System.out.println("NOMBRE REPETIDO");
+                androidx.appcompat.app.AlertDialog.Builder alerta = new androidx.appcompat.app.AlertDialog.Builder(this);
+                alerta.setTitle("Error");
+                alerta.setMessage("Nombre repetido");
+                alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        }
+                    });
+                alerta.show();
             }
         }else{  // EDITAR TABLA ---------------------------------------------------------
             if(!tabla.getNombre().equalsIgnoreCase(tablaLocal.getNombre())){

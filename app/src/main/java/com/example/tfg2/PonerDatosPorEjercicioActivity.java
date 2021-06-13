@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.example.tfg2.ejercicioDatos.adapter.ListaEjercicioDatosAdapter;
 import com.example.tfg2.ejercicioDatos.viewHolder.EjercicioDatosViewHolder;
 import com.example.tfg2.ejercicios.viewHolder.EjercicioPonerInfoViewHolder;
 import com.example.tfg2.tabla.adapter.ListaTablaLocalAdapter;
+import com.example.tfg2.utilidades.SpacingItemDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,13 @@ public class PonerDatosPorEjercicioActivity extends AppCompatActivity {
         txt_nombreEjercicio_ponerDatosPorEjercicio = findViewById(R.id.txt_nombreEjercicio_ponerDatosPorEjercicio);
         rv_datosEjercicio_ponerDatosPorEjercicio = findViewById(R.id.rv_datosEjercicio_ponerDatosPorEjercicio);
 
+        DisplayMetrics medidasVentana = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
+
+        int ancho = medidasVentana.widthPixels;
+        int alto = medidasVentana.heightPixels;
+
+        getWindow().setLayout((int)(ancho * 0.85),(int)(alto*0.62));
 
 
         Intent intent = getIntent();
@@ -60,6 +69,8 @@ public class PonerDatosPorEjercicioActivity extends AppCompatActivity {
         }else{
             listaDeDatos = te.getDatosPorIdEjercicioEIdTabla(tablaEjercicioRelacion.getIdEjercicio(),tablaEjercicioRelacion.getIdTabla());
         }
+        SpacingItemDecorator spacingItemDecorator = new SpacingItemDecorator(10);
+        rv_datosEjercicio_ponerDatosPorEjercicio.addItemDecoration(spacingItemDecorator);
 
         listaTablaLocalAdapter = new ListaEjercicioDatosAdapter(listaDeDatos,tablaEjercicioRelacion,this,te);
         rv_datosEjercicio_ponerDatosPorEjercicio.setAdapter(listaTablaLocalAdapter);

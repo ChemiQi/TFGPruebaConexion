@@ -5,9 +5,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:background="@color/negroclaro"
     android:gravity="center"
-    tools:context=".PonerDatosPorEjercicioActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".PonerDatosPorEjercicioActivity">
 
     <TextView
         android:id="@+id/txt_nombreEjercicio_ponerDatosPorEjercicio"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -27,13 +29,23 @@
         android:layout_marginBottom="40dp"
         android:gravity="center"
         android:text="Pon los datos realizados"
+        android:textColor="@color/grisclaro"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_datosEjercicio_ponerDatosPorEjercicio"
         android:layout_width="354dp"
         android:layout_height="307dp"
-        android:layout_margin="5sp" />
+        android:layout_margin="5sp" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recuerda pulsar las flechas para guardar los datos"
+        android:textColor="@color/grisclaro" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -53,7 +65,9 @@
             android:layout_marginRight="25dp"
             android:layout_weight="1"
             android:onClick="volver"
-            android:text="no" />
+            android:text="cancelar"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/dark_magenta" />
 
         <Button
             android:id="@+id/btn_si_popupActivarTabla"
@@ -65,6 +79,8 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:onClick="guardatDatos"
-            android:text="si" />
+            android:text="guardar"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/dark_magenta" />
     </LinearLayout>
 </LinearLayout>

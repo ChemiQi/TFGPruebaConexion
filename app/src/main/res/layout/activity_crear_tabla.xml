@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".CrearTablaActivity">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Crear Tabla"
+        android:textColor="@color/dark_magenta"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +29,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="¿En cuátos dias se dividirá tu entreno?"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_titulo_verGrupoEjercicios" />
 
@@ -37,6 +40,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
+        android:background="@color/grisclaro"
         android:entries="@array/diasGimnasio"
         android:scrollbarSize="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_textoPreguntaDias_verTabla"
@@ -57,8 +61,7 @@
             android:id="@+id/ly_contenedorFilas_verGrupoEjercicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
     <Button
@@ -70,6 +73,8 @@
         android:layout_marginRight="70dp"
         android:onClick="guardarTabla"
         android:text="Guardar"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintEnd_toEndOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
@@ -82,6 +87,8 @@
         android:layout_marginTop="28dp"
         android:onClick="cancelarCrearTabla"
         android:text="Cancelar"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dark_magenta"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

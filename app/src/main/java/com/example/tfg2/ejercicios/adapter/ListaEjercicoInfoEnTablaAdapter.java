@@ -67,22 +67,23 @@ public class ListaEjercicoInfoEnTablaAdapter extends RecyclerView.Adapter<Ejerci
     public void onBindViewHolder(@NonNull EjercicioInfoVIewHolder holder, int position) {
 
         EjercicioInfo ejercicioInfo = listaEjercicioInfo.get(position);
-        holder.txt_repeticiones_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getRepeticiones()));
-        holder.txt_series_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getSeries()));
+        holder.txt_repeticiones_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getSeries()));
+        holder.txt_series_itemEjercicioEnTabla.setText(String.valueOf(ejercicioInfo.getRepeticiones()));
         try {
             if (ejercicioInfo.getEjercicio().getImageMusculo() != null) {
                 holder.img_imagenEjercicio_imteEjercicioEnTabla.setImageBitmap(ejercicioInfo.getEjercicio().getImageMusculo());
-                System.out.println("IMAGEN NO NULO");
+
+
             }
             if (ejercicioInfo.getEjercicio().getImageMusculo() == null) {
                 Bitmap noImage = BitmapFactory.decodeResource(c.getResources(), R.drawable.noimage);
                 holder.img_imagenEjercicio_imteEjercicioEnTabla.setImageBitmap(noImage);
-                System.out.println("IMAGEN  NULO");
+
             }
         }catch (Exception e) {
                 Bitmap noImage = BitmapFactory.decodeResource(c.getResources(), R.drawable.noimage);
                 holder.img_imagenEjercicio_imteEjercicioEnTabla.setImageBitmap(noImage);
-                System.out.println("IMAGEN  NULO");
+
         }
 
     }

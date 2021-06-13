@@ -161,7 +161,7 @@ public class SeleccionarGrupoEjerciciosActivity extends AppCompatActivity {
 
                 RecyclerView rv = new RecyclerView(getApplicationContext());
                 rv.setAdapter(adapter);
-                rv.setPadding(0, 25, 0, 5);
+
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

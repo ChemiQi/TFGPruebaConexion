@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tfg2.R;
 import com.example.tfg2.VerTablaActivity;
 import com.example.tfg2.tabla.adapter.ListaTablaAdapter;
-import com.example.tfg2.tabla.clases.Tabla;
 
 public class TablaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     public static final String TABLADESCARGADA_A_CREARTABLAACTIVITY = "chema.martinez/tablaOnlineVer";
@@ -20,7 +19,7 @@ public class TablaViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     public TablaViewHolder(@NonNull View itemView,ListaTablaAdapter listaTablaAdapter) {
         super(itemView);
-        txt_nombreTabla_itemTablaLocal = itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar);
+        txt_nombreTabla_itemTablaLocal = itemView.findViewById(R.id.txt_diaEjercicios_elegirTabla);
         txt_diasTablas_itemTablaEntrenar = itemView.findViewById(R.id.txt_diasTablas_itemTablaEntrenar);
         this.listaTablaAdapter = listaTablaAdapter;
         itemView.setOnClickListener(this);

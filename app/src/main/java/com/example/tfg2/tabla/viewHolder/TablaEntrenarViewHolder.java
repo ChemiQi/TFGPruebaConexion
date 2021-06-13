@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg2.R;
 import com.example.tfg2.SeleccionarGrupoEjerciciosActivity;
-import com.example.tfg2.VerTablaActivity;
 import com.example.tfg2.tabla.adapter.ListaTablaEntrenarAdapter;
-
-import org.w3c.dom.Text;
 
 public class TablaEntrenarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public static final String TABLA_A_VERGRUPOEJERCICIO = "chema.martinez/tablaParaEtrenar";
-    public TextView txt_nombreTabla_itemTablaEntrenar;
+    public TextView txt_nombreTabla_itemTablaEntrenar3;
+    public TextView txt_diaEjercicios_elegirTabla;
     ListaTablaEntrenarAdapter listaTablaEntrenarAdapter;
     public TablaEntrenarViewHolder(@NonNull View itemView, ListaTablaEntrenarAdapter listaTablaEntrenarAdapter) {
         super(itemView);
         this.listaTablaEntrenarAdapter = listaTablaEntrenarAdapter;
-        txt_nombreTabla_itemTablaEntrenar = (TextView) itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar);
+        txt_nombreTabla_itemTablaEntrenar3 = (TextView) itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar3);
+        txt_diaEjercicios_elegirTabla = (TextView) itemView.findViewById(R.id.txt_diaEjercicios_elegirTabla);
+
         itemView.setOnClickListener(this);
     }
 
