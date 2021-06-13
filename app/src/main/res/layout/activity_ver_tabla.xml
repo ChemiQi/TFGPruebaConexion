@@ -17,47 +17,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_textoPreguntaDias_verTabla"
-        android:layout_width="141dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/en_cu_tos_dias_se_dividir_tu_entreno"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_verGrupoEjercicios" />
-
     <!-- TODO EL SCROLL, DENTRO TODO LOS BOTONES -->
-    <Spinner
-        android:id="@+id/sp_diasEntreno_verTabla"
-        android:layout_width="80dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:entries="@array/diasGimnasio"
-        android:scrollbarSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_textoPreguntaDias_verTabla"
-        app:layout_constraintStart_toEndOf="@+id/txt_textoPreguntaDias_verTabla"
-        app:layout_constraintTop_toTopOf="@+id/txt_textoPreguntaDias_verTabla"
-        app:layout_constraintVertical_bias="0.47" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="380dp"
         android:layout_height="459dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_textoPreguntaDias_verTabla">
+        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_verGrupoEjercicios">
 
         <LinearLayout
             android:id="@+id/ly_contenedorFilas_verGrupoEjercicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
     <Button

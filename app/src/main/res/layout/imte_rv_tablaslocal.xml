@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/red_magenta">
 
     <ImageView
         android:id="@+id/img_imagenTabla_itemTablaLocal"
-        android:layout_width="89dp"
-        android:layout_height="80dp"
+        android:layout_width="68dp"
+        android:layout_height="70dp"
         android:contentDescription="@string/nombre_tabla" />
 
     <LinearLayout
@@ -17,11 +19,11 @@
         <TextView
             android:id="@+id/txt_nombreTabla_itemTablaEntrenar"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="75dp"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:text="@string/nombre_tabla"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -29,16 +31,17 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="4sp">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/item_btn_activarTablaActiva_tablaLocal"
+        <ImageButton
+            android:id="@+id/btn_imagen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/anadir" />
+            android:layout_margin="7dp"
+            android:contentDescription="actualizar"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/desactivado" />
+
     </FrameLayout>
 
 </LinearLayout>

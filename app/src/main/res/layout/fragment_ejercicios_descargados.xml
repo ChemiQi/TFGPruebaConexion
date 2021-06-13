@@ -5,6 +5,7 @@
     android:id="@+id/ejercicios_descargados"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".EjerciciosDescargadosFr">
 
     <androidx.recyclerview.widget.RecyclerView

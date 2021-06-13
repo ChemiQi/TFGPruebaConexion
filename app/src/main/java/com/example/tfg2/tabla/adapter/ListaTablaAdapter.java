@@ -58,6 +58,7 @@ public class ListaTablaAdapter extends RecyclerView.Adapter<TablaViewHolder> {
     public void onBindViewHolder(@NonNull TablaViewHolder holder, int position) {
         Tabla tabla = tablas.get(position);
         holder.txt_nombreTabla_itemTablaLocal.setText(String.valueOf(tabla.getNombre()));
+        holder.txt_diasTablas_itemTablaEntrenar.setText(String.valueOf(tabla.getDias()));
     }
 
     @Override

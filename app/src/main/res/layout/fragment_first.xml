@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/negroclaro"
     tools:context=".TablasMisTablas">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,13 +24,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_anadirTabla_MisTablas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="@string/anadir"
+        android:layout_width="104dp"
+        android:layout_height="97dp"
+        android:contentDescription="Añadrid tabla"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add_table"
         app:layout_constraintEnd_toEndOf="@+id/rv_verMisTablas_TablasMisTablas"
         app:layout_constraintTop_toBottomOf="@+id/rv_verMisTablas_TablasMisTablas" />
 </androidx.constraintlayout.widget.ConstraintLayout>

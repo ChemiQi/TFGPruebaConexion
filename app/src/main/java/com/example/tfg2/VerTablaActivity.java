@@ -70,14 +70,8 @@ public class VerTablaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_tabla);
 
-
-
-        sp_diasEntreno_verTabla = (Spinner) findViewById(R.id.sp_diasEntreno_verTabla);
         txt_titulo_verTabla = (TextView) findViewById(R.id.txt_titulo_verGrupoEjercicios);
-        txt_textoPreguntaDias_verTabla = (TextView) findViewById(R.id.txt_textoPreguntaDias_verTabla);
         ly_contenedorFilas_verTablas = (LinearLayout) findViewById(R.id.ly_contenedorFilas_verGrupoEjercicio);
-        txt_textoPreguntaDias_verTabla.setVisibility(View.INVISIBLE);
-        sp_diasEntreno_verTabla.setVisibility(View.INVISIBLE);
         btn_editarguardar_verTabla = (Button) findViewById(R.id.btn_editarguardar_verTabla);
 
         //Crear repositorios

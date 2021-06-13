@@ -1,8 +1,11 @@
 package com.example.tfg2.tabla.viewHolder;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,31 +22,30 @@ public class TablaLocalViewHolder extends RecyclerView.ViewHolder implements Vie
     public static final String TABLA_A_CREARTABLAACTIVITY = "chema.martinez/tablaACrearTablaActivity";
     public static final String TABLA_A_ACTIVAR ="chema.martinez/tablaAActivar" ;
     ListaTablaLocalAdapter listaTablaLocalAdapter;
-    public Button item_btn_activarTablaActiva_tablaLocal;
+    public ImageButton btn_imagen;
 
     private View viewLocal;
     private TablaViewModel tablaViewModel;
 
     public TextView txt_nombreTabla_itemTablaLocal;
+    @SuppressLint("WrongViewCast")
     public TablaLocalViewHolder(@NonNull View itemView, ListaTablaLocalAdapter listaTablaLocalAdapter) {
         super(itemView);
         txt_nombreTabla_itemTablaLocal = (TextView) itemView.findViewById(R.id.txt_nombreTabla_itemTablaEntrenar);
-        item_btn_activarTablaActiva_tablaLocal = (Button) itemView.findViewById(R.id.item_btn_activarTablaActiva_tablaLocal);
+        btn_imagen = (ImageButton) itemView.findViewById(R.id.btn_imagen);
+        btn_imagen.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         viewLocal = itemView;
         this.listaTablaLocalAdapter = listaTablaLocalAdapter;
         itemView.setOnClickListener(this);
 
 
-        item_btn_activarTablaActiva_tablaLocal.setOnClickListener(new View.OnClickListener() {
+        btn_imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TablaLocal tablaLocal = listaTablaLocalAdapter.getTablaLocals().get(getLayoutPosition());
                     Intent intent2 = new Intent(listaTablaLocalAdapter.getC(), PopUpActivarTabla.class);
                     intent2.putExtra(TABLA_A_ACTIVAR,tablaLocal);
                     listaTablaLocalAdapter.getC().startActivity(intent2);
-
-
-
             }
         }); // FIN CLICK LISTENER
 

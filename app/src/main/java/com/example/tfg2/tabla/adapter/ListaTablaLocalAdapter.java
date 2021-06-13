@@ -81,9 +81,9 @@ public class ListaTablaLocalAdapter extends RecyclerView.Adapter<TablaLocalViewH
         holder.txt_nombreTabla_itemTablaLocal.setText(String.valueOf(tablaActual.getNombre()));
 
         if(!tablaActual.getActive()){
-            holder.item_btn_activarTablaActiva_tablaLocal.setText("+");
+            holder.btn_imagen.setImageResource(R.drawable.desactivado);
         }else{
-            holder.item_btn_activarTablaActiva_tablaLocal.setText("-");
+            holder.btn_imagen.setImageResource(R.drawable.activado);
         }
 
     }

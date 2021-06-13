@@ -2,6 +2,7 @@ package com.example.tfg2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaViewModel;
@@ -25,12 +27,13 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
 import com.example.tfg2.tabla.adapter.ListaTablaLocalAdapter;
+import com.example.tfg2.utilidades.SpacingItemDecorator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TablasMisTablas extends Fragment {
-    Button btn_anadirTabla_MisTablas;
+    ImageButton btn_anadirTabla_MisTablas;
     View vista;
     RecyclerView rv_verMisTablas_TablasMisTablas;
     TablaViewModel tablaViewModel;
@@ -50,11 +53,14 @@ public class TablasMisTablas extends Fragment {
         vista = inflater.inflate(R.layout.fragment_first, container, false);
         btn_anadirTabla_MisTablas = vista.findViewById(R.id.btn_anadirTabla_MisTablas);
         rv_verMisTablas_TablasMisTablas = vista.findViewById(R.id.rv_verMisTablas_TablasMisTablas);
+        btn_anadirTabla_MisTablas.setBackgroundColor(Color.parseColor("#00FFFFFF"));
 
         tablaViewModel = ViewModelProviders.of(this).get(TablaViewModel.class);
         LiveData<List<TablaLocal>> tablasLive  = tablaViewModel.obtenerTablas();
 
         Context context = vista.getContext();
+        SpacingItemDecorator spacingItemDecorator = new SpacingItemDecorator(10);
+        rv_verMisTablas_TablasMisTablas.addItemDecoration(spacingItemDecorator);
         listaTablaLocalAdapter = new ListaTablaLocalAdapter(context,tablasLive);
         rv_verMisTablas_TablasMisTablas.setAdapter(listaTablaLocalAdapter);
         rv_verMisTablas_TablasMisTablas.setLayoutManager(new LinearLayoutManager(context));
