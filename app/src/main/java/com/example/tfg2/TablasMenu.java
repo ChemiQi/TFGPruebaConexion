@@ -11,9 +11,9 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TablasMenu extends AppCompatActivity {
-    TablasMisTablas tablasMisTablas = new TablasMisTablas();
-    TablasTablasTFG tablasTablasTFG = new TablasTablasTFG();
-    TablasTablasLocales tablasTablasLocales = new TablasTablasLocales();
+    private TablasMisTablas tablasMisTablas = new TablasMisTablas();
+    private TablasTablasTFG tablasTablasTFG = new TablasTablasTFG();
+    private TablasTablasLocales tablasTablasLocales = new TablasTablasLocales();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

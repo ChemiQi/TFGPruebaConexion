@@ -38,11 +38,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TablasMisTablas extends Fragment {
-    ImageButton btn_anadirTabla_MisTablas;
-    View vista;
-    RecyclerView rv_verMisTablas_TablasMisTablas;
-    TablaViewModel tablaViewModel;
-    ListaTablaLocalAdapter listaTablaLocalAdapter;
+    private ImageButton btn_anadirTabla_MisTablas;
+    private View vista;
+    private RecyclerView rv_verMisTablas_TablasMisTablas;
+    private TablaViewModel tablaViewModel;
+    private ListaTablaLocalAdapter listaTablaLocalAdapter;
     private List<TablaLocal> tablaLocales;
     private static final int PETICION1 = 1;
     private TablaEjercicioRelacionViewModel tr;

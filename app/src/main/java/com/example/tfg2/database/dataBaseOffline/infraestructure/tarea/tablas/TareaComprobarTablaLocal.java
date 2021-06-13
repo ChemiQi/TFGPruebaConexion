@@ -17,7 +17,6 @@ public class TareaComprobarTablaLocal implements Callable {
 
             return TablaRepository.daoTablaLocal.comprobarTablaPorNombre(nombre);
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR EJERCICIO");
             return null;
         }
     }

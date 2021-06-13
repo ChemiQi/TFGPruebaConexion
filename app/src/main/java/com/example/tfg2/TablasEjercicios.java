@@ -11,9 +11,9 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TablasEjercicios extends AppCompatActivity {
-    EjerciciosDescargadosFr ejerciciosDescargadosFr = new EjerciciosDescargadosFr();
-    EjerciciosLocalesFr ejerciciosLocalesFr = new EjerciciosLocalesFr();
-    EjerciciosSubudosFR ejerciciosSubudosFR = new EjerciciosSubudosFR();
+    private EjerciciosDescargadosFr ejerciciosDescargadosFr = new EjerciciosDescargadosFr();
+    private EjerciciosLocalesFr ejerciciosLocalesFr = new EjerciciosLocalesFr();
+    private EjerciciosSubudosFR ejerciciosSubudosFR = new EjerciciosSubudosFR();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

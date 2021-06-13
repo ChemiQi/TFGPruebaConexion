@@ -31,10 +31,10 @@ public class PonerDatosActivity extends AppCompatActivity {
     private RecyclerView rv_verEjerciciosParaDatos;
     private ListaEjercicioPonerInfoAdapter listaEjercicioPonerInfoAdapter;
     private TextView txt_diaEjercicio_ponerDatos;
-    List<TablaEjercicioRelacion> tablaEjercicio;
-    List<EjercicioLocal> ejercicioLocals;
-    Integer dia;
-    TextView txt_nombreTabla_ponerDatos;
+    private List<TablaEjercicioRelacion> tablaEjercicio;
+    private List<EjercicioLocal> ejercicioLocals;
+    private Integer dia;
+    private TextView txt_nombreTabla_ponerDatos;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override

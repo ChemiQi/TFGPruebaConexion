@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 
 public class EntrenarActivity extends AppCompatActivity {
 
-    RecyclerView rv_verTablasActivas_aEntrenar;
-    TablaViewModel tablaViewModel;
-    ListaTablaEntrenarAdapter listaTablaEntrenarAdapter;
+    private  RecyclerView rv_verTablasActivas_aEntrenar;
+    private TablaViewModel tablaViewModel;
+    private ListaTablaEntrenarAdapter listaTablaEntrenarAdapter;
     private List<TablaLocal> tablaLocales;
-    LiveData<List<TablaLocal>> tablasLive;
+    private LiveData<List<TablaLocal>> tablasLive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -43,22 +43,22 @@ import java.util.List;
 public class VerTablaActivity extends AppCompatActivity {
     private static final int PETICION2VERTABLA = 2;
     public static final String EXTRA_TABLA_EDITAR = "chema.martinez/tablaAEditar";
-    LinearLayout ly_contenedorFilas_verTablas;
-    TextView txt_titulo_verTabla;
-    Button btn_editarguardar_verTabla;
+    private LinearLayout ly_contenedorFilas_verTablas;
+    private TextView txt_titulo_verTabla;
+    private Button btn_editarguardar_verTabla;
 
 
     private TablaEjercicioRelacionViewModel  tr;
     private EjercicioViewModel ejercicioViewModel;
     private List<EjercicioLocal> ejercicioLocals2;
     private TablaViewModel tablaViewModel;
-    List<TablaEjercicioRelacion> datosTabla;
+    private List<TablaEjercicioRelacion> datosTabla;
 
     boolean descargado = false;
     boolean editado = false;
 
-    TablaLocal tablaLocal;
-    Tabla tablaOnline;
+    private TablaLocal tablaLocal;
+    private Tabla tablaOnline;
 
     int dias = 0;
 
@@ -85,7 +85,6 @@ public class VerTablaActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TablaLocal tabla = (TablaLocal) intent.getSerializableExtra(TablaLocalViewHolder.TABLA_A_CREARTABLAACTIVITY);
         if(tabla != null){
-            System.out.println("ENTRA EN TABLA LOCAL VER");
             if(tabla.getIdTabla() <= 199) {
                 btn_editarguardar_verTabla.setEnabled(false);
                 btn_editarguardar_verTabla.setBackgroundColor(Color.parseColor("#848484"));
@@ -102,19 +101,16 @@ public class VerTablaActivity extends AppCompatActivity {
         }
          tablaOnline = (Tabla) intent.getSerializableExtra(TablaViewHolder.TABLADESCARGADA_A_CREARTABLAACTIVITY);
         if(tablaOnline != null){
-            System.out.println("ENTRA EN TABLA ONLINE VER");
             txt_titulo_verTabla.setText(tablaOnline.getNombre());
              datosTabla = tr.tablaPorIdTabla(tablaOnline.getId());
 
             if(datosTabla != null && !datosTabla.isEmpty()) {
-                System.out.println("ENTRA EN TENGO LA TABLA CRACK");
 
                 descargado = true;
                 diaMaximoEjerciico(datosTabla);
                 ponerDatosTabla(datosTabla);
                 putsLinearLayouts(dias);
             }else{
-                System.out.println("NNO TENGO LA TABLA CRACK");
                 List<TablaEjercicioRelacion> datosTablaDescargado = TablaController.obtenerTablaPorId(tablaOnline.getId());
                 if(datosTablaDescargado != null){
                     diaMaximoEjerciico(datosTablaDescargado);
@@ -134,17 +130,13 @@ public class VerTablaActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void descargarEditar(View view) {
         if(editado){// ----------------------------------------------------- EDITAR
-            System.out.println("ENTRA EN EDITADO");
             Intent intent2 = new Intent(this,CrearTablaActivity.class);
             intent2.putExtra(EXTRA_TABLA_EDITAR, (Serializable) datosTabla);
             startActivityForResult(intent2,PETICION2VERTABLA);
         }else {//-------------------------------------- TABLA GLOBAL VER
             btn_editarguardar_verTabla.setText("DESCARGAR");
             if(!descargado){  // ------------------------------ DESCARGAR BOTON
-                System.out.println("ENTRA EN DESCARGADO");
                 addTablaDatosLocal(tablaOnline);
-            }else{
-                System.out.println("NO ENTRA EN DESCARGADO");
             }
         }
     }
@@ -153,9 +145,7 @@ public class VerTablaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PETICION2VERTABLA) {
-            System.out.println("ENTRA EN PETICION2VERTABL -----------------------------------");
             if(resultCode == RESULT_OK){
-                System.out.println("RESULTO OK--------------------------------------");
                 finish();
             }else{
                 finish();
@@ -174,9 +164,8 @@ public class VerTablaActivity extends AppCompatActivity {
         if(ejercicioLocals2.isEmpty()){
             for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
                 if (ejercicioViewModel.insertarEjercicio(new EjercicioLocal(EjercicioController.getEjercicioPorId(tablaEjercicioRelacion.getIdEjercicio())))) {
-                    System.out.println("EJERCICIO DESCARGADO DB GLOBAL CORRECTAMENTE");
-                } else {
-                    System.out.println("EJERCICIO DESCARGADO DB GLOBAL MAL");
+                } else{
+
                 }
             }
 
@@ -186,9 +175,7 @@ public class VerTablaActivity extends AppCompatActivity {
                 for (EjercicioLocal ejercicioLocal : ejercicioLocals2) {
                     if (ejercicioLocal.getIdEjercicio() != tablaEjercicioRelacion.getIdEjercicio()) {
                         if (ejercicioViewModel.insertarEjercicio(new EjercicioLocal(EjercicioController.getEjercicioPorId(tablaEjercicioRelacion.getIdEjercicio())))) {
-                            System.out.println("EJERCICIO DESCARGADO DB GLOBAL CORRECTAMENTE");
                         } else {
-                            System.out.println("EJERCICIO DESCARGADO DB GLOBAL MAL");
                         }
                         break;
                     }
@@ -201,7 +188,6 @@ public class VerTablaActivity extends AppCompatActivity {
     private void addTablaDatosLocal(Tabla tabla){
         tablaLocal = new TablaLocal(tabla.getId(),tabla.getNombre(),dias,false);
             if(tablaViewModel.addTablaLocal(tablaLocal)){
-                System.out.println("----------------------" + tablaLocal.getIdTabla());
                 List<TablaEjercicioRelacion> tablaRelacion =  transformarDatosAEjercicioTabla(tablaLocal,listaDiasEjercicio);
                 if(comprobarEjerciciosLocales(tablaRelacion)){
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -222,8 +208,7 @@ public class VerTablaActivity extends AppCompatActivity {
                     adda(tablaRelacion);
                 }
             }
-            else
-                System.out.println("ERROR AL AÑADIR TABLA");
+
 
     }
 
@@ -231,7 +216,6 @@ public class VerTablaActivity extends AppCompatActivity {
     private boolean comprobarEjerciciosLocales(List<TablaEjercicioRelacion> tablaRelacion) {
         boolean comprobacion = false;
         ejercicioLocals2 = ejercicioViewModel.allEjercicios();
-        tablaRelacion.forEach(e -> System.out.println("EJERCICIO LISTA ->" + e.getIdEjercicio()));
         for (TablaEjercicioRelacion tablaEjercicioRelacion : tablaRelacion) {
             if(!ejercicioLocals2.stream().anyMatch(ejercicioLocal -> ejercicioLocal.getIdEjercicio() == tablaEjercicioRelacion.getIdEjercicio())) {
                 return true;
@@ -256,13 +240,10 @@ public class VerTablaActivity extends AppCompatActivity {
     private void adda(List<TablaEjercicioRelacion> tablaRelacion){
 
         if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
-            System.out.println("AÑADIDO CORRECTAMENTE");
             finish();
         }else{
             if(tablaViewModel.borrarTabla(tablaLocal)){
-                System.out.println("TABLA BORRADA");
             }else {
-                System.out.println("ERROR AL BORRAR TABLA");
             }
         }
     }
@@ -347,11 +328,11 @@ public class VerTablaActivity extends AppCompatActivity {
             case 3:
                 return Color.parseColor("#CCC5C816");//AMARILLO
             case 4:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CCFF8700"); // NARANJA
             case 5:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CC00FFFF");
             case 6:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CCF000FF");
             default:
                 return Color.parseColor("#CCFFFFFF");
         }

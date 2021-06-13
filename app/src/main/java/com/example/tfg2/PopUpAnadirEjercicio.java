@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
@@ -113,11 +114,14 @@ public class PopUpAnadirEjercicio extends AppCompatActivity {
         if(ejercicioInfoRecibido ==null) {
            if(imagenByte != null){
                 ejercicio.setImageMusculo(imagen);
-                if(ejercicio.getImageMusculo() != null)
-                System.out.println("IMAGENES DEL EJERCICIO NO NULO");
+
            }
-            AnadirEjercicio.addEjercicioLista(new EjercicioInfo(ejercicio, Integer.valueOf(number_numeroSeries_popUpAnadirEjercicio.getText().toString()), Integer.valueOf(number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString())));
-            finish();
+           if(number_numeroSeries_popUpAnadirEjercicio.getText().toString().isEmpty() || number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString().isEmpty()){
+               Toast.makeText(this, "Rellene los campos", Toast.LENGTH_SHORT).show();
+           }else {
+               AnadirEjercicio.addEjercicioLista(new EjercicioInfo(ejercicio, Integer.valueOf(number_numeroSeries_popUpAnadirEjercicio.getText().toString()), Integer.valueOf(number_numeroRepeticiones_popUpAnadirEjercicio.getText().toString())));
+               finish();
+           }
         }
         if(ejercicioInfoRecibido != null){
             finish();

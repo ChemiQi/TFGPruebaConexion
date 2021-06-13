@@ -11,35 +11,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG2">
-        <activity android:name=".EntrenamientoActivity"></activity>
-        <activity android:name=".PantallaPrincipalActivity" />
-        <activity android:name=".PonerDatosPorEjercicioActivity" />
-        <activity android:name=".SeleccionarGrupoEjerciciosActivity" />
-        <activity android:name=".PonerDatosActivity" />
-        <activity android:name=".EntrenarActivity" />
-        <activity android:name=".PopUpActivarTabla" />
-        <activity android:name=".VerTablaActivity" />
-        <activity android:name=".PopUpAnadirTabla" />
-        <activity android:name=".TablasEjercicios">
-
-        </activity>
-        <activity android:name=".CrearEjercicio" />
-        <activity android:name=".PopUpAnadirEjercicio" />
-        <activity android:name=".AnadirEjercicio" />
-        <activity android:name=".CrearTablaActivity" />
-        <activity android:name=".TablasMenu">
-
-        </activity>
-        <activity android:name=".MenuActivity">
-
-        </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".PreguntaConexionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".EntrenamientoActivity" />
+        <activity android:name=".PantallaPrincipalActivity" />
+        <activity
+            android:name=".PonerDatosPorEjercicioActivity"
+            android:theme="@style/Theme.TFG2.temaPopUp" />
+        <activity android:name=".SeleccionarGrupoEjerciciosActivity" />
+        <activity android:name=".PonerDatosActivity" />
+        <activity android:name=".EntrenarActivity" />
+        <activity
+            android:name=".PopUpActivarTabla"
+            android:theme="@style/Theme.TFG2.temaPopUp" />
+        <activity android:name=".VerTablaActivity" />
+        <activity
+            android:name=".PopUpAnadirTabla"
+            android:theme="@style/Theme.TFG2.temaPopUp" />
+        <activity android:name=".TablasEjercicios"></activity>
+        <activity android:name=".CrearEjercicio" />
+        <activity
+            android:name=".PopUpAnadirEjercicio"
+            android:theme="@style/Theme.TFG2.temaPopUp"></activity>
+        <activity android:name=".AnadirEjercicio" />
+        <activity android:name=".CrearTablaActivity" />
+        <activity android:name=".TablasMenu"></activity>
+        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

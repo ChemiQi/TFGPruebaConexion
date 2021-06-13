@@ -32,13 +32,13 @@ import java.util.stream.Collectors;
 
 
 public class TablasTablasLocales extends Fragment {
-    View vista;
-    RecyclerView rv_verTablasDescargadas_TablasLocales;
-    TablaViewModel tablaViewModel;
-    ListaTablaLocalAdapter listaTablaLocalAdapter;
+    private View vista;
+    private RecyclerView rv_verTablasDescargadas_TablasLocales;
+    private TablaViewModel tablaViewModel;
+    private ListaTablaLocalAdapter listaTablaLocalAdapter;
     private List<TablaLocal> tablaLocales;
     private TablaEjercicioRelacionViewModel tr;
-    Context context;
+    private Context context;
     private LiveData<List<TablaLocal>> tablasLive;
 
     public TablasTablasLocales() {

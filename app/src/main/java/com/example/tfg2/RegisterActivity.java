@@ -12,12 +12,14 @@ import android.widget.Toast;
 import com.example.tfg2.user.clases.User;
 import com.example.tfg2.user.controladores.UserController;
 
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
     //VARIABLES DRAWABLE
-    EditText edt_name_crearcuenta;
-    EditText edt_email_crearcuenta;
-    EditText edt_pass_crearcuenta;
-    EditText edt_passrepeat_crearcuenta;
+    private EditText edt_name_crearcuenta;
+    private EditText edt_email_crearcuenta;
+    private EditText edt_pass_crearcuenta;
+    private EditText edt_passrepeat_crearcuenta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +42,20 @@ public class RegisterActivity extends AppCompatActivity {
         String nameUser = edt_name_crearcuenta.getText().toString();
         String password = edt_pass_crearcuenta.getText().toString();
         String email = edt_email_crearcuenta.getText().toString();
-        User user = new User(nameUser,email,password);
+        if(validate()) {
+            User user = new User(nameUser, email, password);
 
-        if(UserController.newUser(user)){
-            finish();
-        }else{
-            Toast.makeText(this, "Error al crear usuario", Toast.LENGTH_SHORT).show();
+            if (UserController.newUser(user)) {
+                finish();
+            } else {
+                Toast.makeText(this, "Error al crear usuario", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
 
     private boolean validate(){
+
         boolean validate = true;
         String user = edt_name_crearcuenta.getText().toString();
         String password = edt_pass_crearcuenta.getText().toString();

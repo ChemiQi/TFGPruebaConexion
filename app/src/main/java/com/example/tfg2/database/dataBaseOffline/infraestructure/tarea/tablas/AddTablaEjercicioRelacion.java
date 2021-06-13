@@ -19,7 +19,7 @@ public class AddTablaEjercicioRelacion implements Callable {
             TablaEjercicioRelacionRepository.mEjercicioTablaDao.inserts(tablaEjercicioRelacions);
             return true;
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR muchas Tabla local");
+
             return false;
         }
     }

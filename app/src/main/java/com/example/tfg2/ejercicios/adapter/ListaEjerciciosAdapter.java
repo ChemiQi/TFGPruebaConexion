@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHolder> {
     private Context c;
     private ArrayList<Ejercicio> listaEjercicios;
-   // private ArrayList<FotoEjercicio> listaFotosEjercicio;
+
     private LayoutInflater mInflater;
 
     public Context getC() {
@@ -37,14 +37,6 @@ public class ListaEjerciciosAdapter extends RecyclerView.Adapter<EjercicioViewHo
     public void setListaEjercicios(ArrayList<Ejercicio> listaEjercicios) {
         this.listaEjercicios = listaEjercicios;
     }
-
-   /* public ArrayList<FotoEjercicio> getListaFotosEjercicio() {
-        return listaFotosEjercicio;
-    }
-
-    public void setListaFotosEjercicio(ArrayList<FotoEjercicio> listaFotosEjercicio) {
-        this.listaFotosEjercicio = listaFotosEjercicio;
-    }*/
 
     public LayoutInflater getmInflater() {
         return mInflater;

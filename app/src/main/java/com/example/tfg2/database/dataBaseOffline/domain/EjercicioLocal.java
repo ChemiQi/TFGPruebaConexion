@@ -18,17 +18,16 @@ public class EjercicioLocal  implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    int idEjercicio;
-    //@NonNull
-    //int idUser;
-    @NonNull
-    String nombreMusculo;
-    @NonNull
-    String nombre;
-    @NonNull
-    String descripcion;
+    private int idEjercicio;
 
-    Boolean created;
+    @NonNull
+    private String nombreMusculo;
+    @NonNull
+    private String nombre;
+    @NonNull
+    private String descripcion;
+
+    private Boolean created;
 
     byte [] imagenEjercicio;
 

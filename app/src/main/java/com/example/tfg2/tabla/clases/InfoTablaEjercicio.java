@@ -6,10 +6,10 @@ import com.example.tfg2.user.clases.User;
 import java.util.List;
 
 public class InfoTablaEjercicio {
-    User user;
-    int idTabla;
-    List<EjercicioInfo> listaEjercicios;
-    int dia;
+    private User user;
+    private int idTabla;
+    private List<EjercicioInfo> listaEjercicios;
+    private int dia;
 
     public InfoTablaEjercicio(User user, int idTabla, List<EjercicioInfo> listaEjercicios, int dia) {
         this.user = user;

@@ -18,7 +18,6 @@ public class TareaAddTablaLocal implements Callable {
             TablaRepository.daoTablaLocal.insert(tablaLocal);
             return true;
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR Tabla local");
             return false;
         }
     }

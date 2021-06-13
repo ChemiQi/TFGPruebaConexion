@@ -44,22 +44,22 @@ public class SeleccionarGrupoEjerciciosActivity extends AppCompatActivity {
     public static final String EXTRA_TABLA_PONERDATOS = "chema.martinez/datosTablaAgregarDatos";
 
 
-    LinearLayout ly_contenedorFilas_verGrupoEjercicio;
-    TextView txt_titulo_verGrupoEjercicios;
+    private LinearLayout ly_contenedorFilas_verGrupoEjercicio;
+    private TextView txt_titulo_verGrupoEjercicios;
 
-    Button btn_cancerlar_verGrupoEjercicio;
+    private Button btn_cancerlar_verGrupoEjercicio;
 
     private TablaEjercicioRelacionViewModel tr;
     private EjercicioViewModel ejercicioViewModel;
     private List<EjercicioLocal> ejercicioLocals2;
     private TablaViewModel tablaViewModel;
-    List<TablaEjercicioRelacion> datosTabla;
+    private List<TablaEjercicioRelacion> datosTabla;
 
 
 
 
-    TablaLocal tabla;
-    Tabla tablaOnline;
+    private TablaLocal tabla;
+    private Tabla tablaOnline;
 
     int dias = 0;
 
@@ -211,11 +211,11 @@ public class SeleccionarGrupoEjerciciosActivity extends AppCompatActivity {
             case 3:
                 return Color.parseColor("#CCC5C816");//AMARILLO
             case 4:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CCFF8700"); // NARANJA
             case 5:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CC00FFFF");
             case 6:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CCF000FF");
             default:
                 return Color.parseColor("#CCFFFFFF");
         }

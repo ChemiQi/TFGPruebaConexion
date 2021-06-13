@@ -55,11 +55,7 @@ public class PopUpActivarTabla extends AppCompatActivity {
         }else{
             tablaEjercicioRelacionInfoViewModel= ViewModelProviders.of(this).get(TablaEjercicoRelacionInfoViewModel.class);
             tablaLocal.setActive(false);
-            System.out.println("ENTRA PARA DESACTIVAR");
             tablaEjercicioRelacionInfoViewModel.borrarDatosPorTabla(tablaLocal.getIdTabla());
-            for(TablaEjercicioRelacionInfo e :tablaEjercicioRelacionInfoViewModel.obtenerDatos()){
-                System.out.println("------------------------------" + e.getIdTabla());
-            }
             tablaViewModel.updateTablaLocal(tablaLocal);
             finish();
         }

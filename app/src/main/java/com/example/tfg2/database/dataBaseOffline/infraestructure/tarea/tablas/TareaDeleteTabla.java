@@ -18,7 +18,6 @@ public class TareaDeleteTabla implements Callable {
             TablaRepository.daoTablaLocal.delete(tablaLocal);
             return true;
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR muchas Tabla local");
             return false;
         }
     }

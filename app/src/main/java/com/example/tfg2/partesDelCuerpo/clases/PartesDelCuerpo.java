@@ -3,8 +3,8 @@ package com.example.tfg2.partesDelCuerpo.clases;
 import java.io.Serializable;
 
 public class PartesDelCuerpo implements Serializable {
-    int id;
-    String nombre;
+    private int id;
+    private String nombre;
 
     public PartesDelCuerpo(int id) {
         this.id = id;

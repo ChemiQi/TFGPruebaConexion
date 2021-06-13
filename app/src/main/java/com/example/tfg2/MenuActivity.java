@@ -10,10 +10,6 @@ import android.widget.Button;
 import com.example.tfg2.user.clases.CurrentUser;
 
 public class MenuActivity extends AppCompatActivity {
-    Button btn_aEntrenar_menu;
-    Button btn_verCalenadrio_menu;
-    Button btn_crearTabla_menu;
-    Button btn_ajustes_menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

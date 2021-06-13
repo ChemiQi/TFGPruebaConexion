@@ -11,7 +11,6 @@ public class TareaGetLastTabla implements Callable {
 
             return TablaRepository.daoTablaLocal.conseguirUltimaTabla();
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR EJERCICIO");
             return null;
         }
     }

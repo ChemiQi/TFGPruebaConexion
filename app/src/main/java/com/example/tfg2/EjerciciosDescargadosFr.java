@@ -39,10 +39,10 @@ public class EjerciciosDescargadosFr extends Fragment  {
     private ImageButton btn_anadirEjercicio_ejerciciosLocalesFr;
     private List<EjercicioLocal> ejercicioLocales;
     private RecyclerView rv_verEjerciciosDescargados_ejerciciosDescargadosFr;
-    ListaEjerciciosLocalesAdapter listaEjerciciosLocalesAdapter;
-    EjercicioViewModel ejercicioViewModel;
-    LiveData<List<EjercicioLocal>> ejerciciosLive;
-    TablaEjercicioRelacionViewModel tablaEjercicioRelacionViewModel;
+    private ListaEjerciciosLocalesAdapter listaEjerciciosLocalesAdapter;
+    private EjercicioViewModel ejercicioViewModel;
+    private LiveData<List<EjercicioLocal>> ejerciciosLive;
+    private TablaEjercicioRelacionViewModel tablaEjercicioRelacionViewModel;
     public EjerciciosDescargadosFr() {
         // Required empty public constructor
     }
@@ -88,7 +88,7 @@ public class EjerciciosDescargadosFr extends Fragment  {
 
 
     private void funcionArrastrar(){
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT,  ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 int from = viewHolder.getAdapterPosition();
@@ -118,17 +118,32 @@ public class EjerciciosDescargadosFr extends Fragment  {
             public void onClick(DialogInterface dialog, int which) {
 
                 if(i == 1){
-                    System.out.println("ACCION MOVER DERECHA");
                 }else if(i == 2){
 
-                    System.out.println("ACCION MOVER IZQ");
                     if(tablaEjercicioRelacionViewModel.comprobarEjercicioEnUso(ejercicioLocal.getIdEjercicio())){
-                        //TODO AVISO
-                        System.out.println("NO PUEDES BORRARLO PORQUE ESTA EN USO");
+                        AlertDialog.Builder alerta2 = new AlertDialog.Builder(vista.getContext());
+                        alerta2.setTitle("Error al borrar");
+                        alerta2.setMessage("Tabla en uso, desactivala para borrar");
+                        alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alerta2.show();
                     }else{
                         if(ejercicioViewModel.borrarEjercicioLocal(ejercicioLocal.getIdEjercicio())){
                             //TODO MENSAJE BORRADO CORRECTO
-                            System.out.println("BORRADO OK");
+                            AlertDialog.Builder alerta2 = new AlertDialog.Builder(vista.getContext());
+                            alerta2.setTitle("Borrado correctamente");
+                            alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            alerta2.show();
+
                         }else {
                             System.out.println("ERROR AL BORRAR");
                         }
@@ -146,6 +161,7 @@ public class EjerciciosDescargadosFr extends Fragment  {
         });
         alerta.show();
     }
+
 
 
 }

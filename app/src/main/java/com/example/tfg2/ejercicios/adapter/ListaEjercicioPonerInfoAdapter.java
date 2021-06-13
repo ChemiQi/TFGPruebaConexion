@@ -95,7 +95,7 @@ public class ListaEjercicioPonerInfoAdapter extends RecyclerView.Adapter<Ejercic
 
     @Override
     public int getItemCount() {
-        //System.out.println(listaTablaEjercicioRelacionInfo.size());
+
         try{
             if(listaTablaEjercicioRelacionInfo.size() != 0){
                 return listaTablaEjercicioRelacionInfo.size();

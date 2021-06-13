@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PonerDatosPorEjercicioActivity extends AppCompatActivity {
-    TextView txt_nombreEjercicio_ponerDatosPorEjercicio;
-    RecyclerView rv_datosEjercicio_ponerDatosPorEjercicio;
-    List<TablaEjercicioRelacionInfo> listaDeDatos;
-    ListaEjercicioDatosAdapter listaTablaLocalAdapter;
+    private TextView txt_nombreEjercicio_ponerDatosPorEjercicio;
+    private RecyclerView rv_datosEjercicio_ponerDatosPorEjercicio;
+    private List<TablaEjercicioRelacionInfo> listaDeDatos;
+    private ListaEjercicioDatosAdapter listaTablaLocalAdapter;
     private TablaEjercicoRelacionInfoViewModel te;
     private TablaEjercicioRelacionViewModel tablaEjercicioRelacionViewModel;
     private TablaEjercicioRelacion tablaEjercicioRelacion;

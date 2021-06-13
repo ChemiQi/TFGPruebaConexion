@@ -17,6 +17,7 @@ import com.example.tfg2.CrearEjercicio;
 import com.example.tfg2.EjerciciosLocalesFr;
 import com.example.tfg2.R;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
+import com.example.tfg2.database.modelos.BaseDB;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
 import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
@@ -49,59 +50,66 @@ public class ListaEjerciciosLocalesViewHolder extends RecyclerView.ViewHolder im
         btn_subirArchivos_itmeEjerciciosLocales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alerta = new AlertDialog.Builder(viewLocal.getContext());
-                EjercicioLocal ejercicioLocal2 = listaEjerciciosAdapter.getListaEjerciciosLocales().get(getLayoutPosition());
-                alerta.setTitle("Subir ejercicio");
-                alerta.setMessage("¿Quíeres añadir este ejercicio? \n" +  ejercicioLocal2.getNombre());
-                alerta.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(!EjercicioController.comprobarEjercicioUser(ejercicioLocal2, 1)) {
-                            System.out.println("NO REPETIDO, AÑADIRA EJERCICO");
-                            EjercicioController.addEjercicioUser(ejercicioLocal2);
-                        }else {
-                            AlertDialog.Builder alertaEjercicioRepetido = new AlertDialog.Builder(viewLocal.getContext());
-                            alerta.setTitle("Ejercicio repetido");
-                            alertaEjercicioRepetido.setMessage("Ejercicio con el mismo nombre. ¿Quieres subirlo igualmente?");
-                            alertaEjercicioRepetido.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    EjercicioController.addEjercicioUser(ejercicioLocal2);
-                                }
-                            });
-                            alertaEjercicioRepetido.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                if(BaseDB.isInternet() == true) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(viewLocal.getContext());
+                    EjercicioLocal ejercicioLocal2 = listaEjerciciosAdapter.getListaEjerciciosLocales().get(getLayoutPosition());
+                    alerta.setTitle("Subir ejercicio");
+                    alerta.setMessage("¿Quíeres añadir este ejercicio? \n" + ejercicioLocal2.getNombre());
+                    alerta.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!EjercicioController.comprobarEjercicioUser(ejercicioLocal2, 1)) {
+                                EjercicioController.addEjercicioUser(ejercicioLocal2);
+                            } else {
+                                AlertDialog.Builder alertaEjercicioRepetido = new AlertDialog.Builder(viewLocal.getContext());
+                                alerta.setTitle("Ejercicio repetido");
+                                alertaEjercicioRepetido.setMessage("Ejercicio con el mismo nombre. ¿Quieres subirlo igualmente?");
+                                alertaEjercicioRepetido.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        EjercicioController.addEjercicioUser(ejercicioLocal2);
+                                    }
+                                });
+                                alertaEjercicioRepetido.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                                }
-                            });
-                            alertaEjercicioRepetido.show();
+                                    }
+                                });
+                                alertaEjercicioRepetido.show();
+                            }
                         }
-                    }
 
-                });
+                    });
 
 
-                alerta.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    alerta.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-                alerta.show();
+                        }
+                    });
+                    alerta.show();
+                }else{
+                    AlertDialog.Builder alertaNoInterneto = new AlertDialog.Builder(viewLocal.getContext());
+                    alertaNoInterneto.setTitle("Conexion");
+                    alertaNoInterneto.setMessage("No hay conexion a internet");
+                    alertaNoInterneto.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    });
+                    alertaNoInterneto.show();
+                }
             }
         });
+
     }
+
 
     @Override
     public void onClick(View v) {
-       /* int mPosition = getLayoutPosition();
-        EjercicioLocal ejercicio =eAdapter.getListaEjerciciosLocales().get(mPosition);
-
-        Intent intent = new Intent(eAdapter.getC(), CrearEjercicio.class);
-        intent.putExtra(EXTRA_OBJETO_EJERCICIOLOCAL,ejercicio);
-        eAdapter.getC().startActivity(intent);*/
 
     }
 

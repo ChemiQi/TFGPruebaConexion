@@ -37,9 +37,9 @@ public class CrearEjercicio extends AppCompatActivity {
     private EditText edt_descripcionEjercicio_crearEjercicio;
 
     private String parteDelCuerpoSeleccionado;
-    String musculoSeleccionado;
+    private String musculoSeleccionado;
 
-    EjercicioViewModel ejercicioViewModel;
+    private EjercicioViewModel ejercicioViewModel;
 
 
 

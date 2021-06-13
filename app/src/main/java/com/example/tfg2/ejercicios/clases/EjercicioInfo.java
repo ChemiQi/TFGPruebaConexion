@@ -17,7 +17,6 @@ public class EjercicioInfo  implements Serializable {
         this.ejercicio = ejercicio;
         this.series = series;
         this.repeticiones = repeticiones;
-        //IMAGEN EJERCIICO
     }
 
     public EjercicioInfo() {

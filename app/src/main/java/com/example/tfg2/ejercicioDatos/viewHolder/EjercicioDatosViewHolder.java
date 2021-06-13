@@ -39,7 +39,6 @@ public class EjercicioDatosViewHolder extends RecyclerView.ViewHolder{
                     tablaEjercicioRelacionInfo.setRepeticiones(Integer.valueOf(String.valueOf(edt_repHechas_itemDatosEjercicio.getText())));
 
                     if(listaEjercicioDatosAdapter.getTe().actualizarDatos(tablaEjercicioRelacionInfo)){
-                        System.out.println("ACTUALIZADO OK");
                     }
 
                 }

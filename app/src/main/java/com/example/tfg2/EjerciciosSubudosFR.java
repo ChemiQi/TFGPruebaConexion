@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
@@ -43,10 +44,10 @@ public class EjerciciosSubudosFR extends Fragment {
     private View vista;
 
     private RecyclerView rv_verEjerciciosSubidos_ejerciciosSubidosFr;
-   private ListaEjerciciosAdapter eAdapter;
-   private ImageButton btn_actualizar_ejecicioSubidosFr2;
+    private ListaEjerciciosAdapter eAdapter;
+    private ImageButton btn_actualizar_ejecicioSubidosFr2;
     private Context context;
-    ArrayList<Ejercicio> ejerciciosSubidos;
+    private ArrayList<Ejercicio> ejerciciosSubidos;
 
     private static final int PETICION4 = 1;
     public EjerciciosSubudosFR() {
@@ -94,7 +95,7 @@ public class EjerciciosSubudosFR extends Fragment {
     }
 
     private void funcionArrastrar(){
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT,  ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 int from = viewHolder.getAdapterPosition();
@@ -117,18 +118,15 @@ public class EjerciciosSubudosFR extends Fragment {
     private void mostrarAlerta(RecyclerView.ViewHolder viewHolder, String mensaje,int i) {
         AlertDialog.Builder alerta = new AlertDialog.Builder(vista.getContext());
         Ejercicio ejercicioLocal = ejerciciosSubidos.get(viewHolder.getAdapterPosition());
-        System.out.println(ejercicioLocal.getIdEjercicio() + "------------------------------------------------------");
         alerta.setTitle(mensaje + "\n" +ejercicioLocal.getNombreEjercicio() );
         alerta.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 if(i == 1){
-                    System.out.println("ACCION MOVER DERECHA");
                 }else if(i == 2){
                     if(EjercicioController.borrarEjercicioPorId(ejercicioLocal.getIdEjercicio())){
-                        System.out.println("MENSAJE BORRADO CORRECTAMENTE");
-
+                        toast("Borrado correctamente");
                     }else{
                         System.out.println("ERROR AL BORRAR");
                     }
@@ -143,5 +141,9 @@ public class EjerciciosSubudosFR extends Fragment {
             }
         });
         alerta.show();
+    }
+
+    private void toast(String texto){
+        Toast.makeText(vista.getContext(), texto, Toast.LENGTH_SHORT).show();
     }
 }

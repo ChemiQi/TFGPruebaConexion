@@ -10,15 +10,15 @@ import java.io.Serializable;
 public class TablaLocal implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    int idTabla;
+    private int idTabla;
     @NonNull
-    String nombre;
+    private String nombre;
 
-    int dias;
+    private int dias;
 
-    Boolean created;
+    private Boolean created;
 
-    Boolean active;
+    private Boolean active;
 
     public TablaLocal() {
     }

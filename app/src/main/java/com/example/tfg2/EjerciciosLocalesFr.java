@@ -42,11 +42,11 @@ public class EjerciciosLocalesFr extends Fragment {
     private ImageButton btn_anadirEjercicio_ejerciciosLocalesFr;
     private List<EjercicioLocal> ejercicioLocales;
     private RecyclerView rv_verEjerciciosLocales_ejerciciosLocalesFr;
-    ListaEjerciciosLocalesAdapter listaEjerciciosLocalesAdapter;
-    LiveData<List<EjercicioLocal>> ejerciciosLive;
-    TablaEjercicioRelacionViewModel tablaEjercicioRelacionViewModel;
+    private ListaEjerciciosLocalesAdapter listaEjerciciosLocalesAdapter;
+    private LiveData<List<EjercicioLocal>> ejerciciosLive;
+    private TablaEjercicioRelacionViewModel tablaEjercicioRelacionViewModel;
 
-    EjercicioViewModel ejercicioViewModel;
+    private EjercicioViewModel ejercicioViewModel;
 
     private static final int PETICION3 = 1;
     public EjerciciosLocalesFr() {
@@ -139,12 +139,27 @@ public class EjerciciosLocalesFr extends Fragment {
 
                     System.out.println("ACCION MOVER IZQ");
                     if(tablaEjercicioRelacionViewModel.comprobarEjercicioEnUso(ejercicioLocal.getIdEjercicio())){
-                        //TODO AVISO
-                        System.out.println("NO PUEDES BORRARLO PORQUE ESTA EN USO");
+                        AlertDialog.Builder alerta2 = new AlertDialog.Builder(vista.getContext());
+                        alerta2.setTitle("Error al borrar");
+                        alerta2.setMessage("Tabla en uso, desactivala para borrar");
+                        alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alerta2.show();
                     }else{
                         if(ejercicioViewModel.borrarEjercicioLocal(ejercicioLocal.getIdEjercicio())){
-                            //TODO MENSAJE BORRADO CORRECTO
-                            System.out.println("BORRADO OK");
+                            AlertDialog.Builder alerta2 = new AlertDialog.Builder(vista.getContext());
+                            alerta2.setTitle("Borrado correctamente");
+                            alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            alerta2.show();
                         }else {
                             System.out.println("ERROR AL BORRAR");
                         }

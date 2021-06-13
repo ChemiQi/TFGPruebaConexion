@@ -47,24 +47,24 @@ public class CrearTablaActivity extends AppCompatActivity {
     public static final String EXTRA_POSITIONDIA = "";
     public static final int PETICION4 = 3;
     private static final String NOMBRE_TABLA_LOCAL = "chema.martinez/nombreTablaLocalEncontrado";
-    LinearLayout ly_contenedorFilas_crearTabla;
-    Spinner sp_diasEntreno_crearTabla;
-    ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
-    int diasSeleccionados = 0;
+    private LinearLayout ly_contenedorFilas_crearTabla;
+    private Spinner sp_diasEntreno_crearTabla;
+    private ArrayList<ArrayList<EjercicioInfo>> listaDiasEjercicio = new ArrayList<>(); //-- cadad dia tendra una lista distinta de ejercicios
+    private int diasSeleccionados = 0;
     private String nombreTabla = "";
 
     private TablaViewModel tablaViewModel;
     private TablaEjercicioRelacionViewModel  tr;
     private EjercicioViewModel ejercicioViewModel;
-    List<EjercicioLocal> ejercicioLocals2;
-    List<TablaEjercicioRelacion> datosRecibidosTabla;
-    TablaLocal tablaLocal;
+    private List<EjercicioLocal> ejercicioLocals2;
+    private List<TablaEjercicioRelacion> datosRecibidosTabla;
+    private TablaLocal tablaLocal;
 
 
-    boolean editar = false;
+    private boolean editar = false;
 
 
-    int position;
+    private int position;
 
     // AL ENTRAR CREO UNA TABLA , CON UN OBJETO --- InfoTablaEjercicio, crear al dar al boton de guardar
 
@@ -113,13 +113,10 @@ public class CrearTablaActivity extends AppCompatActivity {
         Intent intentFromVerTabla = getIntent();
         datosRecibidosTabla = (List<TablaEjercicioRelacion>) intentFromVerTabla.getSerializableExtra(VerTablaActivity.EXTRA_TABLA_EDITAR);
         if(datosRecibidosTabla != null){
-            System.out.println("RECIBIDO CORRECTAMENTE");
             diaMaximoEjerciico(datosRecibidosTabla);
             ponerDatosTabla(datosRecibidosTabla);
             editar = true;
             tablaLocal = tablaViewModel.obtenerTablaPorId(datosRecibidosTabla.get(0).getIdTabla());
-        }else{
-            System.out.println("ERROR AL RECIBIR");
         }
 
 //------------------------------------------------------------------------//
@@ -221,11 +218,11 @@ public class CrearTablaActivity extends AppCompatActivity {
             case 3:
                 return Color.parseColor("#CCC5C816");//AMARILLO
             case 4:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CCFF8700"); // NARANJA
             case 5:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CC00FFFF");
             case 6:
-                return Color.parseColor("#CCFF0000");
+                return Color.parseColor("#CCF000FF");
             default:
                 return Color.parseColor("#CCFFFFFF");
         }
@@ -257,7 +254,6 @@ public class CrearTablaActivity extends AppCompatActivity {
                     tablaLocal.setIdTabla(200);
                 }
                 if (tablaViewModel.addTablaLocal(tablaLocal)) {
-                    System.out.println("----------------------" + tablaLocal.getIdTabla());
                     tablaLocal = tablaViewModel.obtenerUltimaTabla();
                     List<TablaEjercicioRelacion> tablaRelacion = transformarDatosAEjercicioTabla(tablaLocal, listaDiasEjercicio);
                     if (comprobarEjerciciosLocales(tablaRelacion)) {

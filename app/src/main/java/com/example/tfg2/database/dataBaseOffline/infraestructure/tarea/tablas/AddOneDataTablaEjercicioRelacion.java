@@ -17,7 +17,6 @@ public class AddOneDataTablaEjercicioRelacion implements Callable {
             TablaEjercicioRelacionRepository.mEjercicioTablaDao.insert(tablaEjercicioRelacion);
             return true;
         }catch (Exception e){
-            System.out.println("ERROR AL INSERTAR Tabla local");
             return false;
         }
     }

@@ -19,8 +19,8 @@ import com.example.tfg2.user.modelos.UserDB;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_USERNAME_STRING ="" ;
-    EditText edt_username_login;
-    EditText edt_pass_login;
+    private EditText edt_username_login;
+    private EditText edt_pass_login;
     private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
