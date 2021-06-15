@@ -35,8 +35,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_datosEjercicio_ponerDatosPorEjercicio"
         android:layout_width="354dp"
-        android:layout_height="307dp"
-        android:layout_margin="5sp" >
+        android:layout_height="249dp"
+        android:layout_margin="5sp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

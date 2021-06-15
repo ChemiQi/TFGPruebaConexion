@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
@@ -40,9 +41,7 @@ public class CrearEjercicio extends AppCompatActivity {
     private String musculoSeleccionado;
 
     private EjercicioViewModel ejercicioViewModel;
-
-
-
+    private ProgressBar progresBarAñadirEJercicio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,10 @@ public class CrearEjercicio extends AppCompatActivity {
         sp_musculos_crearEjercicio = (Spinner) findViewById(R.id.sp_musculos_crearEjercicio);
         edt_descripcionEjercicio_crearEjercicio = (EditText) findViewById(R.id.edt_descripcionEjercicio_crearEjercicio);
         edt_nombreEjercicio_crearEjercicio = (EditText)findViewById(R.id.edt_nombreEjercicio_crearEjercicio);
-
+        progresBarAñadirEJercicio = (ProgressBar) findViewById(R.id.progresBarAñadirEJercicio);
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
+
+        progresBarAñadirEJercicio.setVisibility(View.INVISIBLE);
 
 
         obtenerPartesDelCuerpo();
@@ -154,20 +155,28 @@ public class CrearEjercicio extends AppCompatActivity {
                     });
                     alerta.show();
                 } else {
-                    EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado, String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()), String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
-                            true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
-                    if (ejercicioViewModel.obtenerIdEjercicio() < 200) {
-                        ejercicioLocal.setIdEjercicio(200);
-                    }
-                    ejercicioViewModel.insertarEjercicio(ejercicioLocal);
-                    finish();
+                    progresBarAñadirEJercicio.setVisibility(View.VISIBLE);
+                    hiloCrearEjercicio();
                 }
             }
         }
 
     }
 
-
+    private void hiloCrearEjercicio(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EjercicioLocal ejercicioLocal = new EjercicioLocal(musculoSeleccionado, String.valueOf(edt_nombreEjercicio_crearEjercicio.getText()), String.valueOf(edt_descripcionEjercicio_crearEjercicio.getText()),
+                        true, ImagenesBlobBitmap.bitmap_to_bytes(imagenSeleccionada));
+                if (ejercicioViewModel.obtenerIdEjercicio() < 200) {
+                    ejercicioLocal.setIdEjercicio(200);
+                }
+                ejercicioViewModel.insertarEjercicio(ejercicioLocal);
+                finish();
+            }
+        }).start();
+    }
     // METODOS-------------------------------------------------------------------
 
     private void obtenerPartesDelCuerpo(){
