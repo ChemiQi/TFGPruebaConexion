@@ -27,7 +27,9 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicoInfoEnTablaAdapter;
+import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.ejercicios.clases.EjercicioInfo;
+import com.example.tfg2.ejercicios.clases.EjercicioYPosicion;
 import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.tabla.clases.Tabla;
 import com.example.tfg2.tabla.controladores.TablaController;
@@ -95,8 +97,14 @@ public class VerTablaActivity extends AppCompatActivity {
             txt_titulo_verTabla.setText(tabla.getNombre());
             if(datosTabla != null) {
                 diaMaximoEjerciico(datosTabla);
-                ponerDatosTabla(datosTabla);
-                putsLinearLayouts(dias);
+                if(ponerDatosTabla(datosTabla)){
+                    putsLinearLayouts(dias);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Error");
+                    builder.setMessage("No tienes internet ni ejercicios descargados, no se mostrarán los ejercicios");
+                    builder.show();
+                }
             }
         }
          tablaOnline = (Tabla) intent.getSerializableExtra(TablaViewHolder.TABLADESCARGADA_A_CREARTABLAACTIVITY);
@@ -105,8 +113,8 @@ public class VerTablaActivity extends AppCompatActivity {
              datosTabla = tr.tablaPorIdTabla(tablaOnline.getId());
 
             if(datosTabla != null && !datosTabla.isEmpty()) {
-
                 descargado = true;
+
                 diaMaximoEjerciico(datosTabla);
                 ponerDatosTabla(datosTabla);
                 putsLinearLayouts(dias);
@@ -248,19 +256,33 @@ public class VerTablaActivity extends AppCompatActivity {
         }
     }
 
-    private void ponerDatosTabla(List<TablaEjercicioRelacion> datosTabla) {
+    private boolean ponerDatosTabla(List<TablaEjercicioRelacion> datosTabla) {
         for(TablaEjercicioRelacion e :datosTabla){
-            listaDiasEjercicio.get(e.getDia()).add(ejercicioPosicionDesdeTablaEjercicioRelacion(e));
+            try {
+                EjercicioInfo ejercicioYPosicion = ejercicioPosicionDesdeTablaEjercicioRelacion(e);
+                if(ejercicioYPosicion==null){
+                    return false;
+                }
+                listaDiasEjercicio.get(e.getDia()).add(ejercicioYPosicion);
+            }catch (Exception e2){
+
+                return false;
+            }
         }
+        return true;
     }
 
     private EjercicioInfo ejercicioPosicionDesdeTablaEjercicioRelacion(TablaEjercicioRelacion e) {
         EjercicioLocal ejercicioLocal = null;
-
-
             ejercicioLocal = ejercicioViewModel.obtenerejercicioPorId(e.getIdEjercicio());
             if(ejercicioLocal == null) {
-                ejercicioLocal = new EjercicioLocal(EjercicioController.getEjercicioPorId(e.getIdEjercicio()));
+                Ejercicio ejercicio = EjercicioController.getEjercicioPorId(e.getIdEjercicio());
+                if(ejercicio != null) {
+                    ejercicioLocal = new EjercicioLocal(ejercicio);
+                }else{
+                    return null;
+
+                }
             }
         if(ejercicioLocal != null){
             return new EjercicioInfo(ejercicioLocal,e);

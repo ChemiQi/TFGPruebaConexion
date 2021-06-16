@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
@@ -36,6 +37,7 @@ public class CrearEjercicio extends AppCompatActivity {
     private Spinner sp_musculos_crearEjercicio;
     private EditText edt_nombreEjercicio_crearEjercicio;
     private EditText edt_descripcionEjercicio_crearEjercicio;
+    private TextView txt_avisoSubiendo_crearEjercicio;
 
     private String parteDelCuerpoSeleccionado;
     private String musculoSeleccionado;
@@ -55,8 +57,10 @@ public class CrearEjercicio extends AppCompatActivity {
         edt_nombreEjercicio_crearEjercicio = (EditText)findViewById(R.id.edt_nombreEjercicio_crearEjercicio);
         progresBarAñadirEJercicio = (ProgressBar) findViewById(R.id.progresBarAñadirEJercicio);
         ejercicioViewModel = ViewModelProviders.of(this).get(EjercicioViewModel.class);
+        txt_avisoSubiendo_crearEjercicio = (TextView) findViewById(R.id.txt_avisoSubiendo_crearEjercicio);
 
         progresBarAñadirEJercicio.setVisibility(View.INVISIBLE);
+        txt_avisoSubiendo_crearEjercicio.setVisibility(View.INVISIBLE);
 
 
         obtenerPartesDelCuerpo();
@@ -156,6 +160,7 @@ public class CrearEjercicio extends AppCompatActivity {
                     alerta.show();
                 } else {
                     progresBarAñadirEJercicio.setVisibility(View.VISIBLE);
+                    txt_avisoSubiendo_crearEjercicio.setVisibility(View.VISIBLE);
                     hiloCrearEjercicio();
                 }
             }

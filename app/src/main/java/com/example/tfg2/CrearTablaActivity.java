@@ -425,7 +425,6 @@ public class CrearTablaActivity extends AppCompatActivity {
     private void adda(List<TablaEjercicioRelacion> tablaRelacion){
 
         if(tr.guardarDatosTablaEjercicio(tablaRelacion)){
-            System.out.println("AÑADIDO CORRECTAMENTE");
             finish();
         }else{
             if(tablaViewModel.borrarTabla(tablaLocal)){

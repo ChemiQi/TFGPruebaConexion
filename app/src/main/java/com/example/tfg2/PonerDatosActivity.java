@@ -19,6 +19,8 @@ import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.Tabla.TablaLocal;
 import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjercicioPonerInfoAdapter;
+import com.example.tfg2.ejercicios.clases.Ejercicio;
+import com.example.tfg2.ejercicios.controladores.EjercicioController;
 import com.example.tfg2.tabla.adapter.ListaTablaLocalAdapter;
 
 import java.util.ArrayList;
@@ -59,8 +61,18 @@ public class PonerDatosActivity extends AppCompatActivity {
        }
         List<TablaEjercicioRelacion> ejercicioRelacion  = tr.tablaPorIdTabla(tabla.getIdTabla());
         tablaEjercicio = ejercicioRelacion.stream().filter(e -> e.getDia() == dia).collect(Collectors.toList());
-
-        ejercicioLocals = ejercicioViewModel.allEjercicios();
+        ejercicioLocals = new ArrayList<>();
+        for(TablaEjercicioRelacion ta : tablaEjercicio){
+            EjercicioLocal ejercicioLocal = ejercicioViewModel.obtenerejercicioPorId(ta.getIdEjercicio());
+            if(ejercicioLocal == null){
+                ejercicioLocal = new EjercicioLocal(EjercicioController.getEjercicioPorId(ta.getIdEjercicio()));
+                if(ejercicioLocal != null){
+                    ejercicioLocals.add(ejercicioLocal);
+                }
+            }else{
+                ejercicioLocals.add(ejercicioLocal);
+            }
+        }
 
 
 
