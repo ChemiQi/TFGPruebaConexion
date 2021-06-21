@@ -2,7 +2,6 @@ package com.example.tfg2;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
@@ -133,9 +131,9 @@ public class EjerciciosDescargadosFr extends Fragment  {
                         alerta2.show();
                     }else{
                         if(ejercicioViewModel.borrarEjercicioLocal(ejercicioLocal.getIdEjercicio())){
-                            //TODO MENSAJE BORRADO CORRECTO
                             AlertDialog.Builder alerta2 = new AlertDialog.Builder(vista.getContext());
-                            alerta2.setTitle("Borrado correctamente");
+                            alerta2.setTitle("Borrado");
+                            alerta2.setMessage("Borrado correctamente");
                             alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

@@ -21,15 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.tfg2.database.dataBaseOffline.application.EjercicioViewModel;
 import com.example.tfg2.database.dataBaseOffline.application.TablaEjercicioRelacionViewModel;
 import com.example.tfg2.database.dataBaseOffline.domain.EjercicioLocal;
-import com.example.tfg2.database.dataBaseOffline.domain.TablaEjercicioRelacion;
 import com.example.tfg2.ejercicios.adapter.ListaEjerciciosLocalesAdapter;
-import com.example.tfg2.ejercicios.clases.Ejercicio;
 import com.example.tfg2.utilidades.SpacingItemDecorator;
 
 import java.util.List;
@@ -128,7 +125,8 @@ public class EjerciciosLocalesFr extends Fragment {
         AlertDialog.Builder alerta = new AlertDialog.Builder(vista.getContext());
         tablaEjercicioRelacionViewModel = ViewModelProviders.of(this).get(TablaEjercicioRelacionViewModel.class);
         EjercicioLocal ejercicioLocal = ejercicioLocales.get(viewHolder.getAdapterPosition());
-        alerta.setTitle(mensaje + "\n" + "  " + ejercicioLocal.getNombre() );
+        alerta.setTitle("Aviso");
+        alerta.setMessage(mensaje + "\n" + "  " + ejercicioLocal.getNombre() );
         alerta.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -152,7 +150,8 @@ public class EjerciciosLocalesFr extends Fragment {
                     }else{
                         if(ejercicioViewModel.borrarEjercicioLocal(ejercicioLocal.getIdEjercicio())){
                             AlertDialog.Builder alerta2 = new AlertDialog.Builder(vista.getContext());
-                            alerta2.setTitle("Borrado correctamente");
+                            alerta.setTitle("Aviso");
+                            alerta2.setMessage("Borrado correctamente");
                             alerta.setPositiveButton("Vale", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
